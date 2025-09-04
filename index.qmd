@@ -1,7 +1,7 @@
 ---
 title: "Writing a great story for data science projects - Fall 2025 "
 subtitle: "This is a Report Template Quarto"
-author: "Student Name (Advisor: Dr. Cohen)"
+author: "Vijayavel Mohanam (Advisor: Dr. Cohen)"
 date: '`r Sys.Date()`'
 format:
   html:
@@ -114,9 +114,6 @@ library(ggrepel)
 library(dslabs)
 ```
 
-```{python}
-import pandas as pd
-```
 
 ```{r, warning=FALSE, echo=TRUE}
 # Load Data
