@@ -1,7 +1,7 @@
 ---
 title: "Writing a great story for data science projects - Fall 2025 "
-subtitle: "This is a Report Template Quarto"
-author: "Vijayavel Mohanam (Advisor: Dr. Cohen)"
+subtitle: "This is a Report using Quarto"
+author: "Vijay Mohanam (Advisor: Dr. Cohen)"
 date: '`r Sys.Date()`'
 format:
   html:
@@ -21,138 +21,81 @@ editor:
 Slides: [slides.html](slides.html){target="_blank"} ( Go to `slides.qmd`
 to edit)
 
-::: callout-important
-**Remember:** Your goal is to make your audience understand and care
-about your findings. By crafting a compelling story, you can effectively
-communicate the value of your data science project.
-
-Carefully read this template since it has instructions and tips to
-writing!
-
-Nice report!
+::: callout-note
+**Individual research:**
+<BR>[Week 1 Paper 1](#week-1-paper-1) 
+<BR>[Week 1 Paper 2](#week-1-paper-2) 
 :::
 
-## Introduction
+## Week 1 Paper 1
 
-The introduction should:
+A predictive model, and predictors of under-five child malaria prevalence in Ghana:[@NIH]
 
--   Develop a storyline that captures attention and maintains interest.
+##### How do 'Least Absolute Shrinkage and Selection Operator'(LASSO), Ridge and Elastic net regression approaches compare?
 
--   Your audience is your peers
+-   To understand how Lasso, Rdige and Elastic was used in prediction.
 
--   Clearly state the problem or question you're addressing.
+-   Particularly in features selections
+
+-   How it affected the fitted model.
 
 <!-- -->
 
--   Introduce why it is relevant needs.
 
--   Provide an overview of your approach.
+*Its yet another paper on Malaria prediction in a community, this improves and focus on 
+selections of features that best fit for Machine Learning models. Malaria among childhood in Sub-Saharan Africa is one of the leading cause of under-five mortality[@Maitlan], [@Camponova].
 
-Example of writing including citing references:
+The interesting method of approach the author handles on elaborating LASSO regression for smallest number of predictors with the smallest prediction error. If this Machine Learning model is able to predict with smallest error, will help avoid adverse outcome after childhood malaria underscores the need for early detection and identification of high-risk populations.
 
-*This is an introduction to ..... regression, which is a non-parametric
-estimator that estimates the conditional expectation of two variables
-which is random. The goal of a kernel regression is to discover the
-non-linear relationship between two random variables. To discover the
-non-linear relationship, kernel estimator or kernel smoothing is the
-main method to estimate the curve for non-parametric statistics. In
-kernel estimator, weight function is known as kernel function
-[@efr2008]. Cite this paper [@bro2014principal]. The GEE [@wang2014].
-The PCA [@daffertshofer2004pca]*. Topology can be used in machine
-learning [@adams2021topology]
+The tricky part is Malaria can have wide range of covariates like physical, climatic and social factors, selecting minimal predictors which will have impact on outcome is where Lasso and Ridge regression will help.
 
-For Symbolic Regression [@wang2019symbolic] *This is my work and I want
-to add more work...*
+## Data collection
 
-Cite new paper [@su2012linear]
+The author has distributed data collection from rural and urban regions with the total of 2867 children under-five, using rapid diagnostic test(RDK) kit who got infected with malaria.
 
-## Methods
-
--   Detail the models or algorithms used.
-
--   Justify your choices based on the problem and data.
-
-*The common non-parametric regression model is*
-$Y_i = m(X_i) + \varepsilon_i$*, where* $Y_i$ *can be defined as the sum
-of the regression function value* $m(x)$ *for* $X_i$*. Here* $m(x)$ *is
-unknown and* $\varepsilon_i$ *some errors. With the help of this
-definition, we can create the estimation for local averaging i.e.*
-$m(x)$ *can be estimated with the product of* $Y_i$ *average and* $X_i$
-*is near to* $x$*. In other words, this means that we are discovering
-the line through the data points with the help of surrounding data
-points. The estimation formula is printed below [@R-base]:*
-
-$$
-M_n(x) = \sum_{i=1}^{n} W_n (X_i) Y_i  \tag{1}
-$$$W_n(x)$ *is the sum of weights that belongs to all real numbers.
-Weights are positive numbers and small if* $X_i$ *is far from* $x$*.*
-
-*Another equation:*
-
-$$
-y_i = \beta_0 + \beta_1 X_1 +\varepsilon_i
-$$
-
-## Analysis and Results
-
-### Data Exploration and Visualization
-
--   Describe your data sources and collection process.
-
--   Present initial findings and insights through visualizations.
-
--   Highlight unexpected patterns or anomalies.
-
-A study was conducted to determine how...
-
-```{r, warning=FALSE, echo=T, message=FALSE}
-# loading packages 
-library(tidyverse)
-library(knitr)
-library(ggthemes)
-library(ggrepel)
-library(dslabs)
-```
+With the available dataset and literature search, they narrowed down to following variables
 
 
-```{r, warning=FALSE, echo=TRUE}
-# Load Data
-kable(head(murders))
+## Predictors
 
-ggplot1 = murders %>% ggplot(mapping = aes(x=population/10^6, y=total)) 
+-   Child age, 
+-   Number of under-five children in a household, 
+-   Has mosquito bed net for sleeping, 
+-   Sex of household head, 
+-   Sex of a household member, 
+-   Dwelling sprayed against mosquito last 12 months, 
+-   Household wealth, 
+-   Child-anaemia status, 
+-   Has electricity in HH, 
+-   Has a television in the household, 
+-   Place of residence, 
+-   The region of residence, 
+-   Number of children who slept under mosquito bed net previous night, 
+-   Insecticide-treated net available in the household, 
+-   Number of household members.
 
-  ggplot1 + geom_point(aes(col=region), size = 4) +
-  geom_text_repel(aes(label=abb)) +
-  scale_x_log10() +
-  scale_y_log10() +
-  geom_smooth(formula = "y~x", method=lm,se = F)+
-  xlab("Populations in millions (log10 scale)") + 
-  ylab("Total number of murders (log10 scale)") +
-  ggtitle("US Gun Murders in 2010") +
-  scale_color_discrete(name = "Region")+
-      theme_bw()
-  
 
-```
+## Alpha selection
+
+For LASSO, author selected an alpha value of one, while for Ridge regression, an alpha value of zero was chosen. Since the alpha values for Elastic Net fall between zero and one 
+(0<α<1), author used maximum likelihood estimation to determine the optimal alpha, which was estimated to be approximately 0.4187, based on 5-fold cross-validation repeated five times using the ‘caret’ package. Additionally, we estimated the minimum lambda (corresponding to the lowest mean squared error, or MSE) for LASSO, Ridge, and Elastic Net through maximum likelihood estimation under k-fold cross-validation.
+
 
 ### Modeling and Results
 
--   Explain your data preprocessing and cleaning steps.
+-   Lasso was able to predict using 11 features.
 
--   Present your key findings in a clear and concise manner.
+-   Ridge was able to use all features.
 
--   Use visuals to support your claims.
 
--   **Tell a story about what the data reveals.**
 
-```{r}
-
-```
 
 ### Conclusion
 
--   Summarize your key findings.
+-   Among two of logistic models using features picked by LASSO and Ridge methods. The model with LASSO features used 11 features and the Ridge model used 15 features. Both of these models explained about 20% of the differences in malaria rates among children. Each model had the same accuracy score for predictions, with an area under the curve (AUROC) of 81.2%. This means the models were quite good at predicting which children might have malaria.
 
--   Discuss the implications of your results.
+-   Based on the principle of parsimony, the Lasso regression is preferred because it contains the smallest number of predictors and the smallest prediction error. LASSO model (RMSE = 0.9489, SD = 0.0202) where as Ridge (RMSE = 1.0366, SD = 0.0172) where RMSE is root mean square error i.e., prediction error
+
+## Week 1 Paper 2
 
 ## References
