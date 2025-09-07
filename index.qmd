@@ -85,10 +85,12 @@ For LASSO, author selected an alpha value of one, while for Ridge regression, an
 
 -   Lasso was able to predict using 11 features.
 
--   Ridge was able to use all features.
+-   Ridge used all 15 features.
 
-
-
+|Model |R-Square | RMSE(95% CI)|SD|AUC Value|Predictors|
+|:------|:------ |:------------|:------|:------|:------|
+|Lasso |0.196989 |0.9489 (0.9286, 0.9691) |0.0202 |81.20% |11 |
+|Ridge |0.1972966 |1.0366 (1.0194, 1.0537) |0.0172 |81.20% |15 |
 
 ### Conclusion
 
@@ -97,5 +99,62 @@ For LASSO, author selected an alpha value of one, while for Ridge regression, an
 -   Based on the principle of parsimony, the Lasso regression is preferred because it contains the smallest number of predictors and the smallest prediction error. LASSO model (RMSE = 0.9489, SD = 0.0202) where as Ridge (RMSE = 1.0366, SD = 0.0172) where RMSE is root mean square error i.e., prediction error
 
 ## Week 1 Paper 2
+
+Prediction Modeling With Many Correlated and Zero-Inflated Predictors: Assessing the Non-negative Garrote Approach:[@wiley]
+
+##### How do to handle zero-inflation data using 'ridge-garrote' methods?
+
+-   To understand how to transform zero inflated predictor.
+
+-   Particularly in correlated features
+
+-   How it affected the fitted model.
+
+<!-- -->
+
+
+*This paper is of great inerest because it lists ways to handle zero values in the samples specifically in mass-spectrometry dataset.
+
+The authors apply this technique and document there observations using predict kidney function using peptidomic features. The issue with mass-specrometry is that it produces intense data, sometime not all data is needed for accurate prediction another problem is that they are often subject to zero-inflation, means there is s spike at zero, which needs special transformation for linear models.
+
+
+## Data collection
+
+In Exploratory Data Analysis, Zero-inflated dataset is sometimes called as point mass values(PMVs, non-PMVs). There could be two reason, one natural sampleing data itself has zero or recording tool could be at fault. once eliminating the tool accuracy, we have to address actual PMVs.
+
+Though there are methods of handling PVM, demonstrated by Gajjala et al.[@gajjala] used the least absolute shrinkage and selection operator (lasso), nonetheless, the optimal strategy for handling and analyzing zero-inflated and correlated predictors is uncertain, particularly in high-dimensional settings.
+
+
+## Models
+Author investigated commonly used practice, lasso and ridge regression, lasso provides selection and shrinkage of the regression coefficients for predictors based on L1-regularization where as ridge is better suited to handle correlated predictors.
+
+In Lasso-ridge approach, author concludes, reduces the set of candidate predictors, while the second step retains the information from the zero-inflated predictors
+
+In Ridge-lasso approach, author observes that there is a good blend of two-stage approach, which leads to explore ridge-garrote approach, first fits a ridge regression model then shrinkage factor for all predictors.
+
+## Data selection
+
+Motivated by real-life data from mass-spectrometry studies, author simulated data from a multivariate binomial and lognormal mixture distribution, 4 groups of 200 predictors with a group size of 50 predictors carefully introducing zeros in the dataset ranging 1/3 to 2/3 sample zeros.
+
+
+### Modeling and Results
+
+
+From each simulated dataset
+
+-   Ridge, Lasso
+-   Lasso-ridge
+-   ridge-lasso
+-   ridge-garrote regression were computed.
+
+![Result](PVM.png){fig-alt="Result" width="400"}
+
+Plot above displays the modeling methods across various cutoff levels for the maximum allowed proportion of PMVs (maxPMV) to explore how sensitive results are to these cutoff levels. Ridge, lasso-ridge and ridge-lasso mostly overlapped in terms of predictive accuracy in terms of RMSPE and R^2^
+ 
+
+### Conclusion
+
+-   Author concludes as ridge-garrote model was with the smallest number of selected predictors and demonstrated stability in predictor selection across increasing levels of maxPMV in contrast to lasso-ridge.
+-   The lasso-ridge model, despite its predictive capabilities, showed similar variability in terms of the number of selected variables, can be seen by the sudden jump in selected predictors at a maximum percentage of zero-inflation of 90%.
 
 ## References
