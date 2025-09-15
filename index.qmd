@@ -25,6 +25,9 @@ to edit)
 **Individual research:**
 <BR>[Week 1 Paper 1](#week-1-paper-1) 
 <BR>[Week 1 Paper 2](#week-1-paper-2) 
+<BR>[Week 2 paper 1](#week-2-paper-1) 
+<BR>[Week 2 paper 2](#week-2-paper-2) 
+
 :::
 
 ## Week 1 Paper 1
@@ -156,5 +159,105 @@ Plot above displays the modeling methods across various cutoff levels for the ma
 
 -   Author concludes as ridge-garrote model was with the smallest number of selected predictors and demonstrated stability in predictor selection across increasing levels of maxPMV in contrast to lasso-ridge.
 -   The lasso-ridge model, despite its predictive capabilities, showed similar variability in terms of the number of selected variables, can be seen by the sudden jump in selected predictors at a maximum percentage of zero-inflation of 90%.
+
+## Week 2 Paper 1
+
+Dealing with adverse drug reactions in the context of polypharmacy using regression models[@sen]
+
+
+##### This study demonstrates that regression models with horseshoe or lasso priors are effective for analyzing ADRs.
+
+-   Comprehensive consideration of multiple factors in large.
+
+-   Working on sparse datasets
+
+-   Which Improvs signal detection in polypharmacy.
+
+<!-- -->
+
+
+*Its common now a days adults taking multiple drugs(polypharmacy), which increases adverse drug reactions(ADRs) and rises signal which needs to be reported to FDA, Pharma companies needs data and right model to analyse there product against some common drugs to decrease ADR. Polypharmacy also includes other predictors like age, gender etc.
+
+The interesting method of approach the author handles on elaborating horseshoe and LASSO regression on fewer potential overall positive predictors, which could make it suitable as a diagnostic tool with multiple factors in large, sparse datasets and improving signal detection in polypharmacy.
+
+Falls or bleeding may serve as easily detectable ADRs outcome in older adults with polypharmacy. Though there are many generalized linear models, like logistic regression which can be interpreted, they lack analyzing many predictors with rare binary outcome this often may results in overfitting and poor predictive performances, which also results in under-reporting, so author explores more comprehensive analytically approach.
+
+## Data collection
+
+The author considered Adverse Drug Reaction in Emergency Departments (ADRED) dataset of 7175 records and considered 100 most frequently used drugs.
+
+
+## Predictors
+Author used Logistic regression models with horseshoe and lasso priors were used to analyze the association of drugs with the occurrence of the outcome ADRs. The most used 100 drugs included in the analysis served as possible predictors.
+
+
+
+## Model selection
+
+Author calculated the “global_scale” to be the “ratio of the expected number of non-zero coefficients to the expected number of zero coefficients, divided by the square root of the number of observations, essentially allowing a portion of the coefficients to escape the shrinkage. I might not understand why this was done, need to explore on this.
+
+
+### Modeling and Results
+
+Both regression were applied to the dataset to analyze associations between drugs and outcome ADRs in the context of polypharmacy. Some differences between the distribution of regression coefficients for drugs could be observed between the methods.
+
+For Fall outcome, horseshoe model found age, female sex and inhibitors and substrate class drug showed association with outcome.
+
+Similarly lasso regression highlighted a strong positive tendency for female sex and a positive tendency for the number of inhibitors and substrates taken.
+
+For bleeding, both regression models, the confounding factor age showed a strong positive tendency, and the number of substrates and inhibitors a light positive tendency. As a difference, the lasso regression also exhibited a light positive tendency for the number of substrates.
+
+### Conclusion
+
+-   The horseshoe regression’s shrinkage was able to reduce the long list of drugs to a small group of candidates, which previously was linked to ADRs in the literature.
+
+-   Similarly, lasso regression shrank most coefficients towards zero due to the Laplace distribution as well, but the shrinkage appeared to be less aggressive compared to the horseshoe model.
+
+## Week 2 Paper 2
+
+A comparison of penalised regression methods for informing the selection of predictive markers[@com]
+
+
+##### study was to examine the predictive performance and feature (i.e., indicator) selection capability of common penalised logistic regression methods (LASSO, adaptive LASSO, and elastic-net), compared with traditional logistic regression and forward selection methods.
+
+-   explore to identify which indicators maximize prediction when a large number of potential indicators is available
+
+-   How the author tries to improving the accuracy and generalisability of predictive models
+
+-   Or to balance accuracy and generalisability of prediction using Lasso, adaptive lasso and elastic-net
+
+<!-- -->
+
+
+*The author had two goals to explore, accuracy - ability of the model to correctly predict an outcome and generalisability - ability of the model to predict well given new data. I thought both are the need of the hour in the data science, so want to explore.
+
+
+## Data collection
+
+The author considered Australian Temperament Projects with multi-wave psychosocial development of young people from infancy to adulthood study dataset consisting of 1292 records.
+
+
+## Predictors
+Initially author chose 102 predictors in each models and young adult tobacco use outcome.they used mice pakage to create imputed dataset and continuous indicators were standardized by dividing scores by two times its SD.
+
+
+## Model selection
+
+Author used logistic, LASSO, adaptive LASSO and elastic-net regression methods. There were two penalties L1 - constraint based on the sum of the absolute value of regression coefficients and L2 - constraint based on the sum of the squared regression coefficients. 
+
+
+### Modeling and Results
+
+Author chose Area under curve (AUC) and harmonic mean of precision and recal (F1 score)  for predictive performance assessment. For the penalised logistic regression methods, robust indicators were considered as those which were selected in at least 80% of the cross-validation iterations also considered mean of the coefficients.
+
+![Result](com.png){fig-alt="Result"}
+
+Predictive performance: Box and whisker plot of AUC scores across 100 iterations of training and testing data splits. Dotted lines indicating median performance for logistic regression and forward selection
+
+### Conclusion
+
+-   The λ-min LASSO had the higher F1 score than the λ-1se model (Δ median F1 0.004), the λ-1se model outperformed the respective λ-min model for adaptive LASSO and elastic-net (Δ median F1 0.011–0.018).
+
+-   There was notable similarity in the number of indicators selected in the LASSO and adaptive LASSO. The LASSO did, however, select slightly fewer indicators than the adaptive LASSO for both the λ-min (35 v 36) and λ-1se (5 v 7) models. Comparatively, both the LASSO and adaptive LASSO λ-min models contained several unique indicators (five and six, respectively)
 
 ## References
