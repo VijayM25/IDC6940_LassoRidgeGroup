@@ -27,6 +27,8 @@ to edit)
 <BR>[Week 1 Paper 2](#week-1-paper-2) 
 <BR>[Week 2 paper 1](#week-2-paper-1) 
 <BR>[Week 2 paper 2](#week-2-paper-2) 
+<BR>[Week 3 paper 1](#week-3-paper-1) 
+<BR>[Week 3 paper 2](#week-3-paper-2) 
 
 :::
 
@@ -259,5 +261,98 @@ Predictive performance: Box and whisker plot of AUC scores across 100 iterations
 -   The λ-min LASSO had the higher F1 score than the λ-1se model (Δ median F1 0.004), the λ-1se model outperformed the respective λ-min model for adaptive LASSO and elastic-net (Δ median F1 0.011–0.018).
 
 -   There was notable similarity in the number of indicators selected in the LASSO and adaptive LASSO. The LASSO did, however, select slightly fewer indicators than the adaptive LASSO for both the λ-min (35 v 36) and λ-1se (5 v 7) models. Comparatively, both the LASSO and adaptive LASSO λ-min models contained several unique indicators (five and six, respectively)
+
+
+## Week 3 Paper 1
+
+#### Estimating U.S. housing price network connectedness: Evidence from dynamic Elastic Net, Lasso, and ridge vector autoregressive models[@USH]
+
+
+##### The study is to see the effect of dynamic connectedness of random shokcks in housing price among the regions  using standard vector acutoregressive model(VAR) as well as three VAR models with shrinkage effect - Elastic Net, Lasso and Ridge..
+
+-   Explore time series data in multivariate shrinkage using Lasso, Ridge models
+
+-   How the author tries to take advantage of impulse response analysis and forecast error variance decomposition.
+
+-   Finally demonstrate it on US housing market connectedness.
+
+<!-- -->
+
+
+*The author starts from Sims 'Macroeconomics and Reality' book reference to use Vector autoregressive model (AVR), this was interesting for me to know another type of model on time series data. Another term that is used in the paper is the 'spillovers of shocks', its defined as effects of a treatment extend to the control group, impacting their response despite not receiving the treatment directly.
+
+
+## Data collection
+
+The author find a limitation on the VAR approach, meaning that k = 51 (US States) and, hence, a joint estimation with a lag length of one would mean that $$k + k^2{p}=2652$$ parameters need to be estimated, but he only have T = 418 observations (2652 >> 418), which would mean that this model cannot be estimated. Using the equation-by-equation estimation procedure makes this feasible as it just estimates, k + 1 = 52 parameters (52<418). Additionally, as he deal with this high-dimensional network and employ different regularization methods that shrink and select parameters and compare the results with the standard equation-by-equation VAR model.
+
+
+## Connectedness Measure
+The starting point for the connectedness approach of Diebold and Yilmaz (2012)[@diebold] transforms the VAR(p) in (1) into its vector moving average representation using the Wold theorem. In the next step, the Generalized Forecast Error Variance Decomposition (GFEVD)5 of Koop, Pesaran, and Potter (1996)[@koop] and Pesaran and Shin (1998)[@shin], which is invariant to the ordering of the variables in the VAR. A rolling-window estimation with a 120-month (10-year) window and a 10-month forecast horizon, with repeated 10-fold cross-validation in each window is used on all 4 methods.
+
+
+## Data and Model selection
+
+Author used the seasonally adjusted monthly nominal house price data for the 50 states and the District of Columbia  from Freddie Mac, with the indices based on an ever-expanding database of loans purchased by either Freddie Mac or Fannie Mae.
+
+
+### Modeling and Results
+
+Its interesting to see the three methods that penalized parameter estimates using the Lasso, Ridge, and Net Elastic methods of penalization trended generally together, not differing by too much (below plot). The standard OLS results, however, produced higher total connectedness than the Lasso, Ridge, and Net Elastic methods during the beginning of the sample period 
+
+![Result](ush.png){fig-alt="Result"}
+
+
+### Conclusion
+
+-   In using a VAR modeling approach that selects parameter estimates using Lasso, Ridge, and Elastic Net method, Lasso, Ridge, and Net Elastic methods of penalization trended generally together, not differing by too much. The standard OLS results, however, produced higher total connectedness than the other three methods.
+
+## Week 3 Paper 2
+
+## Estimating U.S. housing price network connectedness: Evidence from dynamic Elastic Net, Lasso, and ridge vector autoregressive models[@USH]
+
+
+##### The study was to examine the predictive performance and feature (i.e., indicator) selection capability of common penalised logistic regression methods (LASSO, adaptive LASSO, and elastic-net), compared with traditional logistic regression and forward selection methods.
+
+-   explore to identify which indicators maximize prediction when a large number of potential indicators is available
+
+-   How the author tries to improving the accuracy and generalisability of predictive models
+
+-   Or to balance accuracy and generalisability of prediction using Lasso, adaptive lasso and elastic-net
+
+<!-- -->
+
+
+*The author had two goals to explore, accuracy - ability of the model to correctly predict an outcome and generalisability - ability of the model to predict well given new data. I thought both are the need of the hour in the data science, so want to explore.
+
+
+## Data collection
+
+The author considered Australian Temperament Projects with multi-wave psychosocial development of young people from infancy to adulthood study dataset consisting of 1292 records.
+
+
+## Predictors
+Initially author chose 102 predictors in each models and young adult tobacco use outcome.they used mice pakage to create imputed dataset and continuous indicators were standardized by dividing scores by two times its SD.
+
+
+## Model selection
+
+Author used logistic, LASSO, adaptive LASSO and elastic-net regression methods. There were two penalties L1 - constraint based on the sum of the absolute value of regression coefficients and L2 - constraint based on the sum of the squared regression coefficients. 
+
+
+### Modeling and Results
+
+Author chose Area under curve (AUC) and harmonic mean of precision and recal (F1 score)  for predictive performance assessment. For the penalised logistic regression methods, robust indicators were considered as those which were selected in at least 80% of the cross-validation iterations also considered mean of the coefficients.
+
+![Result](com.png){fig-alt="Result"}
+
+Predictive performance: Box and whisker plot of AUC scores across 100 iterations of training and testing data splits. Dotted lines indicating median performance for logistic regression and forward selection
+
+### Conclusion
+
+-   The λ-min LASSO had the higher F1 score than the λ-1se model (Δ median F1 0.004), the λ-1se model outperformed the respective λ-min model for adaptive LASSO and elastic-net (Δ median F1 0.011–0.018).
+
+-   There was notable similarity in the number of indicators selected in the LASSO and adaptive LASSO. The LASSO did, however, select slightly fewer indicators than the adaptive LASSO for both the λ-min (35 v 36) and λ-1se (5 v 7) models. Comparatively, both the LASSO and adaptive LASSO λ-min models contained several unique indicators (five and six, respectively)
+
 
 ## References
