@@ -309,50 +309,58 @@ Its interesting to see the three methods that penalized parameter estimates usin
 
 ## Week 3 Paper 2
 
-## Estimating U.S. housing price network connectedness: Evidence from dynamic Elastic Net, Lasso, and ridge vector autoregressive models[@USH]
+## The Logistic Lasso and Ridge Regression in Predicting Corporate Failure[@corp]
 
 
-##### The study was to examine the predictive performance and feature (i.e., indicator) selection capability of common penalised logistic regression methods (LASSO, adaptive LASSO, and elastic-net), compared with traditional logistic regression and forward selection methods.
+##### The study was to examine lasso and ridge approach in predicting corporate bankruptcy, which is of great interest to investors, creditors, borrowing firms, and governments alike, as this methods deal well with multicolinearity and display the ideal properties to minimize the numerical instability that may occur due to overfitting. 
 
--   explore to identify which indicators maximize prediction when a large number of potential indicators is available
 
--   How the author tries to improving the accuracy and generalisability of predictive models
+-   Explore lasso and ridge approach, as there are empirical models using quantitative methods and distinct variable selection techniques.
 
--   Or to balance accuracy and generalisability of prediction using Lasso, adaptive lasso and elastic-net
+-   How the author utilized lasso and ridge method for variable shrinking.
+
+-   Its applied in hospitality industry.
 
 <!-- -->
 
 
-*The author had two goals to explore, accuracy - ability of the model to correctly predict an outcome and generalisability - ability of the model to predict well given new data. I thought both are the need of the hour in the data science, so want to explore.
+*Though there are many type of models in statistic and probability domains, even a type of discriminant analysis by couple of authors like Altman's Z-score. Artificial intelligence also had multiple neural network models like  the multilayer perceptron model, the Cascor method (cascade correlation) as a learning algorithm, multilayer perceptron net and support vector machines. the author wants to explore the least absolute shrinkage and selection operator (Lasso) is a variable selection technique that has been recently applied on corporate bankruptcy forecasts, since they deal well with multicolinearity and display the ideal properties to minimize the
+numerical instability that may occur due to overfitting.
 
 
 ## Data collection
-
-The author considered Australian Temperament Projects with multi-wave psychosocial development of young people from infancy to adulthood study dataset consisting of 1292 records.
-
-
-## Predictors
-Initially author chose 102 predictors in each models and young adult tobacco use outcome.they used mice pakage to create imputed dataset and continuous indicators were standardized by dividing scores by two times its SD.
+The models were employed to a dataset of 2032 non-bankrupt firms and 401 bankrupt firms belonging to the hospitality industry, over the period 2010-2012.
 
 
 ## Model selection
 
-Author used logistic, LASSO, adaptive LASSO and elastic-net regression methods. There were two penalties L1 - constraint based on the sum of the absolute value of regression coefficients and L2 - constraint based on the sum of the squared regression coefficients. 
+Author used the lasso and ridge approaches, since they deal well with multicolinearity and display the ideal properties to minimize the numerical instability that may occur due to overfitting. Therefore, improve prediction accuracy can be achieved. Lasso will shrink parameter estimates towards zero and, in some cases, equate parameters to be exactly zero and thus allows the exclusion of some of the variables from the model. These solutions were compared in terms of accuracy of predictions to the stepwise methods available in SPSS. . 
 
 
 ### Modeling and Results
 
-Author chose Area under curve (AUC) and harmonic mean of precision and recal (F1 score)  for predictive performance assessment. For the penalised logistic regression methods, robust indicators were considered as those which were selected in at least 80% of the cross-validation iterations also considered mean of the coefficients.
+The author aims to build a logistic model to predict enterprise failure, by resorting on two kinds of approaches: stepwise or best subset selection methods, and the ridge regression or the lasso, procedures less known, since they are not usually available in most commercial software. A comparison is made between those procedures.
 
-![Result](com.png){fig-alt="Result"}
+Model with the training set with failed and good enterprises of equal sizes
 
-Predictive performance: Box and whisker plot of AUC scores across 100 iterations of training and testing data splits. Dotted lines indicating median performance for logistic regression and forward selection
+|Error |Forward Wald | Backward Wald | Lasso | Ridge|
+|:------|:------ |:------------|:------|:------|
+|Type I error |37.65% |37.65% |38.82% |40.59% |
+|Type II error |29.21% |29.10% |28.73% |25.79% |
+|Overall error |29.92% |29.92% |29.57% |27.02% |
+
+The type I error : percentage of failed enterprises predicted good by the model
+
+The type II error : percentage of good enterprises predicted failed by the model and 
+the overall error
 
 ### Conclusion
 
--   The λ-min LASSO had the higher F1 score than the λ-1se model (Δ median F1 0.004), the λ-1se model outperformed the respective λ-min model for adaptive LASSO and elastic-net (Δ median F1 0.011–0.018).
-
--   There was notable similarity in the number of indicators selected in the LASSO and adaptive LASSO. The LASSO did, however, select slightly fewer indicators than the adaptive LASSO for both the λ-min (35 v 36) and λ-1se (5 v 7) models. Comparatively, both the LASSO and adaptive LASSO λ-min models contained several unique indicators (five and six, respectively)
+-   From these results, the main conclusion is that ridge and lasso regressions behave not very distinctly from SPSS
+stepwise methods when the size of the healthy and failed enterprises in the training data is equal (although ridge
+regression showed the least type II and overall errors in that case, but with differences not very substantial),
+otherwise the lasso and ridge models tend to favor the category of the dependent variable that appears with heavier
+weight in the training set in a more outstanding way than what occurs in stepwise methods implemented in SPSS.
 
 
 ## References
