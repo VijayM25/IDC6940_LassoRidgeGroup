@@ -268,7 +268,7 @@ Predictive performance: Box and whisker plot of AUC scores across 100 iterations
 #### Estimating U.S. housing price network connectedness: Evidence from dynamic Elastic Net, Lasso, and ridge vector autoregressive models[@USH]
 
 
-##### The study is to see the effect of dynamic connectedness of random shokcks in housing price among the regions  using standard vector acutoregressive model(VAR) as well as three VAR models with shrinkage effect - Elastic Net, Lasso and Ridge..
+##### The study is to see the effect of dynamic connectedness of random shocks in housing price among the regions  using standard vector acutoregressive model(VAR) as well as three VAR models with shrinkage effect - Elastic Net, Lasso and Ridge.
 
 -   Explore time series data in multivariate shrinkage using Lasso, Ridge models
 
