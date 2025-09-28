@@ -1,6 +1,6 @@
 ---
 title: "Lass- Ridge Regression Group for data science projects - Fall 2025 "
-subtitle: "This is a Report Template Quarto"
+subtitle: "A report on Lasso-Ridge Regression"
 author: "Vijay Mohanam, Jennifer Nesbit and Sassou Khabou (Advisor: Dr. Cohen)"
 date: '`r Sys.Date()`'
 format:
@@ -21,13 +21,8 @@ editor:
 Slides: [slides.html](slides.html){target="_blank"} ( Go to `slides.qmd`
 to edit)
 
-::: callout-important
-**Remember:** Your goal is to make your audience understand and care
-about your findings. By crafting a compelling story, you can effectively
-communicate the value of your data science project.
-
-Carefully read this template since it has instructions and tips to
-writing!
+::: callout-note
+**Remember:** This is our first week as group, we are trying to compile a summary of introductions!
 
 Nice report!
 :::
