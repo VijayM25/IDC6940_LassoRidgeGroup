@@ -29,15 +29,32 @@ Nice report!
 
 ## Introduction
 
-The introduction should:
+Lasso and Ridge regression are both regularization techniques used to prevent overfitting and multicollinearity in linear regression models by adding a penalty term to the loss function. Lasso regression uses L1 regularization, which adds a penalty proportional to the sum of the absolute values of the coefficients, whereas Ridge uses L2 regularization, which adds a penalty proportional to the sum of the squared coefficients. There is another one called Elastic Net regression, which combines both Lasso and Ridge, this works well when there are many correlated features.
 
--   Develop a storyline that captures attention and maintains interest.
+We analysed the following papers in our initial understanding of how it is used in various industries.
 
--   Your audience is your peers
+1. https://doi.org/10.1167/iovs.15-16445
+2. https://doi.org/10.3390/s23177407
+3. https://doi.org/10.1080/10428194.2021.2018584
+4. https://doi.org/10.1186/s12957-023-03097-4
+5. https://doi.org/10.1097/MD.0000000000042690
+6. https://doi.org/10.1016/j.ins.2023.118944
+7. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8258678
+8. https://onlinelibrary.wiley.com/doi/10.1002/sim.70062
+9. https://www.ncbi.nlm.nih.gov/pmc/articles/39521861
+10. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7678959
+11. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7678959
+12. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7678959
+13. https://doi.org/10.1007/s12045-018-0635-x
+14. https://doi.org/10.1111/j.2517-6161.1996.tb02080.x
+15. https://doi.org/10.1111/insr.12023
+16. Link NA
+17. Link NA
+18. https://doi.org/10.1007/s12664-023-01426-9
 
--   Clearly state the problem or question you're addressing.
 
-<!-- -->
+------------------ Updated till here -----------------------
+<!--Team updates -->
 
 -   Introduce why it is relevant needs.
 
