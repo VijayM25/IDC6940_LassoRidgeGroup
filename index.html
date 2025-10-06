@@ -2206,15 +2206,17 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Week 01:</strong> This is our first week as group, we are trying to compile a summary of introductions!</p>
-<p>Nice report!</p>
+<p><strong>Week 02:</strong> We tried to add more articles from our research!</p>
+<p>Nice effort!</p>
 </div>
 </div>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Least Absolute Shrinkage and Selection Operator (Lasso) and Ridge regression are both regularization techniques used to prevent overfitting and multicollinearity in linear regression models by adding a penalty term to the loss function. The Lasso regression method was first introduced by Tibshirani in 1996 and has become a widely used method in both statistical modeling and machine learning. Lasso regression uses L1 regularization, which adds a penalty proportional to the sum of the absolute values of the coefficients, whereas Ridge uses L2 regularization, which adds a penalty proportional to the sum of the squared coefficients. An additional regularization technique called Elastic Net regression, combines both Lasso and Ridge. This technique is useful when there are many correlated features. The L1 penalty used with Lasso shrinks some coefficients to zero which allows for automated selection while also reducing model complexity. Overall Lasso is able to combine both predictive accuracy with interpretability.</p>
-<p>Lasso has demonstrated its versatile and practical uses as it has been applied across diverse applications. In healthcare, Lasso has been used to predict prevalence of child malaria Aheto et al., 2021<span class="citation" data-cites="aheto">(<a href="#ref-aheto" role="doc-biblioref">Aheto JMK 2021</a>)</span>, stroke risk in hypertensive patients Huang &amp; Liu, 2025<span class="citation" data-cites="huang">(<a href="#ref-huang" role="doc-biblioref">Huang and Liu. 2025</a>)</span> and adverse drug reactions in polypharmacy Sommer et al., 2024 <span class="citation" data-cites="sommer">(<a href="#ref-sommer" role="doc-biblioref">Jakob Sommer 2024</a>)</span>. These studies all highlight the ability for Lasso to produce models with fewer predictors while maintaining strong performance and often outperforming Ridge regression models in interpretability. Lasso has also been applied to clinical diagnostics, specifically improving disease classification for glaucoma progression Fujino et al., 2015 <span class="citation" data-cites="fujino">(<a href="#ref-fujino" role="doc-biblioref">Fujino and Asaoka 2015</a>)</span> and differentiating between hematologic cancers Amaador et al., 2022<span class="citation" data-cites="amaador">(<a href="#ref-amaador" role="doc-biblioref">Amaador and Kersten 2022</a>)</span>. These applications demonstrate the ability of Lasso to enhance decision making with streamlined models.</p>
+<p>Lasso has demonstrated its versatile and practical uses as it has been applied across diverse applications. In healthcare, Lasso has been used to predict prevalence of child malaria Aheto et al., 2021<span class="citation" data-cites="aheto">(<a href="#ref-aheto" role="doc-biblioref">Aheto JMK 2021</a>)</span>, stroke risk in hypertensive patients Huang &amp; Liu, 2025<span class="citation" data-cites="huang">(<a href="#ref-huang" role="doc-biblioref">Huang and Liu. 2025</a>)</span> and adverse drug reactions in polypharmacy Sommer et al., 2024 <span class="citation" data-cites="sommer">(<a href="#ref-sommer" role="doc-biblioref">Jakob Sommer 2024</a>)</span>. These studies all highlight the ability for Lasso to produce models with fewer predictors while maintaining strong performance and often outperforming Ridge regression models in interpretability. Lasso has also been applied to clinical diagnostics, specifically improving disease classification for glaucoma progression Fujino et al., 2015 <span class="citation" data-cites="fujino">(<a href="#ref-fujino" role="doc-biblioref">Fujino and Asaoka 2015</a>)</span> and differentiating between hematologic cancers Amaador et al., 2022<span class="citation" data-cites="amaador">(<a href="#ref-amaador" role="doc-biblioref">Amaador and Kersten 2022</a>)</span>. Another medical related paper on gastroenterology (Ali, H et al., 2023)<span class="citation" data-cites="ali">(<a href="#ref-ali" role="doc-biblioref">Ali 2023</a>)</span> also applied Lasso to select key predictors and remove insignificant predictors by setting their coefficients to zero. These applications demonstrate the ability of Lasso to enhance decision making with streamlined models.</p>
 <p>Lasso regression has also been proven as an effective methodology in economics and finance. Specifically, in predicting corporate bankruptcy Pereira et al., 2016<span class="citation" data-cites="pereira">(<a href="#ref-pereira" role="doc-biblioref">Jose Manuel Pereira 2016</a>)</span> and analyzing housing price network connectedness Gabauer et al., 2024<span class="citation" data-cites="gabauer">(<a href="#ref-gabauer" role="doc-biblioref">David Gabauer 2024</a>)</span>. Lasso has also been used for technology applications such as supporting innovations specifically with sensor selection for wearable respiratory monitoring devices Laufer et al., 2023 <span class="citation" data-cites="laufer">(<a href="#ref-laufer" role="doc-biblioref">Laufer and Moeller 2023</a>)</span> and improved interpretability with decision tree models Czajkowski et al., 2023 <span class="citation" data-cites="czajkowski">(<a href="#ref-czajkowski" role="doc-biblioref">Czajkowski and Kretowski 2023</a>)</span>.</p>
 <p>Research has been done to compare the use of Lasso as a methodology to multiple related techniques such as Ridge and Elastic Net. Studies have shown that Ridge regression sometimes outperforms Lasso when predictor variables are highly correlated. However, Lasso tends to be more valuable when only a few predictors are significant and applicable to the problem at hand Vidaurre et al., 2013<span class="citation" data-cites="vidaurre">(<a href="#ref-vidaurre" role="doc-biblioref">Vidaurre and Larrañaga 2013</a>)</span>. Overall, Lasso shows a consistent advantage with its ability to produce sparse, interpretable and efficient models making it an excellent tool for both modeling and research.</p>
+<p>A principal advantage of Lasso (Least Absolute Shrinkage and Selection Operator) regression is its capacity for feature shrinkage and selection. As established in the seminal works by “Introduction to the Lasso” (Gauraha, N, 2018)<span class="citation" data-cites="gauraha">(<a href="#ref-gauraha" role="doc-biblioref">Gauraha 2018</a>)</span>, selection of most relevant variables from a large set of clinical and pathological data while shrinking less important ones to zero(Li, Y., Bai. 2023)<span class="citation" data-cites="li">(<a href="#ref-li" role="doc-biblioref">Li 2023</a>)</span> and “Regression Shrinkage and Selection Via the Lasso” (Robert Tibshirani. 1996)<span class="citation" data-cites="robert">(<a href="#ref-robert" role="doc-biblioref">Tibshirani 1996</a>)</span>. They also compare lasso regression to both ridge regression and subset selection. Unlike in ridge regression, where all parameters can only asymptotically approach zero, lasso regression allows some parameters to reach zero. These techniques are applied in ML for feature selection techniques in predictive modeling (R. Muthukrishnan and R. Rohini. 2016)<span class="citation" data-cites="muthu">(<a href="#ref-muthu" role="doc-biblioref">Muthukrishnan and Rohini 2016</a>)</span> .On the same lines, we can see how to handle zero inflated predictors(Mariella Gregorich et al., 2025)<span class="citation" data-cites="mari">(<a href="#ref-mari" role="doc-biblioref">Mariella Gregorich 2025</a>)</span> handled by Lasso.</p>
 <p><em>The final introduction paragraph on the problem that we will apply Lasso to will be added to draft next week after finalizing the problem and choosing a dataset.</em></p>
 </section>
 <section id="methods" class="level2">
@@ -2241,6 +2243,9 @@ Note
 <div id="ref-aheto" class="csl-entry" role="listitem">
 Aheto JMK, Duah HO, Agbadi P. 2021. <span>“A Predictive Model, and Predictors of Under-Five Child Malaria Prevalence in Ghana.”</span> <em>Prev Med Rep. 10.1016/j.pmedr.2021.101475</em>.
 </div>
+<div id="ref-ali" class="csl-entry" role="listitem">
+Ali, Shahzad, H. 2023. <span>“Application and Impact of Lasso Regression in Gastroenterology.”</span> <em>A Systematic Review. Indian J Gastroenterol 42, 780–790 (2023)</em>.
+</div>
 <div id="ref-amaador" class="csl-entry" role="listitem">
 Amaador, Josephine M. I Vos, Karima, and Marie José Kersten. 2022. <span>“Discriminating Between Waldenström Macroglobulinemia and Marginal Zone Lymphoma Using Logistic LASSO Regression.”</span> <em>Leukemia &amp; Lymphoma 63 (5): 1070–79.</em>
 </div>
@@ -2253,6 +2258,9 @@ David Gabauer, Rangan Gupta, Hardik A. Marfatia. 2024. <span>“Estimating u.s. 
 <div id="ref-fujino" class="csl-entry" role="listitem">
 Fujino, Hiroshi Murata, Yuri, and Ryo Asaoka. 2015. <span>“Applying <span>‘Lasso’</span> Regression to Predict Future Visual Field Progression in Glaucoma Patients.”</span> <em>Investigative Opthalmology &amp; Visual Science 56 (4): 2334-.</em>
 </div>
+<div id="ref-gauraha" class="csl-entry" role="listitem">
+Gauraha, N. 2018. <span>“Introduction to the LASSO.”</span> <em>Reson 23, 439–464 (2018)</em>.
+</div>
 <div id="ref-huang" class="csl-entry" role="listitem">
 Huang, Junzhang, and Wencai Liu. 2025. <span>“Comparison of Machine Learning Models for Predicting Stroke Risk in Hypertensive Patients: Lasso Regression Model, Random Forest Model, Boruta Algorithm Model, and Boruta Algorithm Combined with Lasso Regression Model.”</span> <em>Medicine (Baltimore) 104 (22): E42690.</em>
 </div>
@@ -2264,6 +2272,18 @@ Jose Manuel Pereira, Mario Bastoa, Amelia Ferreira da Silva. 2016. <span>“The 
 </div>
 <div id="ref-laufer" class="csl-entry" role="listitem">
 Laufer, Paul D Docherty, Bernhard, and Knut Moeller. 2023. <span>“Ensor Selection for Tidal Volume Determination via Linear Regression—Impact of Lasso Versus Ridge Regression.”</span> <em>Sensors (Basel, Switzerland) 23 (17): 7407.</em>
+</div>
+<div id="ref-li" class="csl-entry" role="listitem">
+Li, Bai, Y. 2023. <span>“Prognostic Nomograms for Gastric Carcinoma After D2 + Total Gastrectomy to Assist Decision-Making for Postoperative Treatment: Based on Lasso Regression.”</span> <em>World Journal of Surgical Oncology, 21(1), Article 207</em>.
+</div>
+<div id="ref-mari" class="csl-entry" role="listitem">
+Mariella Gregorich, Michael Kammer, Harald Mischak. 2025. <span>“Prediction Modeling with Many Correlated and Zero-Inflated Predictors: Assessing the Nonnegative Garrote Approach.”</span> <em>Volume 44, Issue 8-910.1002</em>.
+</div>
+<div id="ref-muthu" class="csl-entry" role="listitem">
+Muthukrishnan, R., and R. Rohini. 2016. <span>“LASSO: A Feature Selection Technique in Predictive Modeling for Machine Learning.”</span> <em>IEEE International Conference on Advances in Computer Applications (ICACA), Coimbatore, India, 2016, Pp. 18-20</em>.
+</div>
+<div id="ref-robert" class="csl-entry" role="listitem">
+Tibshirani, Robert. 1996. <span>“Regression Shrinkage and SelectionVia the Lasso.”</span> <em>Journal of the Royal Statistical Society: Series B (Methodological), Volume 58, Issue 1, January 1996, Pages 267–288</em>.
 </div>
 <div id="ref-vidaurre" class="csl-entry" role="listitem">
 Vidaurre, Concha Bielza, Diego, and Pedro Larrañaga. 2013. <span>“A Survey of L1 Regression.”</span> <em>International Statistical Review 81 (3): 361–87.</em>
