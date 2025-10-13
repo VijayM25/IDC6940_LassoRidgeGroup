@@ -2206,7 +2206,8 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Week 01:</strong> This is our first week as group, we are trying to compile a summary of introductions!</p>
-<p><strong>Week 02:</strong> We tried to add more articles from our research and narrowing on a perticular dataset!</p>
+<p><strong>Week 02:</strong> We tried to add more articles from our research and narrowing on a particular dataset!</p>
+<p><strong>Week 03:</strong> Downloaded USA cancer dataset, exploring attributes and records for our study!</p>
 <p>Nice effort!</p>
 </div>
 </div>
@@ -2220,14 +2221,1242 @@ Note
 <p>After considering the multiple impactful applications of Lasso regression, this study will apply Lasso to a real-world healthcare problem using the Surveillance, Epidemiology and End Results (SEER) database. Specifically, we aim to develop predictive models that will estimate the likelihood of various cancer treatments such as chemotherapy, radiation therapy or surgery based on patient demographics and clinical characteristics. We will leverage the ability of Lasso to select the most influential factors driving treatment decisions while automatically excluding less informative predictors. The ultimate goal of this application is to support utilization management processes by streamlining treatment approval pathways and expediting patient access to appropriate care. Through this study, we aim to demonstrate how Lasso regressive can serve as an effective tool for improving operational efficiency and decision making in oncology care.</p>
 <p><em>The final introduction paragraph on the problem that we will apply Lasso to will be added to draft next week after finalizing the problem and choosing a dataset.</em></p>
 </section>
+<section id="data-exploration-and-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="data-exploration-and-visualization">Data Exploration and Visualization</h2>
+<p>We got the permission and downloaded cancer dataset of USA from https://seer.cancer.gov/. It has about 240 attributes and ~10M records,</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 48%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Sl No</th>
+<th style="text-align: left;">Attribute Name</th>
+<th style="text-align: left;">Consider</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Age recode with &lt;1 year olds and 90+</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Sex</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Year of diagnosis</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">PRCDA 2020</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">Race recode (W, B, AI, API)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">Origin recode NHIA (Hispanic, Non-Hisp)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">Race and origin recode (NHW, NHB, NHAIAN, NHAPI, Hispanic)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">Site recode ICD-O-3/WHO 2008</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">Behavior code ICD-O-3</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">TNM 7/CS v0204+ Schema (thru 2017)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">TNM 7/CS v0204+ Schema recode</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">AYA site recode 2020 Revision</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">13</td>
+<td style="text-align: left;">Lymphoid neoplasm recode 2021 Revision</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">ICCC site recode 3rd edition/IARC 2017</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">SEER Brain and CNS Recode</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">Site recode ICD-O-3 2023 Revision</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">Site recode ICD-O-3 2023 Revision Expanded</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">18</td>
+<td style="text-align: left;">CS Schema - AJCC 6th Edition</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">19</td>
+<td style="text-align: left;">Primary Site - labeled</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">20</td>
+<td style="text-align: left;">Primary Site</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">21</td>
+<td style="text-align: left;">Histologic Type ICD-O-3</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">22</td>
+<td style="text-align: left;">Behavior recode for analysis</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">23</td>
+<td style="text-align: left;">Grade Recode (thru 2017)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">Derived Summary Grade 2018 (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">25</td>
+<td style="text-align: left;">Grade Clinical (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">Grade Pathological (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">27</td>
+<td style="text-align: left;">Laterality</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28</td>
+<td style="text-align: left;">Diagnostic Confirmation</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">29</td>
+<td style="text-align: left;">ICD-O-3 Hist/behav</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">30</td>
+<td style="text-align: left;">ICD-O-3 Hist/behav, malignant</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">31</td>
+<td style="text-align: left;">Histology recode - broad groupings</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">32</td>
+<td style="text-align: left;">ICCC site recode extended 3rd edition/IARC 2017</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">33</td>
+<td style="text-align: left;">Site recode ICD-O-3/WHO 2008 (for SIRs)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">34</td>
+<td style="text-align: left;">Schema ID (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">35</td>
+<td style="text-align: left;">AJCC ID (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">36</td>
+<td style="text-align: left;">EOD Schema ID Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">37</td>
+<td style="text-align: left;">Site recode - rare tumors</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">38</td>
+<td style="text-align: left;">Combined Summary Stage with Expanded Regional Codes (2004+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">39</td>
+<td style="text-align: left;">Summary stage 2000 (1998-2017)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">40</td>
+<td style="text-align: left;">SEER historic stage A (1973-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">41</td>
+<td style="text-align: left;">Derived EOD 2018 T Recode (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">42</td>
+<td style="text-align: left;">Derived EOD 2018 N Recode (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">43</td>
+<td style="text-align: left;">Derived EOD 2018 M Recode (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">44</td>
+<td style="text-align: left;">Derived EOD 2018 Stage Group Recode (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">45</td>
+<td style="text-align: left;">Derived AJCC Stage Group, 7th ed (2010-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">46</td>
+<td style="text-align: left;">Derived AJCC T, 7th ed (2010-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">47</td>
+<td style="text-align: left;">Derived AJCC N, 7th ed (2010-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">48</td>
+<td style="text-align: left;">Derived AJCC M, 7th ed (2010-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">49</td>
+<td style="text-align: left;">7th Edition Stage Group Recode (2016-2017)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">50</td>
+<td style="text-align: left;">Derived SEER Cmb Stg Grp (2016-2017)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">51</td>
+<td style="text-align: left;">Derived SEER Combined T (2016-2017)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">52</td>
+<td style="text-align: left;">Derived SEER Combined N (2016-2017)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">53</td>
+<td style="text-align: left;">Derived SEER Combined M (2016-2017)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">54</td>
+<td style="text-align: left;">Derived SEER Combined T Src (2016-2017)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">55</td>
+<td style="text-align: left;">Derived SEER Combined N Src (2016-2017)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">56</td>
+<td style="text-align: left;">Derived SEER Combined M Src (2016-2017)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">57</td>
+<td style="text-align: left;">Derived AJCC Stage Group, 6th ed (2004-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">58</td>
+<td style="text-align: left;">Breast - Adjusted AJCC 6th Stage (1988-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">59</td>
+<td style="text-align: left;">Derived AJCC T, 6th ed (2004-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">60</td>
+<td style="text-align: left;">Derived AJCC N, 6th ed (2004-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">61</td>
+<td style="text-align: left;">Derived AJCC M, 6th ed (2004-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">62</td>
+<td style="text-align: left;">Breast - Adjusted AJCC 6th T (1988-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">63</td>
+<td style="text-align: left;">Breast - Adjusted AJCC 6th N (1988-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">64</td>
+<td style="text-align: left;">Breast - Adjusted AJCC 6th M (1988-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">65</td>
+<td style="text-align: left;">Lymphoma - Ann Arbor Stage (1983-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">66</td>
+<td style="text-align: left;">AJCC stage 3rd edition (1988-2003)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">67</td>
+<td style="text-align: left;">SEER modified AJCC stage 3rd (1988-2003)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">68</td>
+<td style="text-align: left;">T value - based on AJCC 3rd (1988-2003)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">69</td>
+<td style="text-align: left;">N value - based on AJCC 3rd (1988-2003)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">70</td>
+<td style="text-align: left;">M value - based on AJCC 3rd (1988-2003)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">71</td>
+<td style="text-align: left;">TNM Edition Number (2016-2017)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">RX Summ–Surg Prim Site (1998+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">73</td>
+<td style="text-align: left;">RX Summ–Scope Reg LN Sur (2003+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">74</td>
+<td style="text-align: left;">RX Summ–Surg Oth Reg/Dis (2003+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">75</td>
+<td style="text-align: left;">RX Summ–Surg/Rad Seq</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">76</td>
+<td style="text-align: left;">Reason no cancer-directed surgery</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">77</td>
+<td style="text-align: left;">Radiation recode</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">78</td>
+<td style="text-align: left;">Chemotherapy recode (yes, no/unk)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">79</td>
+<td style="text-align: left;">Scope of reg lymph nd surg (1998-2002)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">80</td>
+<td style="text-align: left;">RX Summ–Reg LN Examined (1998-2002)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">81</td>
+<td style="text-align: left;">Surgery of oth reg/dis sites (1998-2002)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">82</td>
+<td style="text-align: left;">Site specific surgery (1973-1997 varying detail by year and site)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">83</td>
+<td style="text-align: left;">Radiation to Brain or CNS Recode (1988-1997)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">84</td>
+<td style="text-align: left;">RX Summ–Systemic/Sur Seq (2007+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">85</td>
+<td style="text-align: left;">Time from diagnosis to treatment in days recode</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">86</td>
+<td style="text-align: left;">Breslow Tumor Thickness (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">87</td>
+<td style="text-align: left;">PSA (Prostatic Specific Antigen) Lab Value (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">88</td>
+<td style="text-align: left;">Brain Molecular Markers (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">89</td>
+<td style="text-align: left;">AFP Post-Orchiectomy Lab Value Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">90</td>
+<td style="text-align: left;">AFP Pretreatment Interpretation Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">91</td>
+<td style="text-align: left;">B Symptoms Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">92</td>
+<td style="text-align: left;">Breslow Thickness Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">93</td>
+<td style="text-align: left;">CA-125 Pretreatment Interpretation Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">94</td>
+<td style="text-align: left;">CEA Pretreatment Interpretation Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">95</td>
+<td style="text-align: left;">Chromosome 19q: Loss of Heterozygosity (LOH) Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">96</td>
+<td style="text-align: left;">Chromosome 1p: Loss of Heterozygosity (LOH) Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">97</td>
+<td style="text-align: left;">Fibrosis Score Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">98</td>
+<td style="text-align: left;">Gestational Trophoblastic Prognostic Scoring Index Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">99</td>
+<td style="text-align: left;">Gleason Patterns Clinical Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">100</td>
+<td style="text-align: left;">Gleason Patterns Pathological Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">101</td>
+<td style="text-align: left;">Gleason Score Clinical Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">102</td>
+<td style="text-align: left;">Gleason Score Pathological Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">103</td>
+<td style="text-align: left;">hCG Post-Orchiectomy Range Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">104</td>
+<td style="text-align: left;">Invasion Beyond Capsule Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">105</td>
+<td style="text-align: left;">Ipsilateral Adrenal Gland Involvement Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">106</td>
+<td style="text-align: left;">LDH Post-Orchiectomy Range Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">107</td>
+<td style="text-align: left;">LDH Pretreatment Level Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">108</td>
+<td style="text-align: left;">LN Head and Neck Levels I-III Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">109</td>
+<td style="text-align: left;">LN Head and Neck Levels IV-V Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">110</td>
+<td style="text-align: left;">LN Head and Neck Levels VI-VII Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">111</td>
+<td style="text-align: left;">LN Head and Neck Other Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">112</td>
+<td style="text-align: left;">LN Positive Axillary Level I-II Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">113</td>
+<td style="text-align: left;">Lymph Node Size Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">114</td>
+<td style="text-align: left;">Major Vein Involvement Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">115</td>
+<td style="text-align: left;">Measured Basal Diameter Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">116</td>
+<td style="text-align: left;">Measured Thickness Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">117</td>
+<td style="text-align: left;">Mitotic Rate Melanoma Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">118</td>
+<td style="text-align: left;">Multiple Myeloma Terminology Recode (2012+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">119</td>
+<td style="text-align: left;">Number of Cores Positive Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">120</td>
+<td style="text-align: left;">Number of Cores Examined Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">121</td>
+<td style="text-align: left;">Number of Examined Para-Aortic Nodes Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">122</td>
+<td style="text-align: left;">Number of Examined Pelvic Nodes Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">123</td>
+<td style="text-align: left;">Number of Positive Para-Aortic Nodes Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">124</td>
+<td style="text-align: left;">Number of Positive Pelvic Nodes Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">125</td>
+<td style="text-align: left;">Perineural Invasion Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">126</td>
+<td style="text-align: left;">Peripheral Blood Involvement Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">127</td>
+<td style="text-align: left;">Peritoneal Cytology Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">128</td>
+<td style="text-align: left;">Pleural Effusion Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">129</td>
+<td style="text-align: left;">PSA Lab Value Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">130</td>
+<td style="text-align: left;">Residual Tumor Volume Post Cytoreduction Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">131</td>
+<td style="text-align: left;">Response to Neoadjuvant Therapy Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">132</td>
+<td style="text-align: left;">Sarcomatoid Features Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">133</td>
+<td style="text-align: left;">Separate Tumor Nodules Ipsilateral Lung Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">134</td>
+<td style="text-align: left;">Tumor Deposits Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">135</td>
+<td style="text-align: left;">Ulceration Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">136</td>
+<td style="text-align: left;">Visceral and Parietal Pleural Invasion Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">137</td>
+<td style="text-align: left;">EOD Primary Tumor Recode (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">138</td>
+<td style="text-align: left;">EOD Regional Nodes Recode (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">139</td>
+<td style="text-align: left;">EOD Mets Recode (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">140</td>
+<td style="text-align: left;">Prostate Pathological Extension (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">141</td>
+<td style="text-align: left;">Sentinel Lymph Nodes Examined (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">142</td>
+<td style="text-align: left;">Sentinel Lymph Nodes Positive (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">143</td>
+<td style="text-align: left;">Tumor Size Over Time Recode (1988+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">144</td>
+<td style="text-align: left;">Tumor Size Summary (2016+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">145</td>
+<td style="text-align: left;">Regional nodes examined (1988+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">146</td>
+<td style="text-align: left;">Regional nodes positive (1988+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">147</td>
+<td style="text-align: left;">SEER Combined Mets at DX-bone (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">148</td>
+<td style="text-align: left;">SEER Combined Mets at DX-brain (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">149</td>
+<td style="text-align: left;">SEER Combined Mets at DX-liver (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">150</td>
+<td style="text-align: left;">SEER Combined Mets at DX-lung (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">151</td>
+<td style="text-align: left;">Mets at DX-Distant LN (2016+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">152</td>
+<td style="text-align: left;">Mets at DX-Other (2016+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">153</td>
+<td style="text-align: left;">Breast Subtype (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">154</td>
+<td style="text-align: left;">ER Status Recode Breast Cancer (1990+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">155</td>
+<td style="text-align: left;">PR Status Recode Breast Cancer (1990+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">156</td>
+<td style="text-align: left;">Derived HER2 Recode (2010+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">157</td>
+<td style="text-align: left;">Lymph-vascular Invasion (2004+ varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">158</td>
+<td style="text-align: left;">CS tumor size (2004-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">159</td>
+<td style="text-align: left;">CS extension (2004-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">160</td>
+<td style="text-align: left;">CS lymph nodes (2004-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">161</td>
+<td style="text-align: left;">CS mets at dx (2004-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">162</td>
+<td style="text-align: left;">CS Tumor Size/Ext Eval (2004-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">163</td>
+<td style="text-align: left;">CS Reg Node Eval (2004-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">164</td>
+<td style="text-align: left;">CS Mets Eval (2004-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">165</td>
+<td style="text-align: left;">CS site-specific factor 1 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">166</td>
+<td style="text-align: left;">CS site-specific factor 2 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">167</td>
+<td style="text-align: left;">CS site-specific factor 3 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">168</td>
+<td style="text-align: left;">CS site-specific factor 4 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">169</td>
+<td style="text-align: left;">CS site-specific factor 5 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">170</td>
+<td style="text-align: left;">CS site-specific factor 6 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">171</td>
+<td style="text-align: left;">Adjusted CS site-specific factor 7 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">172</td>
+<td style="text-align: left;">CS site-specific factor 8 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">173</td>
+<td style="text-align: left;">CS site-specific factor 9 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">174</td>
+<td style="text-align: left;">CS site-specific factor 10 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">175</td>
+<td style="text-align: left;">CS site-specific factor 11 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">176</td>
+<td style="text-align: left;">CS site-specific factor 12 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">177</td>
+<td style="text-align: left;">CS site-specific factor 13 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">178</td>
+<td style="text-align: left;">CS site-specific factor 15 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">179</td>
+<td style="text-align: left;">CS site-specific factor 16 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">180</td>
+<td style="text-align: left;">CS site-specific factor 25 (2004-2017 varying by schema)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">181</td>
+<td style="text-align: left;">CS version input current (2004-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">182</td>
+<td style="text-align: left;">CS version input original (2004-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">183</td>
+<td style="text-align: left;">CS version derived (2004-2015)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">184</td>
+<td style="text-align: left;">Estrogen Receptor Summary (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">185</td>
+<td style="text-align: left;">HER2 Overall Summary Recode (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">186</td>
+<td style="text-align: left;">Progesterone Receptor Summary (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">187</td>
+<td style="text-align: left;">EOD 10 - Prostate path ext (1995-2003)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">188</td>
+<td style="text-align: left;">EOD 10 - extent (1988-2003)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">189</td>
+<td style="text-align: left;">EOD 10 - nodes (1988-2003)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">190</td>
+<td style="text-align: left;">EOD 10 - size (1988-2003)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">191</td>
+<td style="text-align: left;">Tumor marker 1 (1990-2003)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">192</td>
+<td style="text-align: left;">Tumor marker 2 (1990-2003)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">193</td>
+<td style="text-align: left;">Tumor marker 3 (1998-2003)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">194</td>
+<td style="text-align: left;">Coding system-EOD (1973-2003)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">195</td>
+<td style="text-align: left;">2-Digit NS EOD part 1 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">196</td>
+<td style="text-align: left;">2-Digit NS EOD part 2 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">197</td>
+<td style="text-align: left;">2-Digit SS EOD part 1 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">198</td>
+<td style="text-align: left;">2-Digit SS EOD part 2 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">199</td>
+<td style="text-align: left;">Expanded EOD(1) - CP53 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">200</td>
+<td style="text-align: left;">Expanded EOD(2) - CP54 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">201</td>
+<td style="text-align: left;">Expanded EOD(1,2) - CP53,54 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">202</td>
+<td style="text-align: left;">Expanded EOD(3) - CP55 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">203</td>
+<td style="text-align: left;">Expanded EOD(4) - CP56 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">204</td>
+<td style="text-align: left;">Expanded EOD(5) - CP57 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">205</td>
+<td style="text-align: left;">Expanded EOD(6) - CP58 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">206</td>
+<td style="text-align: left;">Expanded EOD(7) - CP59 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">207</td>
+<td style="text-align: left;">Expanded EOD(8) - CP60 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">208</td>
+<td style="text-align: left;">Expanded EOD(9) - CP61 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">209</td>
+<td style="text-align: left;">Expanded EOD(10) - CP62 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">210</td>
+<td style="text-align: left;">Expanded EOD(11) - CP63 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">211</td>
+<td style="text-align: left;">Expanded EOD(12) - CP64 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">212</td>
+<td style="text-align: left;">Expanded EOD(13) - CP65 (1973-1982)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">213</td>
+<td style="text-align: left;">EOD 4 - extent (1983-1987)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">214</td>
+<td style="text-align: left;">EOD 4 - nodes (1983-1987)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">215</td>
+<td style="text-align: left;">EOD 4 - size (1983-1987)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">216</td>
+<td style="text-align: left;">COD to site recode</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">217</td>
+<td style="text-align: left;">SEER cause-specific death classification</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">218</td>
+<td style="text-align: left;">SEER other cause of death classification</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">219</td>
+<td style="text-align: left;">Survival months</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">220</td>
+<td style="text-align: left;">Survival months flag</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">221</td>
+<td style="text-align: left;">COD to site rec KM</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">222</td>
+<td style="text-align: left;">COD to site recode ICD-O-3 2023 Revision</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">223</td>
+<td style="text-align: left;">COD to site recode ICD-O-3 2023 Revision Expanded (1999+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">224</td>
+<td style="text-align: left;">Vital status recode (study cutoff used)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">225</td>
+<td style="text-align: left;">Sequence number</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">226</td>
+<td style="text-align: left;">First malignant primary indicator</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">227</td>
+<td style="text-align: left;">Primary by international rules</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">228</td>
+<td style="text-align: left;">Record number recode</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">229</td>
+<td style="text-align: left;">Total number of in situ/malignant tumors for patient</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">230</td>
+<td style="text-align: left;">Total number of benign/borderline tumors for patient</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">231</td>
+<td style="text-align: left;">Age recode with &lt;1 year olds</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">232</td>
+<td style="text-align: left;">Race recode (White, Black, Other)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">233</td>
+<td style="text-align: left;">Age recode with single ages and 85+</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">234</td>
+<td style="text-align: left;">Age recode with single ages and 90+</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">235</td>
+<td style="text-align: left;">Race recode (with detailed Asian and Native Hawaiian other PI)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">236</td>
+<td style="text-align: left;">Year of follow-up recode</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">237</td>
+<td style="text-align: left;">Patient ID</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">238</td>
+<td style="text-align: left;">Type of Reporting Source</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">239</td>
+<td style="text-align: left;">Marital status at diagnosis</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">240</td>
+<td style="text-align: left;">CoC Accredited Flag (2018+)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">241</td>
+<td style="text-align: left;">Median household income inflation adj to 2023</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">242</td>
+<td style="text-align: left;">Rural-Urban Continuum Code</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p>Our next task is to identify the right attributes and try to demonstrate the effectiveness of Lasso and Ridge regression to shrink the features to predict cancer.</p>
+</section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
 </section>
 <section id="analysis-and-results" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-and-results">Analysis and Results</h2>
-</section>
-<section id="data-exploration-and-visualization" class="level2">
-<h2 class="anchored" data-anchor-id="data-exploration-and-visualization">Data Exploration and Visualization</h2>
 </section>
 <section id="modeling-and-results" class="level2">
 <h2 class="anchored" data-anchor-id="modeling-and-results">Modeling and Results</h2>
