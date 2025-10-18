@@ -363,4 +363,6 @@ otherwise the lasso and ridge models tend to favor the category of the dependent
 weight in the training set in a more outstanding way than what occurs in stepwise methods implemented in SPSS.
 
 
+<https://cognitiveresearchjournal.springeropen.com/articles/10.1186/s41235-023-00499-6>
+
 ## References
