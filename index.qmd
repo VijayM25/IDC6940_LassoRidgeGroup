@@ -28,7 +28,7 @@ to edit)
 
 **Week 03:** Downloaded USA cancer dataset, exploring attributes and records for our study!
 
-**Week 04:** Analysed the variable, selected and recoded for our model !
+**Week 04:** Analysed the variables, selected and recoded for our model!
 
 Nice effort!
 :::
@@ -309,7 +309,7 @@ Table 1
 
 ***Treatment Variables***
 
-|Veritable Name|Description|Seer Codes (2018-2022|Recoding for modeling|
+|Veritable Name|Description|Seer Codes (2018-2022)|Recoding for modeling|
 |:------|:------ |:------------|:------------|
 |RX Summ–Surg Prim Site|Surgery of the primary site|00 = None; no surgical procedure of primary site; diagnosed at autopsy only 10-19 = Site-specific codes. Tumor destruction; no pathologic specimen or unknown whether there is a pathologic specimen<BR>20-80 = Site-specific codes. Resection; pathologic specimen 90 = Surgery, NOS. A surgical procedure to the primary site was done, but no information on the type of surgical procedure is provided.<BR>98 = Special codes for hematopoietic neoplasms; ill-defined sites; and unknown primaries (See site-specific codes for the sites and histologies), except death certificate only<BR>99 = Unknown if surgery performed|Binary:<br> 1 = any surgery (10-80, 90)<BR> 0 = no surgery (00)<BR> exclude other/unknown (98, 99)|
 |Phase I Radiation Treatment Modality<BR><BR>Phase II Radiation Treatment Modality<BR><BR>Phase III Radiation Treatment Modality|The radiation modality administered during the first, second and third phase of radiation treatment delivered during the first course of treatment.|00 = No radiation treatment<BR>01 = External beam, NOS<BR>02 = External beam, photons<BR>03 = External beam, protons<BR>04 = External beam, electrons<BR>05 = External beam, neutrons<BR>06 = External beam, carbon ions<BR>07 = Brachytherapy, NOS<BR>08 = Brachytherapy, intracavitary, LDR<BR>09 = Brachytherapy, intracavitary, HDR<BR>10 = Brachytherapy, Interstitial, LDR<BR>11 = Brachytherapy, Interstitial, HDR<BR>12 = Brachytherapy, electronic<BR>13 = Radioisotopes, NOS<BR>14 = Radioisotopes, Radium-232<BR>15 = Radioisotopes, Strontium-89<BR>16 = Radioisotopes, Strontium-90<BR>99 = Treatment radiation modality unknown; Unknown if radiation treatment administered|Binary: <BR>1 = any radiation (01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16)<BR>0 = no radiation (00)<BR> exclude unknown (99)|
@@ -319,10 +319,12 @@ Table 1
 |Sequence Number–Central|Describes the number and sequence of all reportable malignant, in situ, benign, and borderline primary tumors that occur over the lifetime of a patient.|00 = One primary in the patient’s lifetime <BR>01 = First of two or more primaries<BR>02 = Second of two or more primaries|Filter data to only include 00 and 01|
 
 
+
 Table 2
+
 ***Treatment Characteristics***
 
-|Veritable Name|Description|Seer Codes (2018-2022|Recoding for modeling|
+|Veritable Name|Description|Seer Codes (2018-2022)|Recoding for modeling|
 |:------|:------ |:------------|:------------|
 |Tumor Size Clinical|Size of a solid primary tumor before any treatment|000 = No mass/tumor found<BR>001 = 1 mm or described as less than 1 mm (0.1 cm or less than 0.1 cm)<BR>002-988 = Exact size in millimeters (2 mm to 988 mm) (0.2 to 98.8 cm)<BR>989 = 989 millimeters or larger (98.9 cm or larger)<BR>990 = Microscopic focus or foci only and no size of focus is given<BR>998 = Alternate descriptions of tumor size for specific sites:DiffuseBreast (C50.0-C50.6, C50.8-C50.9)<BR>999 = Unknown; size not stated Not documented in patient record Size of tumor cannot be assessed The only measurement(s) describes pieces or chips Not applicable|Continuous numeric <BR> unknowns excluded|
 |EOD Regional Nodes|Regional lymph nodes involved with cancer at the time of diagnosis.|000 = None<BR>800 = Regional lymph node(s), NOS Lymph node(s), NOS<BR>888 = Not applicable–e.g., CNS, hematopoietic<BR>999 = Unknown|Binary: <BR>1 = positive lymph nodes (800)<BR>0 = no positive lymph nodes (000)<BR>exclude other/unknown (888, 999)|
@@ -338,11 +340,13 @@ Table 2
 |PR Summary|PR (Progesterone Receptor) Summary is a summary of results from the progesterone receptor (PR) assay.|0 = PR negative (0.0% or less than 1%) <BR>1 = PR positive<BR>7 = Test ordered, results not in chart<BR>9 = Not documented in medical record Cannot be determined (indeterminate) PR (Progesterone Receptor) Summary status not assessed or unknown if assessed|Binary: <BR>1 = PR positive (1)<BR>0 = PR negative (0)<Br>exclude n/a and unknown (7, 9)|
 |HER2 Overall Summary|HER2 Overall Summary is a summary of results from HER2 testing.|0 = HER2 negative; equivocal <BR>1 = HER2 positive<BR>7 = Test ordered, results not in chart<BR>8 = Not applicable: Information not collected for this case (If this item is required by your standard setter, use of code 8 will result in an edit error.)<BR>9 = Not documented in medical record Cannot be determined (indeterminate) HER2 Overall Summary status not assessed or unknown if assessed|Binary: <BR>1 = HER2 positive (1)<BR>0 = HER2 negative (0)<BR>exclude n/a and unknown (7, 8, 9)|
 
+
+
 Table 3
 
 ***Patient Demographics***
 
-|Veritable Name|Description|Seer Codes (2018-2022|Recoding for modeling|
+|Veritable Name|Description|Seer Codes (2018-2022)|Recoding for modeling|
 |:------|:------ |:------------|:------------|
 |Age at Diagnosis|This data item represents the age of the patient at diagnosis for this cancer.|000 Less than one year old <BR>001 One year old, but less than two years old<BR>002 Two years old (Actual age in years) <BR>101 One hundred one years old <BR>120 One hundred twenty years old<BR>999 Unknown age||
 |Race 1, Race 2, Race 3, Race 4, Race 5|The five race fields (Race 1 – Race 5) make it possible to code multiple races for one person, consistent with the 2000 Census.|01 White<BR>02 Black<BR>03 American Indian, Aleutian, Alaskan Native or Eskimo (includes all indigenous populations of the western hemisphere)<BR>04 Chinese<BR>05 Japanese<BR>06 Filipino<BR>07 Hawaiian<BR>08 Korean<BR>10 Vietnamese<BR>11 Laotian<BR>12 Hmong<Br>13 Kampuchean (including Khmer and Cambodian)<BR>14 Thai<BR>15 Asian Indian or Pakistani, NOS (Effective with 01/01/2010 dx)<BR>16 Asian Indian (Effective with 01/01/2010 dx)<BR>17 Pakistani (Effective with 01/01/2010 dx)<BR>20 Micronesian, NOS<BR>21 Chamorro/Chamoru<BR>22 Guamanian, NOS<BR>25 Polynesian, NOS<BR>26 Tahitian<BR>27 Samoan<BR>28 Tongan<BR>30 Melanesian, NOS<BR>31 Fiji Islander<BR>32 New Guinean<BR>88 No additional races (Race 2 – Race 5)<BR>96 Other Asian, including Asian, NOS and Oriental, NOS<BR>97 Pacific Islander, NOS<BR>98 Other<BR>99 Unknown||
