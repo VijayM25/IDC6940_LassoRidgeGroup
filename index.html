@@ -2208,6 +2208,7 @@ Note
 <p><strong>Week 01:</strong> This is our first week as group, we are trying to compile a summary of introductions!</p>
 <p><strong>Week 02:</strong> We tried to add more articles from our research and narrowing on a particular dataset!</p>
 <p><strong>Week 03:</strong> Downloaded USA cancer dataset, exploring attributes and records for our study!</p>
+<p><strong>Week 04:</strong> Analysed the variable, selected and recoded for our model !</p>
 <p>Nice effort!</p>
 </div>
 </div>
@@ -3450,7 +3451,206 @@ Note
 </tr>
 </tbody>
 </table>
-<p>Our next task is to identify the right attributes and try to demonstrate the effectiveness of Lasso and Ridge regression to shrink the features to predict cancer.</p>
+<p>The data for this study was obtained from the SEER program of the <a href="https://seer.cancer.gov/archive/manuals/2018/SPCSM_2018_maindoc.pdf">National Cancer Institute (NCI)</a>. SEER is a comprehensive population-based cancer registry within the United States that consists of a collection of detailed information on cancer incidence, patient demographics, tumor characteristics, treatment modalities and survival outcomes. The SEER dataset provides high quality, standardized data that allows for large-scale analyses of cancer patterns, treatments and outcomes across diverse populations in the United States. For this study we focused on female breast cancer cases (ICD O-3 site codes C50.0 - C50.9) from 2018 - 2021 and specific variables to indicate whether a patient received specific treatment such as surgery, radiation, chemotherapy, immunotherapy or hormone therapy based on the SEER treatment summary fields. This time period aligns with the period following SEER’s transition to the Extent of Disease (EOD) 2018 and Summary Stage 2018 systems. This time was chosen because these years provide the most consistent and comprehensive recording of tumor stage, biological markers and treatment variables. Using 2018 - 2021 ensures compatibility across staging and treatment codes while avoiding inconsistencies in earlier datasets.</p>
+<p>We focused on variables that are clinically relevant and have been shown to influence treatment decisions in breast cancer. These variables have been categorized into three groups: treatment variables, tumor characteristics and patient demographics. Surgical treatment was identified using the variable <strong>RX Sum–Surg Prim Site</strong>, radiation therapy from <strong>Phase I, II and III Radiation Treatment Modality</strong>, chemotherapy from <strong>RX Summ–Chemo</strong>, hormone therapy from <strong>RX Summ–Hormone</strong> and immunotherapy from <strong>RX Summ–BRM</strong>. These variables capture first-course treatments administered after diagnosis. Only first primary malignancies were included to avoid confounding from prior cancer diagnoses and treatments <strong>(Sequence number = 00, 01)</strong>. Patients with missing or unknown treatment or key staging information were excluded. Each treatment variable was recoded into a binary outcome with 1 indicating that treatment was received and 0 indicating that treatment was not received.</p>
+<p>Table 1</p>
+<p><strong><em>Treatment Variables</em></strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 32%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Veritable Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Seer Codes (2018-2022</th>
+<th style="text-align: left;">Recoding for modeling</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">RX Summ–Surg Prim Site</td>
+<td style="text-align: left;">Surgery of the primary site</td>
+<td style="text-align: left;">00 = None; no surgical procedure of primary site; diagnosed at autopsy only 10-19 = Site-specific codes. Tumor destruction; no pathologic specimen or unknown whether there is a pathologic specimen<br>20-80 = Site-specific codes. Resection; pathologic specimen 90 = Surgery, NOS. A surgical procedure to the primary site was done, but no information on the type of surgical procedure is provided.<br>98 = Special codes for hematopoietic neoplasms; ill-defined sites; and unknown primaries (See site-specific codes for the sites and histologies), except death certificate only<br>99 = Unknown if surgery performed</td>
+<td style="text-align: left;">Binary:<br> 1 = any surgery (10-80, 90)<br> 0 = no surgery (00)<br> exclude other/unknown (98, 99)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Phase I Radiation Treatment Modality<br><br>Phase II Radiation Treatment Modality<br><br>Phase III Radiation Treatment Modality</td>
+<td style="text-align: left;">The radiation modality administered during the first, second and third phase of radiation treatment delivered during the first course of treatment.</td>
+<td style="text-align: left;">00 = No radiation treatment<br>01 = External beam, NOS<br>02 = External beam, photons<br>03 = External beam, protons<br>04 = External beam, electrons<br>05 = External beam, neutrons<br>06 = External beam, carbon ions<br>07 = Brachytherapy, NOS<br>08 = Brachytherapy, intracavitary, LDR<br>09 = Brachytherapy, intracavitary, HDR<br>10 = Brachytherapy, Interstitial, LDR<br>11 = Brachytherapy, Interstitial, HDR<br>12 = Brachytherapy, electronic<br>13 = Radioisotopes, NOS<br>14 = Radioisotopes, Radium-232<br>15 = Radioisotopes, Strontium-89<br>16 = Radioisotopes, Strontium-90<br>99 = Treatment radiation modality unknown; Unknown if radiation treatment administered</td>
+<td style="text-align: left;">Binary: <br>1 = any radiation (01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16)<br>0 = no radiation (00)<br> exclude unknown (99)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RX Summ–Chemo</td>
+<td style="text-align: left;">The chemotherapy given as a part of the first course of treatment or the reason that chemotherapy was not given.</td>
+<td style="text-align: left;">00 = None, chemotherapy was not part of the planned first course of therapy; diagnosed at autopsy<br>01 Chemotherapy administered as first course therapy, but the type and number of agents is not documented in the patient record<br>02 = Single agent chemotherapy administered as first course therapy<br>03 = Multi-agent chemotherapy administered as first course therapy<br>82 = Chemotherapy was not recommended/administered because it was contraindicated due to patient<br>risk factors (comorbid conditions, advanced age, etc.)<br>85 = Chemotherapy was not administered because the patient died prior to planned or recommended therapy<br>86 = Chemotherapy was not administered. It was recommended by the patient’s physician but was not administered as part of the first course of therapy. No reason was stated in patient record.<br>87 = Chemotherapy was not administered. It was recommended by the patient’s physician, but the treatment was refused by the patient, a patient’s family member, or the patient’s guardian. The refusal was noted in the patient record.<br>88 = Chemotherapy was recommended, but it is unknown if it was administered<br>99 = It is unknown whether a chemotherapeutic agent(s) was recommended or administered because it is not stated in the patient record</td>
+<td style="text-align: left;">Binary: <br>1 = any chemotherapy(01, 02, 03)<br>0 = no chemotherapy (00)<br>exclude other/unknown (82, 85, 86, 87, 88, 99)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RX Summ–Hormone</td>
+<td style="text-align: left;">Records therapy administered as first course treatment that affects cancer tissue by adding, blocking, or removing the action or production of hormones.</td>
+<td style="text-align: left;">00 = None, hormone therapy was not part of the planned first course of therapy; not usually administered for this type and/or stage of cancer; diagnosed at autopsy only <br>01 = Hormone therapy administered as first course therapy<br>82 = Hormone therapy was not recommended/administered because it was contraindicated due to patient risk factors (comorbid conditions, advanced age, etc.)<br>85 = Hormone therapy was not administered because the patient died prior to planned or recommended therapy<br>86 = Hormone therapy was not administered. It was recommended by the patient’s physician but was not administered as part of the first course of therapy. No reason was stated in the patient record.<br>87 = Hormone therapy was not administered. It was recommended by the patient’s physician, but this treatment was refused by the patient, a patient’s family member, or the patient’s guardian. The refusal was noted in the patient record.<br>88 = Hormone therapy was recommended, but it is unknown if it was administered<br>99 = It is unknown whether a hormonal agent(s) was recommended or administered</td>
+<td style="text-align: left;">Binary: <br>1 = hormone therapy received (01)<br>0 = no hormone therapy received (00)<br>exclude other unknown (82, 85, 86, 87, 88, 99)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RX Summ–BRM</td>
+<td style="text-align: left;">Records immunotherapeutic (biological therapy, biotherapy or biological response modifier) agents administered as first course of therapy.</td>
+<td style="text-align: left;">00 = None, immunotherapy was not part of the planned first course of therapy<br>01 = Immunotherapy was administered as first course therapy<br>82 = Immunotherapy was not recommended/administered because it was contraindicated due to patient risk factors (comorbid conditions, advanced age, etc.)<br>85 = Immunotherapy was not administered because the patient died prior to planned or recommended therapy<br>86 = Immunotherapy was not administered; it was recommended by the patient’s physician but was not administered as part of the first-course of therapy. No reason was noted in the patient’s record.<br> 87 = Immunotherapy was not administered. It was recommended by the patient’s physician, but this treatment was refused by the patient, a patient’s family member, or the patient’s guardian. The refusal was noted in the patient record.<br> 88 = Immunotherapy was recommended, but it is unknown if it was administered<br>99 = It is unknown if immunotherapy was recommended or administered because it is not stated in patient record.</td>
+<td style="text-align: left;">Binary: <br>1 = immunotherapy received (01)<br>0 = no immunotherapy therapy received (00)<br>exclude other unknown (82, 85, 86, 87, 88, 99)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sequence Number–Central</td>
+<td style="text-align: left;">Describes the number and sequence of all reportable malignant, in situ, benign, and borderline primary tumors that occur over the lifetime of a patient.</td>
+<td style="text-align: left;">00 = One primary in the patient’s lifetime <br>01 = First of two or more primaries<br>02 = Second of two or more primaries</td>
+<td style="text-align: left;">Filter data to only include 00 and 01</td>
+</tr>
+</tbody>
+</table>
+<p>Table 2 <strong><em>Treatment Characteristics</em></strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 32%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Veritable Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Seer Codes (2018-2022</th>
+<th style="text-align: left;">Recoding for modeling</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Tumor Size Clinical</td>
+<td style="text-align: left;">Size of a solid primary tumor before any treatment</td>
+<td style="text-align: left;">000 = No mass/tumor found<br>001 = 1 mm or described as less than 1 mm (0.1 cm or less than 0.1 cm)<br>002-988 = Exact size in millimeters (2 mm to 988 mm) (0.2 to 98.8 cm)<br>989 = 989 millimeters or larger (98.9 cm or larger)<br>990 = Microscopic focus or foci only and no size of focus is given<br>998 = Alternate descriptions of tumor size for specific sites:DiffuseBreast (C50.0-C50.6, C50.8-C50.9)<br>999 = Unknown; size not stated Not documented in patient record Size of tumor cannot be assessed The only measurement(s) describes pieces or chips Not applicable</td>
+<td style="text-align: left;">Continuous numeric <br> unknowns excluded</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EOD Regional Nodes</td>
+<td style="text-align: left;">Regional lymph nodes involved with cancer at the time of diagnosis.</td>
+<td style="text-align: left;">000 = None<br>800 = Regional lymph node(s), NOS Lymph node(s), NOS<br>888 = Not applicable–e.g., CNS, hematopoietic<br>999 = Unknown</td>
+<td style="text-align: left;">Binary: <br>1 = positive lymph nodes (800)<br>0 = no positive lymph nodes (000)<br>exclude other/unknown (888, 999)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mets at DX–Bone</td>
+<td style="text-align: left;">This field identifies whether bone is an involved metastatic site.</td>
+<td style="text-align: left;">0 = None; no bone metastases <br>1 = Yes; distant bone metastases<br>8 = Not applicable<br>9 = Unknown whether bone is an involved metastatic site Not documented in patient record</td>
+<td style="text-align: left;">Binary: <br>1 = bone metastases (1)<br>0 = no bone metastases (0)<br> exclude n/a and unknown (8, 9)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mets at DX-Brain</td>
+<td style="text-align: left;">This field identifies whether brain is an involved metastatic site.</td>
+<td style="text-align: left;">0 = None; no brain metastases <br>1 = Yes; distant brain metastases<br>8 = Not applicable<br>9 = Unknown whether brain is involved metastatic site Not documented in patient record</td>
+<td style="text-align: left;">Binary: <br>1 = brain metastases (1)<br>0 = no brain metastases (0)<br>exclude n/a and unknown (8, 9)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mets at DX-Liver</td>
+<td style="text-align: left;">This field identifies whether liver is an involved metastatic site.</td>
+<td style="text-align: left;">0 = None; no liver metastases <br>1 = Yes; distant liver metastases<br>8 = Not applicable<br>9 = Unknown whether liver is involved metastatic site Not documented in patient record</td>
+<td style="text-align: left;">Binary: <br>1 = liver metastases (1)<br>0 = no liver metastases (0)<br> exclude n/a and unknown (8, 9)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mets at DX-Lung</td>
+<td style="text-align: left;">This field identifies whether lung is an involved metastatic site.</td>
+<td style="text-align: left;">0 = None; no lung metastases <br>1 = Yes; distant lung metastases<br>8 = Not applicable<br>9 = Unknown whether lung is involved metastatic site Not documented in patient record</td>
+<td style="text-align: left;">Binary: <br>1 = lung metastases (1)<br>0 = no lung metastases (0)<br> exclude n/a and unknown (8, 9)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mets at DX-Distant LN</td>
+<td style="text-align: left;">This field identifies whether distant lymph node(s) are an involved metastatic site.</td>
+<td style="text-align: left;">0 = None; no distant lymph node metastases<br>1 = Yes; distant lymph node metastases<br>8 = Not applicable<br>9 = Unknown whether distant lymph node(s) are involved metastatic site Not documented in patient record</td>
+<td style="text-align: left;">Binary: <br>1 = distant lymph node metastases (1)<br>0 = no distant lymph node metastases (0)<br> exclude n/a and unknown (8, 9)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Derived Summary Stage 2018</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">0 = In situ <br>1 = Localized<br>2 = Regional, direct extension only<br>3 = Regional, regional lymph nodes only<br>4 = Regional, direct extension and regional lymph nodes<br>7 = Distant<br>8 = Benign, borderline<br>9 = Unknown if extension or metastasis (unstaged, unknown, or unspecified) Death certificate only case</td>
+<td style="text-align: left;">Categorical: <br>0 = In situ <br>1 = Localized <br>2 = Regional, direct extension only<br>3 = Regional,regional lymph nodes only<br>4 = Regional, direct extension and regional lymph nodes<br>7 = Distant <br>exclude 8, 9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Laterality</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">0 = Not a paired site <br>1 = Right: origin of primary<br>2 = Left: origin of primary <br>3 = Only one side involved, right or left origin unspecified<br>4 = Bilateral involvement at time of diagnosis, lateral origin unknown for a single primary; or both ovaries involved simultaneously, single histology; bilateral retinoblastomas; bilateral Wilms tumors<br>5 = Paired site: midline tumor (effective with 01/01/2010 dx)<br>9 = Paired site, but no information concerning laterality</td>
+<td style="text-align: left;">Categorical:<br>1 = Right (1)<br>2 = Left (2)<br>3 = Bilateral (4)<br>4 = Midline (5)<br>exclude unspecified/unknown (3, 9)<br>*exclude “not a paired site” breast is always paired (0)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Grade Clinical</td>
+<td style="text-align: left;">Records the grade of a solid primary tumor before any treatment</td>
+<td style="text-align: left;">1 = G1: Low combined histologic grade (favorable), SBR score of 3–5 points<br>2 = G2: Intermediate combined histologic grade (moderately favorable); SBR score of 6–7 points<br>3 = G3: High combined histologic grade (unfavorable); SBR score of 8–9 points</td>
+<td style="text-align: left;">Categorical: <br>1 = G1<br>2 = G2<br>3 = G3<br>exclude unknown (9)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ER Summary</td>
+<td style="text-align: left;">ER (Estrogen Receptor) Summary is a summary of results of the estrogen receptor (ER) assay.</td>
+<td style="text-align: left;">0 = ER negative<br>1 = ER positive<br>7 = Test ordered, results not in chart<br>9 = Not documented in medical record Cannot be determined (indeterminate) ER (Estrogen Receptor) Summary status not assessed or unknown if assessed</td>
+<td style="text-align: left;">Binary: <br>1 = ER positive (1)<br>0 = ER negative (0)<br>exclude n/a and unknown (7, 9)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PR Summary</td>
+<td style="text-align: left;">PR (Progesterone Receptor) Summary is a summary of results from the progesterone receptor (PR) assay.</td>
+<td style="text-align: left;">0 = PR negative (0.0% or less than 1%) <br>1 = PR positive<br>7 = Test ordered, results not in chart<br>9 = Not documented in medical record Cannot be determined (indeterminate) PR (Progesterone Receptor) Summary status not assessed or unknown if assessed</td>
+<td style="text-align: left;">Binary: <br>1 = PR positive (1)<br>0 = PR negative (0)<br>exclude n/a and unknown (7, 9)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HER2 Overall Summary</td>
+<td style="text-align: left;">HER2 Overall Summary is a summary of results from HER2 testing.</td>
+<td style="text-align: left;">0 = HER2 negative; equivocal <br>1 = HER2 positive<br>7 = Test ordered, results not in chart<br>8 = Not applicable: Information not collected for this case (If this item is required by your standard setter, use of code 8 will result in an edit error.)<br>9 = Not documented in medical record Cannot be determined (indeterminate) HER2 Overall Summary status not assessed or unknown if assessed</td>
+<td style="text-align: left;">Binary: <br>1 = HER2 positive (1)<br>0 = HER2 negative (0)<br>exclude n/a and unknown (7, 8, 9)</td>
+</tr>
+</tbody>
+</table>
+<p>Table 3</p>
+<p><strong><em>Patient Demographics</em></strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 32%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Veritable Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Seer Codes (2018-2022</th>
+<th style="text-align: left;">Recoding for modeling</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Age at Diagnosis</td>
+<td style="text-align: left;">This data item represents the age of the patient at diagnosis for this cancer.</td>
+<td style="text-align: left;">000 Less than one year old <br>001 One year old, but less than two years old<br>002 Two years old (Actual age in years) <br>101 One hundred one years old <br>120 One hundred twenty years old<br>999 Unknown age</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Race 1, Race 2, Race 3, Race 4, Race 5</td>
+<td style="text-align: left;">The five race fields (Race 1 – Race 5) make it possible to code multiple races for one person, consistent with the 2000 Census.</td>
+<td style="text-align: left;">01 White<br>02 Black<br>03 American Indian, Aleutian, Alaskan Native or Eskimo (includes all indigenous populations of the western hemisphere)<br>04 Chinese<br>05 Japanese<br>06 Filipino<br>07 Hawaiian<br>08 Korean<br>10 Vietnamese<br>11 Laotian<br>12 Hmong<br>13 Kampuchean (including Khmer and Cambodian)<br>14 Thai<br>15 Asian Indian or Pakistani, NOS (Effective with 01/01/2010 dx)<br>16 Asian Indian (Effective with 01/01/2010 dx)<br>17 Pakistani (Effective with 01/01/2010 dx)<br>20 Micronesian, NOS<br>21 Chamorro/Chamoru<br>22 Guamanian, NOS<br>25 Polynesian, NOS<br>26 Tahitian<br>27 Samoan<br>28 Tongan<br>30 Melanesian, NOS<br>31 Fiji Islander<br>32 New Guinean<br>88 No additional races (Race 2 – Race 5)<br>96 Other Asian, including Asian, NOS and Oriental, NOS<br>97 Pacific Islander, NOS<br>98 Other<br>99 Unknown</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Marital Status at DX</td>
+<td style="text-align: left;">Patient’s marital status at the time of diagnosis for the reportable tumor.</td>
+<td style="text-align: left;">1 Single (never married)<br>2 Married (including common law)<br>3 Separated<br>4 Divorced<br>5 Widowed<br>6 Unmarried or Domestic Partner (same sex or opposite sex, registered or unregistered, other than common law marriage) (effective for cases diagnosed 01/01/11 and forward)<br>9 Unknown</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Primary Payer at DX</td>
+<td style="text-align: left;">Identifies the patient’s primary health insurance carrier or method of payment at the time of initial diagnosis and/or treatment.</td>
+<td style="text-align: left;">01 Not insured Patient has no insurance and is declared a charity write-off<br>02 Not insured, self-pay Patient has no insurance and is declared responsible for charges<br>10 Insurance, NOS Type of insurance is unknown or other than types listed in codes 20, 21,31, 35, 60-68<br>20 Private Insurance:Managed care, HMO,or PPO An organized system of prepaid care for a group of enrollees usually within a defined geographic area. Generally formed as one of four types: a group model, an independent physician association (IPA), a network, or a staff model. “Gate-keeper model” is another term for describing this type of insurance.<br>21 Private Insurance: Fee-for-service An insurance plan that does not have negotiated fee structure with the participating hospital. Type of insurance plan not coded as 20.<br>31 Medicaid State government administered insurance for persons who are uninsured, below the poverty level, or covered under entitlement programs Medicaid other than Medicaid described in code 35<br>35 Medicaid – administered through a Managed Care plan Patient is enrolled in Medicaid through a Managed Care program (e.g., HMO or PPO). The managed care plan pays for all incurred costs.<br>60 Medicare/Medicare,NOS Federal government funded insurance for persons who are 62 years of age or older, or are chronically disabled (social security insurance eligible). Includes Medicare without supplement. Not described in codes 61, 62, or 63.<br>61 Medicare with supplement, NOS Patient has Medicare and another type of unspecified insurance to pay costs not covered by Medicare. (See also, codes 63 and 64.)<br>62 Medicare – Administered through a Managed Care Plan Patient is enrolled in Medicare through a Managed Care plan (e.g., HMO or PPO). The Managed Care plan pays for all incurred costs. <br>63 Medicare with private supplement Patient has Medicare and private insurance to pay costs not covered by Medicare.<br>64 Medicare with Medicaid eligibility Federal government Medicare insurance with state-administered Medicaid supplement.<br>65 TRICARE Department of Defense program providing supplementary civilian- sector hospital and medical services beyond a military treatment facility to military dependents, retirees, and their dependents Formerly known as CHAMPUS (Civilian Health and Medical Program of the Uniformed Services).<br>66 Military Military personnel or their dependents treated at a military facility<br>67 Veterans Affairs Veterans treated in Department of Veterans Affairs facilities <br>68 Indian/Public Health Service Patient receives care at an Indian Health Service facility or at another facility and medical costs are reimbursed by the Indian Health Service Patient receives care at a Public Health Service facility or at another facility, and medical costs are reimbursed by the Public Health Service Section III: Demographic Information 76SEER Program Coding and Staging Manual 2018 Code Label Definition<br>99 Insurance status unknown Patient’s medical record does not indicate whether or not the patient is insured</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p>Only female breast cancer cases (C50.0–C50.9) diagnosed from 2018–2021 were included. First primary malignancies only (Sequence Number = 00 or 01). Cases with missing or unknown treatment or key staging variables were excluded. Variables were recoded into consistent binary or continuous formats suitable for Lasso logistic regression modeling.</p>
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
