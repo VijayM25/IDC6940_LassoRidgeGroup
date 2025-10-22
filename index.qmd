@@ -375,7 +375,6 @@ For LASSO and Ridge regression, respectively, the basic OLS regression equation 
 \begin{equation*} \hat{\beta}^{lasso}=\underset{\beta}{\arg\min}\left\{\frac{1}{2}\sum_{i=1}^{N}\left(y_{i}-\beta_{0}-\sum_{j=1}^{p}x_{ij}\beta_{j}\right)^{2}+\lambda\sum_{j=1}^{p}\left\vert\beta_{j}\right\vert\right\} \tag{2} \end{equation*}
 
 
-
 \begin{equation*} \hat{\beta}^{ridge}=\underset{\beta}{\arg\min}\left\{\sum_{i=1}^{N}\left(y_{i}-\beta_{0}-\sum_{j=1}^{p}x_{ij}\beta_{j}\right)^{2}+\lambda\sum_{j=1}^{p}\beta_{j}^{2}\right\} \tag{3}\end{equation*}
 
 where 𝜆 is the shrinkage parameter[@muthu]. Clearly, the higher the value of 𝜆, the more the parameters are shrunken towards zero. Simply put, Ridge regression minimizes a combination of the sum of squared residuals and the shrinkage parameter times the squared sum of the parameters (L2-regularization), while LASSO regression minimizes a combination of the sum of squared residuals and the shrinkage parameter times the sum of the absolute values of the parameters (L1-regularization).
