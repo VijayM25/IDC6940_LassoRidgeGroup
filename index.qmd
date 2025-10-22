@@ -362,7 +362,29 @@ Variables were recoded into consistent binary or continuous formats suitable for
 
 ## Methods
 
+The basis for LASSO and Ridge regression is Ordinary Least Squares (OLS) regression. The objective of OLS regression is to minimize the sum of the squared residuals, which are the differences between the observed and predicted outcome values. The equation for OLS regression can be expressed as:
 
+\begin{equation*} \hat{\beta}_{ols}=\underset{\beta}{\arg\min}\left\{\sum_{i=1}^{N}\left(y_{i}-\beta_{0}-\sum_{j=1}^{p}x_{ij}\beta_{j}\right)^{2}\right\} \tag{1} \end{equation*}
+
+Where *N* is our number of observations, *p* is our number of parameters, *y~i~* is an observed outcome variable value, 𝛽~0~ is the intercept, *𝑥~ij~* is an observed predictor variable value, and 𝛽~𝑗~ is the coefficient for a parameter (Muthukrishnan and Rohini, 2016).
+
+However, while OLS regression has low bias, it is also prone to overfitting and thus high variance. LASSO and Ridge regression remedy this by introducing a shrinkage parameter, denoted as 𝜆. By shrinking the parameters, we introduce some bias but at the benefit of much lower variance.
+
+For LASSO and Ridge regression, respectively, the basic OLS regression equation is modified to:
+
+\begin{equation*} \hat{\beta}^{lasso}=\underset{\beta}{\arg\min}\left\{\frac{1}{2}\sum_{i=1}^{N}\left(y_{i}-\beta_{0}-\sum_{j=1}^{p}x_{ij}\beta_{j}\right)^{2}+\lambda\sum_{j=1}^{p}\left\vert\beta_{j}\right\vert\right\} \tag{2} \end{equation*}
+
+
+
+\begin{equation*} \hat{\beta}^{ridge}=\underset{\beta}{\arg\min}\left\{\sum_{i=1}^{N}\left(y_{i}-\beta_{0}-\sum_{j=1}^{p}x_{ij}\beta_{j}\right)^{2}+\lambda\sum_{j=1}^{p}\beta_{j}^{2}\right\} \tag{3}\end{equation*}
+
+where 𝜆 is the shrinkage parameter[@muthu]. Clearly, the higher the value of 𝜆, the more the parameters are shrunken towards zero. Simply put, Ridge regression minimizes a combination of the sum of squared residuals and the shrinkage parameter times the squared sum of the parameters (L2-regularization), while LASSO regression minimizes a combination of the sum of squared residuals and the shrinkage parameter times the sum of the absolute values of the parameters (L1-regularization).
+
+Of note, there exists an adaptation of the lasso regression created by Zou in 2006 called the “adaptive lasso”. The “adaptive lasso” penalized each parameter according to the importance, or weight, of its corresponding predictor variable. The adaptive lasso can be written as:
+
+\begin{equation*} \hat{\beta}^{adaptive  lasso}=\underset{\beta}{\arg\min}\left\{\frac{1}{2}\sum_{i=1}^{N}\left(y_{i}-\beta_{0}-\sum_{j=1}^{p}x_{ij}\beta_{j}\right)^{2}+\lambda\sum_{j=1}^{p} w_{j}\left\vert\beta_{j}\right\vert\right\}\tag{4}\end{equation*}
+
+where 𝑤~𝑗~ is the weight assigned to a certain parameter[@vidaurre].
 
 ## Analysis and Results
 
