@@ -368,4 +368,253 @@ Ridge regression - https://web.archive.org/web/20150616000426id_/http://aliquote
 lasso using R - https://www.statology.org/lasso-regression-in-r/
 another ex - https://www.science.smith.edu/~jcrouser/SDS293/labs/lab10-r.html
 
+##extra from main
+We got the permission and downloaded cancer dataset of USA from https://seer.cancer.gov/.
+It has about 240 attributes and ~10M records,
+
+|Sl No|Attribute Name|Consider  |
+|:------|:------ |:------------|
+|1|Age recode with <1 year olds and 90+|  |
+|2|Sex|  |
+|3|Year of diagnosis|  |
+|4|PRCDA 2020|  |
+|5|Race recode (W, B, AI, API)|  |
+|6|Origin recode NHIA (Hispanic, Non-Hisp)|  |
+|7|Race and origin recode (NHW, NHB, NHAIAN, NHAPI, Hispanic)|  |
+|8|Site recode ICD-O-3/WHO 2008|  |
+|9|Behavior code ICD-O-3|  |
+|10|TNM 7/CS v0204+ Schema (thru 2017)|  |
+|11|TNM 7/CS v0204+ Schema recode|  |
+|12|AYA site recode 2020 Revision|  |
+|13|Lymphoid neoplasm recode 2021 Revision|  |
+|14|ICCC site recode 3rd edition/IARC 2017|  |
+|15|SEER Brain and CNS Recode|  |
+|16|Site recode ICD-O-3 2023 Revision|  |
+|17|Site recode ICD-O-3 2023 Revision Expanded|  |
+|18|CS Schema - AJCC 6th Edition|  |
+|19|Primary Site - labeled|  |
+|20|Primary Site|  |
+|21|Histologic Type ICD-O-3|  |
+|22|Behavior recode for analysis|  |
+|23|Grade Recode (thru 2017)|  |
+|24|Derived Summary Grade 2018 (2018+)|  |
+|25|Grade Clinical (2018+)|  |
+|26|Grade Pathological (2018+)|  |
+|27|Laterality|  |
+|28|Diagnostic Confirmation|  |
+|29|ICD-O-3 Hist/behav|  |
+|30|ICD-O-3 Hist/behav, malignant|  |
+|31|Histology recode - broad groupings|  |
+|32|ICCC site recode extended 3rd edition/IARC 2017|  |
+|33|Site recode ICD-O-3/WHO 2008 (for SIRs)|  |
+|34|Schema ID (2018+)|  |
+|35|AJCC ID (2018+)|  |
+|36|EOD Schema ID Recode (2010+)|  |
+|37|Site recode - rare tumors|  |
+|38|Combined Summary Stage with Expanded Regional Codes (2004+)|  |
+|39|Summary stage 2000 (1998-2017)|  |
+|40|SEER historic stage A (1973-2015)|  |
+|41|Derived EOD 2018 T Recode (2018+)|  |
+|42|Derived EOD 2018 N Recode (2018+)|  |
+|43|Derived EOD 2018 M Recode (2018+)|  |
+|44|Derived EOD 2018 Stage Group Recode (2018+)|  |
+|45|Derived AJCC Stage Group, 7th ed (2010-2015)|  |
+|46|Derived AJCC T, 7th ed (2010-2015)|  |
+|47|Derived AJCC N, 7th ed (2010-2015)|  |
+|48|Derived AJCC M, 7th ed (2010-2015)|  |
+|49|7th Edition Stage Group Recode (2016-2017)|  |
+|50|Derived SEER Cmb Stg Grp (2016-2017)|  |
+|51|Derived SEER Combined T (2016-2017)|  |
+|52|Derived SEER Combined N (2016-2017)|  |
+|53|Derived SEER Combined M (2016-2017)|  |
+|54|Derived SEER Combined T Src (2016-2017)|  |
+|55|Derived SEER Combined N Src (2016-2017)|  |
+|56|Derived SEER Combined M Src (2016-2017)|  |
+|57|Derived AJCC Stage Group, 6th ed (2004-2015)|  |
+|58|Breast - Adjusted AJCC 6th Stage (1988-2015)|  |
+|59|Derived AJCC T, 6th ed (2004-2015)|  |
+|60|Derived AJCC N, 6th ed (2004-2015)|  |
+|61|Derived AJCC M, 6th ed (2004-2015)|  |
+|62|Breast - Adjusted AJCC 6th T (1988-2015)|  |
+|63|Breast - Adjusted AJCC 6th N (1988-2015)|  |
+|64|Breast - Adjusted AJCC 6th M (1988-2015)|  |
+|65|Lymphoma - Ann Arbor Stage (1983-2015)|  |
+|66|AJCC stage 3rd edition (1988-2003)|  |
+|67|SEER modified AJCC stage 3rd (1988-2003)|  |
+|68|T value - based on AJCC 3rd (1988-2003)|  |
+|69|N value - based on AJCC 3rd (1988-2003)|  |
+|70|M value - based on AJCC 3rd (1988-2003)|  |
+|71|TNM Edition Number (2016-2017)|  |
+|72|RX Summ--Surg Prim Site (1998+)|  |
+|73|RX Summ--Scope Reg LN Sur (2003+)|  |
+|74|RX Summ--Surg Oth Reg/Dis (2003+)|  |
+|75|RX Summ--Surg/Rad Seq|  |
+|76|Reason no cancer-directed surgery|  |
+|77|Radiation recode|  |
+|78|Chemotherapy recode (yes, no/unk)|  |
+|79|Scope of reg lymph nd surg (1998-2002)|  |
+|80|RX Summ--Reg LN Examined (1998-2002)|  |
+|81|Surgery of oth reg/dis sites (1998-2002)|  |
+|82|Site specific surgery (1973-1997 varying detail by year and site)|  |
+|83|Radiation to Brain or CNS Recode (1988-1997)|  |
+|84|RX Summ--Systemic/Sur Seq (2007+)|  |
+|85|Time from diagnosis to treatment in days recode|  |
+|86|Breslow Tumor Thickness (2018+)|  |
+|87|PSA (Prostatic Specific Antigen) Lab Value (2018+)|  |
+|88|Brain Molecular Markers (2018+)|  |
+|89|AFP Post-Orchiectomy Lab Value Recode (2010+)|  |
+|90|AFP Pretreatment Interpretation Recode (2010+)|  |
+|91|B Symptoms Recode (2010+)|  |
+|92|Breslow Thickness Recode (2010+)|  |
+|93|CA-125 Pretreatment Interpretation Recode (2010+)|  |
+|94|CEA Pretreatment Interpretation Recode (2010+)|  |
+|95|Chromosome 19q: Loss of Heterozygosity (LOH) Recode (2010+)|  |
+|96|Chromosome 1p: Loss of Heterozygosity (LOH) Recode (2010+)|  |
+|97|Fibrosis Score Recode (2010+)|  |
+|98|Gestational Trophoblastic Prognostic Scoring Index Recode (2010+)|  |
+|99|Gleason Patterns Clinical Recode (2010+)|  |
+|100|Gleason Patterns Pathological Recode (2010+)|  |
+|101|Gleason Score Clinical Recode (2010+)|  |
+|102|Gleason Score Pathological Recode (2010+)|  |
+|103|hCG Post-Orchiectomy Range Recode (2010+)|  |
+|104|Invasion Beyond Capsule Recode (2010+)|  |
+|105|Ipsilateral Adrenal Gland Involvement Recode (2010+)|  |
+|106|LDH Post-Orchiectomy Range Recode (2010+)|  |
+|107|LDH Pretreatment Level Recode (2010+)|  |
+|108|LN Head and Neck Levels I-III Recode (2010+)|  |
+|109|LN Head and Neck Levels IV-V Recode (2010+)|  |
+|110|LN Head and Neck Levels VI-VII Recode (2010+)|  |
+|111|LN Head and Neck Other Recode (2010+)|  |
+|112|LN Positive Axillary Level I-II Recode (2010+)|  |
+|113|Lymph Node Size Recode (2010+)|  |
+|114|Major Vein Involvement Recode (2010+)|  |
+|115|Measured Basal Diameter Recode (2010+)|  |
+|116|Measured Thickness Recode (2010+)|  |
+|117|Mitotic Rate Melanoma Recode (2010+)|  |
+|118|Multiple Myeloma Terminology Recode (2012+)|  |
+|119|Number of Cores Positive Recode (2010+)|  |
+|120|Number of Cores Examined Recode (2010+)|  |
+|121|Number of Examined Para-Aortic Nodes Recode (2010+)|  |
+|122|Number of Examined Pelvic Nodes Recode (2010+)|  |
+|123|Number of Positive Para-Aortic Nodes Recode (2010+)|  |
+|124|Number of Positive Pelvic Nodes Recode (2010+)|  |
+|125|Perineural Invasion Recode (2010+)|  |
+|126|Peripheral Blood Involvement Recode (2010+)|  |
+|127|Peritoneal Cytology Recode (2010+)|  |
+|128|Pleural Effusion Recode (2010+)|  |
+|129|PSA Lab Value Recode (2010+)|  |
+|130|Residual Tumor Volume Post Cytoreduction Recode (2010+)|  |
+|131|Response to Neoadjuvant Therapy Recode (2010+)|  |
+|132|Sarcomatoid Features Recode (2010+)|  |
+|133|Separate Tumor Nodules Ipsilateral Lung Recode (2010+)|  |
+|134|Tumor Deposits Recode (2010+)|  |
+|135|Ulceration Recode (2010+)|  |
+|136|Visceral and Parietal Pleural Invasion Recode (2010+)|  |
+|137|EOD Primary Tumor Recode (2018+)|  |
+|138|EOD Regional Nodes Recode (2018+)|  |
+|139|EOD Mets Recode (2018+)|  |
+|140|Prostate Pathological Extension (2018+)|  |
+|141|Sentinel Lymph Nodes Examined (2018+)|  |
+|142|Sentinel Lymph Nodes Positive (2018+)|  |
+|143|Tumor Size Over Time Recode (1988+)|  |
+|144|Tumor Size Summary (2016+)|  |
+|145|Regional nodes examined (1988+)|  |
+|146|Regional nodes positive (1988+)|  |
+|147|SEER Combined Mets at DX-bone (2010+)|  |
+|148|SEER Combined Mets at DX-brain (2010+)|  |
+|149|SEER Combined Mets at DX-liver (2010+)|  |
+|150|SEER Combined Mets at DX-lung (2010+)|  |
+|151|Mets at DX-Distant LN (2016+)|  |
+|152|Mets at DX-Other (2016+)|  |
+|153|Breast Subtype (2010+)|  |
+|154|ER Status Recode Breast Cancer (1990+)|  |
+|155|PR Status Recode Breast Cancer (1990+)|  |
+|156|Derived HER2 Recode (2010+)|  |
+|157|Lymph-vascular Invasion (2004+ varying by schema)|  |
+|158|CS tumor size (2004-2015)|  |
+|159|CS extension (2004-2015)|  |
+|160|CS lymph nodes (2004-2015)|  |
+|161|CS mets at dx (2004-2015)|  |
+|162|CS Tumor Size/Ext Eval (2004-2015)|  |
+|163|CS Reg Node Eval (2004-2015)|  |
+|164|CS Mets Eval (2004-2015)|  |
+|165|CS site-specific factor 1 (2004-2017 varying by schema)|  |
+|166|CS site-specific factor 2 (2004-2017 varying by schema)|  |
+|167|CS site-specific factor 3 (2004-2017 varying by schema)|  |
+|168|CS site-specific factor 4 (2004-2017 varying by schema)|  |
+|169|CS site-specific factor 5 (2004-2017 varying by schema)|  |
+|170|CS site-specific factor 6 (2004-2017 varying by schema)|  |
+|171|Adjusted CS site-specific factor 7 (2004-2017 varying by schema)|  |
+|172|CS site-specific factor 8 (2004-2017 varying by schema)|  |
+|173|CS site-specific factor 9 (2004-2017 varying by schema)|  |
+|174|CS site-specific factor 10 (2004-2017 varying by schema)|  |
+|175|CS site-specific factor 11 (2004-2017 varying by schema)|  |
+|176|CS site-specific factor 12 (2004-2017 varying by schema)|  |
+|177|CS site-specific factor 13 (2004-2017 varying by schema)|  |
+|178|CS site-specific factor 15 (2004-2017 varying by schema)|  |
+|179|CS site-specific factor 16 (2004-2017 varying by schema)|  |
+|180|CS site-specific factor 25 (2004-2017 varying by schema)|  |
+|181|CS version input current (2004-2015)|  |
+|182|CS version input original (2004-2015)|  |
+|183|CS version derived (2004-2015)|  |
+|184|Estrogen Receptor Summary (2018+)|  |
+|185|HER2 Overall Summary Recode (2018+)|  |
+|186|Progesterone Receptor Summary (2018+)|  |
+|187|EOD 10 - Prostate path ext (1995-2003)|  |
+|188|EOD 10 - extent (1988-2003)|  |
+|189|EOD 10 - nodes (1988-2003)|  |
+|190|EOD 10 - size (1988-2003)|  |
+|191|Tumor marker 1 (1990-2003)|  |
+|192|Tumor marker 2 (1990-2003)|  |
+|193|Tumor marker 3 (1998-2003)|  |
+|194|Coding system-EOD (1973-2003)|  |
+|195|2-Digit NS EOD part 1 (1973-1982)|  |
+|196|2-Digit NS EOD part 2 (1973-1982)|  |
+|197|2-Digit SS EOD part 1 (1973-1982)|  |
+|198|2-Digit SS EOD part 2 (1973-1982)|  |
+|199|Expanded EOD(1) - CP53 (1973-1982)|  |
+|200|Expanded EOD(2) - CP54 (1973-1982)|  |
+|201|Expanded EOD(1,2) - CP53,54 (1973-1982)|  |
+|202|Expanded EOD(3) - CP55 (1973-1982)|  |
+|203|Expanded EOD(4) - CP56 (1973-1982)|  |
+|204|Expanded EOD(5) - CP57 (1973-1982)|  |
+|205|Expanded EOD(6) - CP58 (1973-1982)|  |
+|206|Expanded EOD(7) - CP59 (1973-1982)|  |
+|207|Expanded EOD(8) - CP60 (1973-1982)|  |
+|208|Expanded EOD(9) - CP61 (1973-1982)|  |
+|209|Expanded EOD(10) - CP62 (1973-1982)|  |
+|210|Expanded EOD(11) - CP63 (1973-1982)|  |
+|211|Expanded EOD(12) - CP64 (1973-1982)|  |
+|212|Expanded EOD(13) - CP65 (1973-1982)|  |
+|213|EOD 4 - extent (1983-1987)|  |
+|214|EOD 4 - nodes (1983-1987)|  |
+|215|EOD 4 - size (1983-1987)|  |
+|216|COD to site recode|  |
+|217|SEER cause-specific death classification|  |
+|218|SEER other cause of death classification|  |
+|219|Survival months|  |
+|220|Survival months flag|  |
+|221|COD to site rec KM|  |
+|222|COD to site recode ICD-O-3 2023 Revision|  |
+|223|COD to site recode ICD-O-3 2023 Revision Expanded (1999+)|  |
+|224|Vital status recode (study cutoff used)|  |
+|225|Sequence number|  |
+|226|First malignant primary indicator|  |
+|227|Primary by international rules|  |
+|228|Record number recode|  |
+|229|Total number of in situ/malignant tumors for patient|  |
+|230|Total number of benign/borderline tumors for patient|  |
+|231|Age recode with <1 year olds|  |
+|232|Race recode (White, Black, Other)|  |
+|233|Age recode with single ages and 85+|  |
+|234|Age recode with single ages and 90+|  |
+|235|Race recode (with detailed Asian and Native Hawaiian other PI)|  |
+|236|Year of follow-up recode|  |
+|237|Patient ID|  |
+|238|Type of Reporting Source|  |
+|239|Marital status at diagnosis|  |
+|240|CoC Accredited Flag (2018+)|  |
+|241|Median household income inflation adj to 2023|  |
+|242|Rural-Urban Continuum Code|  |
+
 ## References
