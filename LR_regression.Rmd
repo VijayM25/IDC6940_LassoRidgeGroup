@@ -1,11 +1,9 @@
 ---
-title: "R Notebook"
+title: "Lasso - Ridge Regression Group for data science projects - Fall 2025"
 output: html_notebook
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
 
 ```{r}
 library(data.table)
@@ -35,20 +33,16 @@ plot(fit)
 
 ```{r}
 grid = 10^seq(10, -2, length = 100)
-lasso_mod = glmnet(x, y, alpha = 1, lambda = grid)
-plot(lasso_mod)
+lasso_fit = glmnet(x, y, alpha = 1, lambda = grid)
+plot(lasso_fit)
 ```
 
 ```{r}
 set.seed(1)
-cv.out = cv.glmnet(x, y, alpha = 1) # Fit lasso model on training data #
-plot(cv.out) # Draw plot of training MSE as a function of lambda
-bestlam = cv.out$lambda.min # Select lamda that minimizes training MSE
+cv.out = cv.glmnet(x, y, alpha = 1) 
+plot(cv.out) 
+bestlam = cv.out$lambda.min 
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
-
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
 

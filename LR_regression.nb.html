@@ -11,7 +11,7 @@
 
 
 
-<title>R Notebook</title>
+<title>Lasso - Ridge Regression Group for data science projects - Fall 2025</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1746,18 +1746,13 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">R Notebook</h1>
+<h1 class="title toc-ignore">Lasso - Ridge Regression Group for data
+science projects - Fall 2025</h1>
 
 </div>
 
 
 <!-- rnb-text-begin -->
-<p>This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a>
-Notebook. When you execute code within the notebook, the results appear
-beneath the code.</p>
-<p>Try executing this chunk by clicking the <em>Run</em> button within
-the chunk or by placing your cursor inside it and pressing
-<em>Cmd+Shift+Enter</em>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjpbImxpYnJhcnkoZGF0YS50YWJsZSkiLCJsaWJyYXJ5KElTTFIyKSIsImxpYnJhcnkoZ2xtbmV0KSIsImxpYnJhcnkoZHBseXIpIiwibGlicmFyeSh0aWR5cikiXX0= -->
@@ -1794,35 +1789,26 @@ plot(fit)</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbImdyaWQgPSAxMF5zZXEoMTAsIC0yLCBsZW5ndGggPSAxMDApIiwibGFzc29fbW9kID0gZ2xtbmV0KHgsIHksIGFscGhhID0gMSwgbGFtYmRhID0gZ3JpZCkiLCJwbG90KGxhc3NvX21vZCkiXX0= -->
+<!-- rnb-source-begin eyJkYXRhIjpbImdyaWQgPSAxMF5zZXEoMTAsIC0yLCBsZW5ndGggPSAxMDApIiwibGFzc29fZml0ID0gZ2xtbmV0KHgsIHksIGFscGhhID0gMSwgbGFtYmRhID0gZ3JpZCkiLCJwbG90KGxhc3NvX2ZpdCkiXX0= -->
 <pre class="r"><code>grid = 10^seq(10, -2, length = 100)
-lasso_mod = glmnet(x, y, alpha = 1, lambda = grid)
-plot(lasso_mod)</code></pre>
+lasso_fit = glmnet(x, y, alpha = 1, lambda = grid)
+plot(lasso_fit)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbInNldC5zZWVkKDEpIiwiY3Yub3V0ID0gY3YuZ2xtbmV0KHgsIHksIGFscGhhID0gMSkgIyBGaXQgbGFzc28gbW9kZWwgb24gdHJhaW5pbmcgZGF0YSAjIiwicGxvdChjdi5vdXQpICMgRHJhdyBwbG90IG9mIHRyYWluaW5nIE1TRSBhcyBhIGZ1bmN0aW9uIG9mIGxhbWJkYSIsImJlc3RsYW0gPSBjdi5vdXQkbGFtYmRhLm1pbiAjIFNlbGVjdCBsYW1kYSB0aGF0IG1pbmltaXplcyB0cmFpbmluZyBNU0UiXX0= -->
+<!-- rnb-source-begin eyJkYXRhIjpbInNldC5zZWVkKDEpIiwiY3Yub3V0ID0gY3YuZ2xtbmV0KHgsIHksIGFscGhhID0gMSkgIiwicGxvdChjdi5vdXQpICIsImJlc3RsYW0gPSBjdi5vdXQkbGFtYmRhLm1pbiAiXX0= -->
 <pre class="r"><code>set.seed(1)
-cv.out = cv.glmnet(x, y, alpha = 1) # Fit lasso model on training data #
-plot(cv.out) # Draw plot of training MSE as a function of lambda
-bestlam = cv.out$lambda.min # Select lamda that minimizes training MSE</code></pre>
+cv.out = cv.glmnet(x, y, alpha = 1) 
+plot(cv.out) 
+bestlam = cv.out$lambda.min </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the
-toolbar or by pressing <em>Cmd+Option+I</em>.</p>
-<p>When you save the notebook, an HTML file containing the code and
-output will be saved alongside it (click the <em>Preview</em> button or
-press <em>Cmd+Shift+K</em> to preview the HTML file).</p>
-<p>The preview shows you a rendered HTML copy of the contents of the
-editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not
-run any R code chunks. Instead, the output of the chunk when it was last
-run in the editor is displayed.</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKVGhpcyBpcyBhbiBbUiBNYXJrZG93bl0oaHR0cDovL3JtYXJrZG93bi5yc3R1ZGlvLmNvbSkgTm90ZWJvb2suIFdoZW4geW91IGV4ZWN1dGUgY29kZSB3aXRoaW4gdGhlIG5vdGVib29rLCB0aGUgcmVzdWx0cyBhcHBlYXIgYmVuZWF0aCB0aGUgY29kZS4gCgpUcnkgZXhlY3V0aW5nIHRoaXMgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpSdW4qIGJ1dHRvbiB3aXRoaW4gdGhlIGNodW5rIG9yIGJ5IHBsYWNpbmcgeW91ciBjdXJzb3IgaW5zaWRlIGl0IGFuZCBwcmVzc2luZyAqQ21kK1NoaWZ0K0VudGVyKi4gCgpgYGB7cn0KbGlicmFyeShkYXRhLnRhYmxlKQpsaWJyYXJ5KElTTFIyKQpsaWJyYXJ5KGdsbW5ldCkKbGlicmFyeShkcGx5cikKbGlicmFyeSh0aWR5cikKYGBgCgpgYGB7cn0KI2RhdGFyIDwtIGZyZWFkKCIvVXNlcnMvdm1vaGFuYW0vRG93bmxvYWRzL2RhdGEvU2VsZWN0ZWRfdmFyX2Zvcm1hdGVkLmNzdiIpCgpkYXRhID0gbmEub21pdChmcmVhZCgiL1VzZXJzL3Ztb2hhbmFtL0Rvd25sb2Fkcy9kYXRhL1NlbGVjdGVkX3Zhcl9mb3JtYXRlZC5jc3YiKSkKI3N0cihkYXRhKQp4ID0gbW9kZWwubWF0cml4KHR2X3JhZGlhdGlvbn4uLCBkYXRhKVssLTJdIAp5ID0gZGF0YSAlPiUKICBzZWxlY3QodHZfcmFkaWF0aW9uKSAlPiUKICB1bmxpc3QoKSAlPiUKICBhcy5udW1lcmljKCkKI2hpc3QoZGF0YSR0dl9yYWRpYXRpb24pCmhpc3QoZGF0YSR0Y19jb21iaW5lZF9zdGFnZSkKYGBgCmBgYHtyfQpmaXQgPC0gZ2xtbmV0KHgseSwgZmFtaWx5PSJiaW5vbWlhbCIpCnBsb3QoZml0KQpgYGAKCmBgYHtyfQpncmlkID0gMTBec2VxKDEwLCAtMiwgbGVuZ3RoID0gMTAwKQpsYXNzb19tb2QgPSBnbG1uZXQoeCwgeSwgYWxwaGEgPSAxLCBsYW1iZGEgPSBncmlkKQpwbG90KGxhc3NvX21vZCkKYGBgCgpgYGB7cn0Kc2V0LnNlZWQoMSkKY3Yub3V0ID0gY3YuZ2xtbmV0KHgsIHksIGFscGhhID0gMSkgIyBGaXQgbGFzc28gbW9kZWwgb24gdHJhaW5pbmcgZGF0YSAjCnBsb3QoY3Yub3V0KSAjIERyYXcgcGxvdCBvZiB0cmFpbmluZyBNU0UgYXMgYSBmdW5jdGlvbiBvZiBsYW1iZGEKYmVzdGxhbSA9IGN2Lm91dCRsYW1iZGEubWluICMgU2VsZWN0IGxhbWRhIHRoYXQgbWluaW1pemVzIHRyYWluaW5nIE1TRQpgYGAKCkFkZCBhIG5ldyBjaHVuayBieSBjbGlja2luZyB0aGUgKkluc2VydCBDaHVuayogYnV0dG9uIG9uIHRoZSB0b29sYmFyIG9yIGJ5IHByZXNzaW5nICpDbWQrT3B0aW9uK0kqLgoKV2hlbiB5b3Ugc2F2ZSB0aGUgbm90ZWJvb2ssIGFuIEhUTUwgZmlsZSBjb250YWluaW5nIHRoZSBjb2RlIGFuZCBvdXRwdXQgd2lsbCBiZSBzYXZlZCBhbG9uZ3NpZGUgaXQgKGNsaWNrIHRoZSAqUHJldmlldyogYnV0dG9uIG9yIHByZXNzICpDbWQrU2hpZnQrSyogdG8gcHJldmlldyB0aGUgSFRNTCBmaWxlKS4gCgpUaGUgcHJldmlldyBzaG93cyB5b3UgYSByZW5kZXJlZCBIVE1MIGNvcHkgb2YgdGhlIGNvbnRlbnRzIG9mIHRoZSBlZGl0b3IuIENvbnNlcXVlbnRseSwgdW5saWtlICpLbml0KiwgKlByZXZpZXcqIGRvZXMgbm90IHJ1biBhbnkgUiBjb2RlIGNodW5rcy4gSW5zdGVhZCwgdGhlIG91dHB1dCBvZiB0aGUgY2h1bmsgd2hlbiBpdCB3YXMgbGFzdCBydW4gaW4gdGhlIGVkaXRvciBpcyBkaXNwbGF5ZWQuCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTGFzc28gLSBSaWRnZSBSZWdyZXNzaW9uIEdyb3VwIGZvciBkYXRhIHNjaWVuY2UgcHJvamVjdHMgLSBGYWxsIDIwMjUiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCgoKYGBge3J9CmxpYnJhcnkoZGF0YS50YWJsZSkKbGlicmFyeShJU0xSMikKbGlicmFyeShnbG1uZXQpCmxpYnJhcnkoZHBseXIpCmxpYnJhcnkodGlkeXIpCmBgYAoKYGBge3J9CiNkYXRhciA8LSBmcmVhZCgiL1VzZXJzL3Ztb2hhbmFtL0Rvd25sb2Fkcy9kYXRhL1NlbGVjdGVkX3Zhcl9mb3JtYXRlZC5jc3YiKQoKZGF0YSA9IG5hLm9taXQoZnJlYWQoIi9Vc2Vycy92bW9oYW5hbS9Eb3dubG9hZHMvZGF0YS9TZWxlY3RlZF92YXJfZm9ybWF0ZWQuY3N2IikpCiNzdHIoZGF0YSkKeCA9IG1vZGVsLm1hdHJpeCh0dl9yYWRpYXRpb25+LiwgZGF0YSlbLC0yXSAKeSA9IGRhdGEgJT4lCiAgc2VsZWN0KHR2X3JhZGlhdGlvbikgJT4lCiAgdW5saXN0KCkgJT4lCiAgYXMubnVtZXJpYygpCiNoaXN0KGRhdGEkdHZfcmFkaWF0aW9uKQpoaXN0KGRhdGEkdGNfY29tYmluZWRfc3RhZ2UpCmBgYApgYGB7cn0KZml0IDwtIGdsbW5ldCh4LHksIGZhbWlseT0iYmlub21pYWwiKQpwbG90KGZpdCkKYGBgCgpgYGB7cn0KZ3JpZCA9IDEwXnNlcSgxMCwgLTIsIGxlbmd0aCA9IDEwMCkKbGFzc29fZml0ID0gZ2xtbmV0KHgsIHksIGFscGhhID0gMSwgbGFtYmRhID0gZ3JpZCkKcGxvdChsYXNzb19maXQpCmBgYAoKYGBge3J9CnNldC5zZWVkKDEpCmN2Lm91dCA9IGN2LmdsbW5ldCh4LCB5LCBhbHBoYSA9IDEpIApwbG90KGN2Lm91dCkgCmJlc3RsYW0gPSBjdi5vdXQkbGFtYmRhLm1pbiAKYGBgCgoKCg==</div>
 
 
 

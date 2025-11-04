@@ -18,8 +18,7 @@ editor:
     wrap: 72
 ---
 
-Slides: [slides.html](slides.html){target="_blank"} ( Go to `slides.qmd`
-to edit)
+Slides: [slides.html](slides.html){target="_blank"} ( Go to `slides.qmd` to edit)
 
 ::: callout-note
 **Week 01:** This is our first week as group, we are trying to compile a summary of introductions!
@@ -31,6 +30,8 @@ to edit)
 **Week 04:** Analysed the variables, selected and recoded for our model!
 
 **Week 05:** Refined the variables, as metadata and data were not matching!
+
+**Week 06:** Started coding in R studio!
 
 Nice effort!
 :::
@@ -143,9 +144,7 @@ where 𝑤~𝑗~ is the weight assigned to a certain parameter[@vidaurre].
 
 ## Analysis and Results
 
-
-
-
+R output: [LR_regression.html](LR_regression.nb.html){target="_blank"} 
 
 ## Modeling and Results
 
