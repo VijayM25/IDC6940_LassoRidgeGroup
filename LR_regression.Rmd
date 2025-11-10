@@ -13,18 +13,20 @@ library(dplyr)
 library(tidyr)
 ```
 
+Lets try with radiation prediction data
+
 ```{r}
 #datar <- fread("/Users/vmohanam/Downloads/data/Selected_var_formated.csv")
 
-data = na.omit(fread("/Users/vmohanam/Downloads/data/Selected_var_formated.csv"))
+data_rad = na.omit(fread("/Users/vmohanam/Downloads/data/Selected_var_formated_rad.csv"))
 #str(data)
-x = model.matrix(tv_radiation~., data)[,-2] 
-y = data %>%
+x = model.matrix(tv_radiation~., data_rad)[,-1] 
+y = data_rad %>%
   select(tv_radiation) %>%
   unlist() %>%
   as.numeric()
 #hist(data$tv_radiation)
-hist(data$tc_combined_stage)
+hist(data_rad$pd_year_of_diagnosis)
 ```
 ```{r}
 fit <- glmnet(x,y, family="binomial")
@@ -32,17 +34,90 @@ plot(fit)
 ```
 
 ```{r}
-grid = 10^seq(10, -2, length = 100)
-lasso_fit = glmnet(x, y, alpha = 1, lambda = grid)
+grid = 10^seq(-30, 10, length = 100)
+lasso_fit = glmnet(x, y, alpha = 1, lambda = grid, standardize = TRUE, nfolds = 10)
+
 plot(lasso_fit)
+#find the best CV lambda
+lambda_cv <- lasso_fit$lambda.min
+
+# Best cross-validated lambda
+
+# Fit final model, get its sum of squared residuals and multiple R-squared
+model_cv <- glmnet(x, y, alpha = 1, lambda = lambda_cv, standardize = TRUE)
+y_hat_cv <- predict(model_cv, x)
+ssr_cv <- t(y - y_hat_cv) %*% (y - y_hat_cv)
+rsq_lasso_cv <- cor(y, y_hat_cv)^2
+#rsq_lasso_cv
+
+# See how increasing lambda shrinks the coefficients --------------------------
+# Each line shows coefficients for one variables, for different lambdas.
+# The higher the lambda, the more the coefficients are shrinked towards zero.
+res <- glmnet(x, y, alpha = 1, lambda = grid, standardize = FALSE)
+plot(res, xvar = "lambda")
+legend("bottomright", lwd = 1, col = 1:6, legend = colnames(x), cex = .7)
+
 ```
 
 ```{r}
 set.seed(1)
-cv.out = cv.glmnet(x, y, alpha = 1) 
+cv.out = cv.glmnet(x, y, alpha = 1, standardize = TRUE, nfolds = 10) 
 plot(cv.out) 
 bestlam = cv.out$lambda.min 
+coef(cv.out, s=bestlam)
+```
+
+Lets try with Chemotherapy prediction data
+
+```{r}
+# for chemotheraphy
+data_che = na.omit(fread("/Users/vmohanam/Downloads/data/Selected_var_formated_che.csv"))
+#str(data)
+x2 = model.matrix(tv_chemotherapy~., data_che)[,-1] 
+y2 = data_che %>%
+  select(tv_chemotherapy) %>%
+  unlist() %>%
+  as.numeric()
+#hist(data$tv_radiation)
+hist(data_che$pd_age)
 ```
 
 
+```{r}
+fit2 <- glmnet(x2,y2, family="binomial")
+plot(fit2)
+```
 
+```{r}
+#grid = 10^seq(-30, 10, length = 100)
+lasso_fit2 = glmnet(x2, y2, alpha = 1, lambda = grid, standardize = TRUE, nfolds = 10)
+
+plot(lasso_fit2)
+#find the best CV lambda
+lambda_cv2 <- lasso_fit2$lambda.min
+
+# Best cross-validated lambda
+
+# Fit final model, get its sum of squared residuals and multiple R-squared
+model_cv2 <- glmnet(x2, y2, alpha = 1, lambda = lambda_cv2, standardize = TRUE)
+y_hat_cv2 <- predict(model_cv2, x2)
+ssr_cv2 <- t(y2 - y_hat_cv2) %*% (y2 - y_hat_cv2)
+rsq_lasso_cv2 <- cor(y2, y_hat_cv2)^2
+#rsq_lasso_cv
+
+# See how increasing lambda shrinks the coefficients --------------------------
+# Each line shows coefficients for one variables, for different lambdas.
+# The higher the lambda, the more the coefficients are shrinked towards zero.
+res2 <- glmnet(x2, y2, alpha = 1, lambda = grid, standardize = FALSE)
+plot(res2, xvar = "lambda")
+legend("bottomright", lwd = 1, col = 1:6, legend = colnames(x2), cex = .7)
+
+```
+
+```{r}
+set.seed(1)
+cv2.out = cv.glmnet(x2, y2, alpha = 1, standardize = TRUE, nfolds = 10) 
+plot(cv2.out) 
+bestlam2 = cv2.out$lambda.min 
+coef(cv2.out, s=bestlam2)
+```
