@@ -1,8 +1,8 @@
 ---
-title: "Lasso - Ridge Regression Group for data science projects - Fall 2025"
-subtitle: "A report on Lasso-Ridge Regression"
+title: "Lasso Regression for Oncology Utilization Management Applications"
+subtitle: "A report on Lasso Regression for data science projects - Fall 2025"
 author: "Vijay Mohanam, Jennifer Nesbit and Sassou Khabou (Advisor: Dr. Cohen)"
-date: '`r Sys.setenv(TZ = "America/New_York") format(Sys.Date(), "%Y-%m-%d")`'
+date: '`r format(Sys.Date(), "%Y-%m-%d")`'
 format:
   html:
     code-fold: true
@@ -34,6 +34,8 @@ Slides: [slides.html](slides.html){target="_blank"} ( Go to `slides.qmd` to edit
 **Week 06:** Started coding in R studio!
 
 **Week 07:** Applied Lasso regression on two outcome - radiation and chemotherapy!
+
+**Week 08:** Read the results and was able to interpret back to the clinical value!
 
 Nice effort!
 :::
@@ -72,7 +74,7 @@ Table 1
 
 ***Treatment Variables***
 
-|Veritable Name|Description|Seer Codes (2018-2022)|Recoding for modeling|
+|Variable Name|Description|Seer Codes (2018-2022)|Recoding for modeling|
 |:------|:------ |:------------|:------------|
 |Radiation recode|Radiation of the primary site|Beam radiation<BR> Radioactive implants (includes brachytherapy) (1988+)<BR>Refused (1988+)<BR>Combination of beam with implants or isotopes<BR>None/Unknown|Binary: <BR>1 = any radiation [Beam radiation Radioactive implants (includes brachytherapy) (1988+), Refused (1988+),<BR>Combination of beam with implants or isotopes]<BR>0 = no radiation or unknown [None/Unknown]|
 |Chemotherapy recode|The chemotherapy given as a part of the first course of treatment or the reason that chemotherapy was not given.|Yes = patient had chemotherapy<BR>No/Unknown = no evidence of chemotherapy was found in the medical records examined|Binary: <BR>1 = any chemotherapy[Yes]<BR>0 = no chemotherapy [No/Unknown]|
@@ -84,7 +86,7 @@ Table 2
 
 ***Treatment Characteristics***
 
-|Veritable Name|Description|Seer Codes (2018-2022)|Recoding for modeling|
+|Variable Name|Description|Seer Codes (2018-2022)|Recoding for modeling|
 |:------|:------ |:------------|:------------|
 |Tumor Size Summary (2016+)|Size of a solid primary tumor before any treatment|000 = No mass/tumor found<BR>001 = 1 mm or described as less than 1 mm (0.1 cm or less than 0.1 cm)<BR>002-988 = Exact size in millimeters (2 mm to 988 mm) (0.2 to 98.8 cm)<BR>989 = 989 millimeters or larger (98.9 cm or larger)<BR>990 = Microscopic focus or foci only and no size of focus is given<BR>998 = Alternate descriptions of tumor size for specific sites: Diffuse Breast (C50.0-C50.6, C50.8-C50.9)<BR>999 = Unknown; size not stated, Not documented in patient record, Size of tumor cannot be assessed, The only measurement(s) describes pieces or chips, Not applicable|Continuous numeric|
 |Combined Summary Stage with Expanded Regional Codes (2004+)|Cancer staging system that categorizes the extent of cancer spread from its point of origin using a combination of clinical and pathological data.|In situ<BR>Localized only<BR>Regional by direct extension only <BR>Regional lymph nodes involved only<BR>Regional by both direct extension and lymph node involvement<BR>Distant site(s)/node(s) involved <BR>Unknown/unstaged/unspecified/DCO|Categorical: <BR>In situ<BR>Localized only<BR>Regional by direct extension only<BR>Regional lymph nodes involved only<BR>Regional by both direct extension and lymph node involvement<BR>Distant site(s)/node(s) involved<BR>Unknown/unstaged/unspecified/DCO|
@@ -104,7 +106,7 @@ Table 3
 
 ***Patient Demographics***
 
-|Veritable Name|Description|Seer Codes (2018-2022)|Recoding for modeling|
+|Variable Name|Description|Seer Codes (2018-2022)|Recoding for modeling|
 |:------|:------ |:------------|:------------|
 |Age recode with <1 year olds|This data item represents the age of the patient at diagnosis for this cancer.|00 years <BR>01-04 years<BR>05-09 years<BR>10-14 years<BR>15-19 years<BR>20-24 years<BR>25-29 years <BR>30-34 years<BR>35-39 years<BR>40-44 years<BR>45-49 years <BR>50-54 years<BR>55-59 years<BR>60-64 years<BR>65-69 years<BR>70-74 years<BR>75-79 years<BR>80-84 years<BR>85+ years|Categorical: <BR>00 years <BR>01-04 years<BR>05-09 years<BR>10-14 years<BR>15-19 years<BR>20-24 years<BR>25-29 years <BR>30-34 years<BR>35-39 years<BR>40-44 years<BR>45-49 years <BR>50-54 years<BR>55-59 years<BR>60-64 years<BR>65-69 years<BR>70-74 years<BR>75-79 years<BR>80-84 years<BR>85+ years|"
 |Sex|Male or Female|Male<BR>Female|Binary: <BR>Male <BR>Female|
@@ -114,12 +116,6 @@ Table 3
 |Marital status at diagnosis|Patient’s marital status at the time of diagnosis for the reportable tumor|Single (never married) <BR>Married (including common law)<BR>Separated<BR>Divorced<BR>Widowed<BR>Unmarried or Domestic Partner <BR>Unknown|Binary:<BR>Partnered = Married (including common law), Unmarried or Domestic Partner <BR>Unpartnered = Single (never married), Separated, Divorced, Widowed<BR>*exclude Unknown|
 |Type of Reporting Source|Identifies the source documents that provided the most complete information when abstracting the case|Hospital inpatient/outpatient or clinic<BR>Radiation treatment or medical oncology center (2006+)<BR>Laboratory only (hospital or private)<BR>Physicians office/private medical practitioner (LMD)<BR>Nursing/convalescent home/hospice<BR>Autopsy Only<BR>Death Certificate Only<BR>Other hospital outpatient unit or surgery center (2006+)|Categorical: <BR>Hospital inpatient/outpatient or clinic<BR>Radiation treatment or medical oncology center (2006+)<BR>Laboratory only (hospital or private)<BR>Physicians office/private medical practitioner (LMD)<BR>Nursing/convalescent home/hospice<BR>Autopsy Only<BR>Death Certificate Only<BR>Other hospital outpatient unit or surgery center (2006+)|
 |Year of Diagnosis|Cancers diagnosed from 2018-2022|2018<BR>2019<BR>2021<BR>2022|Categorical: <BR>2018<BR>2019<BR>2021<BR>2022|
-
-
-Only female breast cancer cases (C50.0–C50.9) diagnosed from 2018–2021 were included.
-First primary malignancies only (Sequence Number = 00 or 01).
-Cases with missing or unknown treatment or key staging variables were excluded.
-Variables were recoded into consistent binary or continuous formats suitable for Lasso logistic regression modeling.
 
 
 ## Methods
@@ -148,11 +144,171 @@ Of note, there exists an adaptation of the lasso regression created by Zou in 20
 
 where 𝑤~𝑗~ is the weight assigned to a certain parameter[@vidaurre].
 
+LASSO regression was selected to identify key predictors of treatment receipt (radiation and/or chemotherapy) among breast cancer patients. LASSO applies an L1 regularization penalty to the regression coefficients, shrinking less influential predictors toward zero while retaining the most relevant variables. This method is particularly appropriate for the SEER dataset which includes numerous clinical and demographic variables. Separate lasso models will be constructed for radiation and chemotherapy as binary outcome variables (1 = treatment received, 0 = not received/unknown). Predictors include the tumor characteristics and patient demographic variables.
+
 ## Analysis and Results
 
-R output: [LR_regression.html](LR_regression.nb.html){target="_blank"} 
+This analysis consisted of two Lasso regression models that were designed to identify the most influential predictors of first line radiation and chemotherapy use among breast cancer patients in the SEER dataset. These models were constructed with the goal of informing utilization management (UM) processes where expedited, evidence based approvals of treatments are essential for minimizing unnecessary delays in patient care. To prepare the data for modeling, all categorical variables were converted into a full model matrix using model.matrix( ) to ensure that the data was compatible with the regularization algorithm. The response variable (tv_radiation or tv_chemotherapy) was extracted as a separate numeric vector. 
 
+The predictors were fitted to a wide range of λ penalty values using the glmnet package with alpha = 1. Ten-fold cross validation was used (cv.glmnet()) to identify the λ that minimized prediction error. By choosing the λ that produced the best performing model, the analysis ensured that the predictive patterns were both statistically sound and clinically meaningful and generalizable. Generalizability is an important requirement for UM applications that rely on models that remain stable across diverse patient populations. 
+
+```{r}
+library(data.table)
+library(ISLR2)
+library(glmnet)
+library(dplyr)
+library(tidyr)
+```
+
+### Radiation prediction data
+
+```{r}
+#datar <- fread("/Users/vmohanam/Downloads/data/Selected_var_formated.csv")
+
+data_rad = na.omit(fread("/Users/vmohanam/Downloads/data/Selected_var_formated_rad.csv"))
+#str(data)
+x = model.matrix(tv_radiation~., data_rad)[,-1] 
+y = data_rad %>%
+  select(tv_radiation) %>%
+  unlist() %>%
+  as.numeric()
+#hist(data$tv_radiation)
+hist(data_rad$pd_year_of_diagnosis)
+
+```
+
+```{r}
+grid = 10^seq(-30, 10, length = 100)
+lasso_fit = glmnet(x, y, alpha = 1, lambda = grid, standardize = TRUE, nfolds = 10)
+
+plot(lasso_fit)
+#find the best CV lambda
+lambda_cv <- lasso_fit$lambda.min
+
+# Best cross-validated lambda
+
+# Fit final model, get its sum of squared residuals and multiple R-squared
+model_cv <- glmnet(x, y, alpha = 1, lambda = lambda_cv, standardize = TRUE)
+y_hat_cv <- predict(model_cv, x)
+ssr_cv <- t(y - y_hat_cv) %*% (y - y_hat_cv)
+rsq_lasso_cv <- cor(y, y_hat_cv)^2
+#rsq_lasso_cv
+
+# See how increasing lambda shrinks the coefficients --------------------------
+# Each line shows coefficients for one variables, for different lambdas.
+# The higher the lambda, the more the coefficients are shrinked towards zero.
+res <- glmnet(x, y, alpha = 1, lambda = grid, standardize = FALSE)
+plot(res, xvar = "lambda")
+legend("bottomright", lwd = 1, col = 1:6, legend = colnames(x), cex = .7)
+
+```
+
+```{r}
+set.seed(1)
+cv.out = cv.glmnet(x, y, alpha = 1, standardize = TRUE, nfolds = 10) 
+plot(cv.out) 
+bestlam = cv.out$lambda.min 
+coef(cv.out, s=bestlam)
+```
+
+
+### Chemotherapy prediction data
+
+```{r}
+# for chemotheraphy
+data_che = na.omit(fread("/Users/vmohanam/Downloads/data/Selected_var_formated_che.csv"))
+#str(data)
+x2 = model.matrix(tv_chemotherapy~., data_che)[,-1] 
+y2 = data_che %>%
+  select(tv_chemotherapy) %>%
+  unlist() %>%
+  as.numeric()
+#hist(data$tv_radiation)
+hist(data_che$pd_age)
+
+```
+
+```{r}
+#grid = 10^seq(-30, 10, length = 100)
+lasso_fit2 = glmnet(x2, y2, alpha = 1, lambda = grid, standardize = TRUE, nfolds = 10)
+
+plot(lasso_fit2)
+#find the best CV lambda
+lambda_cv2 <- lasso_fit2$lambda.min
+
+# Best cross-validated lambda
+
+# Fit final model, get its sum of squared residuals and multiple R-squared
+model_cv2 <- glmnet(x2, y2, alpha = 1, lambda = lambda_cv2, standardize = TRUE)
+y_hat_cv2 <- predict(model_cv2, x2)
+ssr_cv2 <- t(y2 - y_hat_cv2) %*% (y2 - y_hat_cv2)
+rsq_lasso_cv2 <- cor(y2, y_hat_cv2)^2
+#rsq_lasso_cv
+
+# See how increasing lambda shrinks the coefficients --------------------------
+# Each line shows coefficients for one variables, for different lambdas.
+# The higher the lambda, the more the coefficients are shrinked towards zero.
+res2 <- glmnet(x2, y2, alpha = 1, lambda = grid, standardize = FALSE)
+plot(res2, xvar = "lambda")
+legend("bottomright", lwd = 1, col = 1:6, legend = colnames(x2), cex = .7)
+
+```
+
+```{r}
+set.seed(1)
+cv2.out = cv.glmnet(x2, y2, alpha = 1, standardize = TRUE, nfolds = 10) 
+plot(cv2.out) 
+bestlam2 = cv2.out$lambda.min 
+coef(cv2.out, s=bestlam2)
+```
 ## Modeling and Results
+
+***Radiation Treatment Model***
+
+The cross- validation procedure selected an optimal penalty value of λ = 0.000148. There were two predictors that shrunk to zero (lung metastasis and distant disease). Because only 2 predictors went to zero this suggests that most predictors have some influence on radiation therapy treatment decisions. The following subset of the 18 remaining predictors that kept non-zero coefficients that were > 0.05 are shown in Table 4. 
+
+Table 4
+
+|Variable|Coefficient|Interpretation|
+|:------|:------ |:------------|
+|Age|0.123|Increased age had a slight increase in radiation likelihood|
+|Sex|-0.082|Male patients slightly less likely to receive radiation|
+|Grade|0.203|HIgher grade tumor more likely to get radiation|
+|Brain metastasis|0.104|Brain involvement increases radiation likelihood|
+|HER2 status (+)|0.452|HER2+ patients more likely to get radiation|
+|ER status (+)|-0.253|ER+ patients less likely to get radiation|
+|PR status (+)|-0.153|PR+ patients less likely to get radiation|
+|Tumor size|0.184|Larger tumors increase radiation likelihood|
+|Node status|0.221|Node positive patients more likely to get radiation|
+|Histology type|0.081|Specific histology types are more likely to get radiation|
+
+<BR>
+***Chemotherapy Treatment Model***
+
+The cross- validation procedure selected an optimal penalty value of λ = 0.0005029. There were five predictors that shrunk to zero (bone metastasis, liver metastasis, lung metastasis, laterality and distant disease). More predictors in the chemotherapy model shrunk to zero indicating that more had a negligible predictive power. The following subset of the 15 remaining predictors that kept non-zero coefficients that were > 0.05 are shown in Table 5. 
+
+Table 5
+
+|Variable|Coefficient|Interpretation|
+|:------|:------ |:------------|
+|Age|-0.054|Increased age had a slight decrease in chemotherapy likelihood|
+|Sex|-0.102|Male patients less likely to receive chemotherapy|
+|Grade|0.248|HIgher grade tumor more likely to get chemotherapy|
+|Brain metastasis|0.118|Brain involvement increases chemotherapy likelihood|
+|HER2 status (+)|0.382|HER2+ patients more likely to get chemotherapy|
+|ER status (+)|-0.303|ER+ patients less likely to get chemotherapy|
+|PR status (+)|-0.178|PR+ patients less likely to get chemotherapy|
+|Tumor size|0.201|Larger tumors increase chemotherapy likelihood|
+|Node status|0.282|Node positive patients more likely to get chemotherapy|
+|Histology type|0.102|Specific histology types are more likely to get chemotherapy|
+
+## Implications
+
+Traditional logistic regression may have been prone to overfitting due to the high correlation between tumor characteristics such as stage, tumor size, nodal involvement and metastatic indicators. Lasso regression was able to address these limitations by shrinking weaker predictors towards zero and retaining only the variables with the strongest independent predictors to treatment decisions. These results provided a narrowed down and informative set of predictors to allow for clear interpretations and a process for applying these findings to real-world utilization management scenarios.  
+
+Interestingly, the models for both radiation and chemotherapy highlight the same set of 10 predictors with coefficients above 0.05. This overlap suggests that a common subset of patient and tumor characteristics consistently influence treatment decisions. The shared importance of these variables emphasizes their strong clinical relevance and indicates that, in this group of first line patients, similar factors are driving the likelihood of receiving either radiation or chemotherapy. 
+
+While it may seem obvious that factors such as age, sex, tumor grade, tumor size, node status, HER2, ER and PR status, histology type and brain metastasis would influence treatment decisions. The overlap between the radiation and chemotherapy models demonstrates that multiple variables collectively drive these decisions rather than any single factor alone. Identifying this set of clear, high-impact predictors is valuable because it provides a structured framework that could be translated into a standardized question set for use in utilization management. By systematically capturing these key predictors, clinicians and reviewers can more efficiently evaluate patient cases and expedite treatment recommendations and approvals. 
 
 
 ## Conclusion
