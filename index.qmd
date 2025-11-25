@@ -35,7 +35,9 @@ Slides: [slides.html](slides.html){target="_blank"} ( Go to `slides.qmd` to edit
 
 **Week 07:** Applied Lasso regression on two outcome - radiation and chemotherapy!
 
-**Week 08:** Read the results and was able to interpret back to the clinical value!
+**Week 08:** Accessed the results and was able to interpret back to the clinical value!
+
+**Week 09:** Added conclusion and getting ready for our presentation!
 
 Nice effort!
 :::
@@ -312,6 +314,14 @@ While it may seem obvious that factors such as age, sex, tumor grade, tumor size
 
 
 ## Conclusion
+
+  In this study, we applied Lasso regression to real-world health care data using the Surveillance, Epidemiology, and End Results (SEER) database. Specifically, we focused on breast cancer in women during the years 2018-2022. We estimated the likelihood of both radiation therapy and chemotherapy treatment variables based on various tumor characteristic variables and patient demographic variables.
+
+  Using cross-validation for the radiation treatment model, we obtained a shrinkage parameter, λ = 0.000148. Using cross-validation for the chemotherapy treatment model, we obtained a λ = 0.0005029. For the radiation treatment model, we were only able to shrink two parameters to zero: metastasis to lungs and metastasis to distant lymph nodes. For the chemotherapy treatment model, we were able to shrink five parameters to zero: metastasis to bone, metastasis to lungs, metastasis to distant lymph nodes, and laterality. It makes sense that we were able to shrink more parameters to zero with the chemotherapy model versus the radiotherapy model. This is very likely because the chemotherapy model’s shrinkage parameters was over threefold higher than the radiotherapy model’s shrinkage parameter.
+  
+  There were some coefficients for both the radiotherapy and chemotherapy models that did not shrink to zero, but had an absolute value lower than 0.05. For non-zero coefficients with an absolute value lower than 0.05, we took these out of our final Lasso model. In the radiotherapy final model, we found that age, tumor grade, tumor size, node positive status, brain metastasis, positive HER2 receptor status, and specific histology types are all associated with a higher likelihood of getting radiation therapy. Meanwhile, male sex, positive estrogen receptor (ER) status, and positive progesterone receptor (PR) status are all associated with a lower likelihood for radiation therapy. In the chemotherapy final model, we found that tumor grade, tumor size, node positive status, brain metastasis, positive HER2 receptor status, and histology type were all associated with a higher likelihood of receiving chemotherapy. Meanwhile, age, male sex, positive ER status, and positive PR status were all associated with a lower likelihood for chemotherapy.
+  
+  Overall, this study is significant because it suggests that we can look at many patient demographic and clinical tumor variables to evaluate the best treatment options for patients. Every unique patient possesses their own unique demographics and clinical markers. By looking at these many unique variables, we can create a model that finds the optimal patient treatment method for a patient and facilitates the ability of clinicians to create individualized treatment plans. For future studies, we can find another dataset that contains a different set of variables. We can then use Lasso regression, as we did here, to model how these new variables correlate with different treatment options.
 
 
 ## References
