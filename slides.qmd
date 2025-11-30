@@ -18,6 +18,7 @@ editor:
 transition: fade
 transition-speed: slow
 theme: serif
+slide-number: c/t
 ---
 
 ::: callout-important
