@@ -202,6 +202,7 @@ rsq_lasso_cv <- cor(y, y_hat_cv)^2
 res <- glmnet(x, y, alpha = 1, lambda = grid, standardize = FALSE)
 plot(res, xvar = "lambda")
 legend("bottomright", lwd = 1, col = 1:6, legend = colnames(x), cex = .7)
+title ("Radiation Model")
 
 ```
 
@@ -253,7 +254,7 @@ rsq_lasso_cv2 <- cor(y2, y_hat_cv2)^2
 res2 <- glmnet(x2, y2, alpha = 1, lambda = grid, standardize = FALSE)
 plot(res2, xvar = "lambda")
 legend("bottomright", lwd = 1, col = 1:6, legend = colnames(x2), cex = .7)
-
+title ("Chemotherapy Model")
 ```
 
 ```{r}
@@ -305,6 +306,12 @@ Table 5
 |Histology type|0.102|Specific histology types are more likely to get chemotherapy|
 
 ## Implications
+
+The results from both Lasso regression models directly support the problem at hand of creating tools that can improve utilization management workflows and accelerate treatment approvals for breast cancer patients. By clearly identifying clinical factors most strongly associated with providers treatment decisions, the models offer a data driven method to anticipate which treatments are likely appropriate for a given patient's specific disease characteristics. This type of predictive insight can help UM reviewers move away from manual case-by-case review and toward automated or semi-antimated pathways that approve treatments when the clinical features strongly match established patterns.
+
+The radiation model showed that higher tumor grade, larger tumor size and regional (node) involvement substantially increased the likelihood of receiving radiation therapy. This aligns with standard oncology practice and can be leveraged within utilization management (UM) systems to expedite approval for patients whose clinical profiles match these evidence-supported indicators. The model also indicated that ER+ and PR+ patients were less likely to receive radiation, while HER2+ status and brain metastasis increased likelihood, highlighting the nuanced role of tumor biology in treatment decisions. Recognizing these distinctions allows UM reviewers to quickly assess whether a requested radiation treatment aligns with expected care patterns.
+
+The chemotherapy model also identified strong and clinically meaningful predictors. Higher tumor grade, larger tumor size, node involvement and HER2+ status significantly increased the likelihood of chemotherapy, supporting rapid UM approval for patients with these characteristics. In contrast, ER+ and PR+ status, older age and male sex were associated with decreased chemotherapy likelihood, consistent with hormonal based treatment plans and real-world guideline supported treatments. Brain metastasis and histology type also contributed to treatment predictions. By translating these predictive features into structured UM rules or automated decision-support tools, healthcare organizations can reduce manual review time, minimize administrative burden and accelerate approval for medically necessary treatments while ensuring alignment with evidence-based care.
 
 Traditional logistic regression may have been prone to overfitting due to the high correlation between tumor characteristics such as stage, tumor size, nodal involvement and metastatic indicators. Lasso regression was able to address these limitations by shrinking weaker predictors towards zero and retaining only the variables with the strongest independent predictors to treatment decisions. These results provided a narrowed down and informative set of predictors to allow for clear interpretations and a process for applying these findings to real-world utilization management scenarios.  
 

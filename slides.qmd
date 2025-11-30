@@ -1,7 +1,7 @@
 ---
-title: "Present a great story for data science projects"
-subtitle: "This is a Slide Template"
-author: "Students names (Advisor: Dr. Cohen)"
+title: "Lasso Regression for Oncology Utilization Management"
+subtitle: "A report on Lasso Regression for data science projects - Fall 2025"
+author: "Vijay Mohanam, Jennifer Nesbit and Sassou Khabou (Advisor: Dr. Cohen)"
 date: '`r Sys.Date()`'
 format:
   revealjs
@@ -15,6 +15,9 @@ execute:
 editor: 
   markdown: 
     wrap: 72
+transition: fade
+transition-speed: slow
+theme: serif
 ---
 
 ::: callout-important
@@ -29,89 +32,184 @@ More information about `revealjs`:
 <https://quarto.org/docs/reference/formats/presentations/revealjs.html>
 :::
 
-## Introduction  {.smaller}
+```{r}
+library(data.table)
+library(glmnet)
+```
 
--   Develop a storyline that captures attention and maintains interest.
+## Overview  {.smaller}
 
--   Your audience is your peers
+-   Background.
 
--   Clearly state the problem or question you're addressing.
+-   Problem Statement & Objectives.
 
--   Introduce why it is relevant needs.
+-   Objectives.
 
--   Provide an overview of your approach.
+-   Dataset Overview.
+
+-   Variables & Data Preparation.
+
+-   Lasso Regression: Concept & Rationale.
+
+-   Lasso Regression Equations
+
+-   Modeling Approach.
+
+-   Modeling Implementation
+
+-   Results - Radiation Model
+
+-   Results - Chemotherapy Model
+
+-   Results - Model Performance
+
+-   Clinical Implications
+
+-   Limitations 
+
+-   Conclusion
 
 In kernel estimator, weight function is known as kernel function
 [@efr2008]. Cite this paper [@bro2014principal]. The GEE [@wang2014].
 The PCA [@daffertshofer2004pca]\*
 
-## Methods
+## Background  {.smaller}
 
--   Detail the models or algorithms used.
+-   The rising complexity of cancer care and treatment decision-making requires robust tools to support utilization management.
+-   Clinical decisions (radiation, chemotherapy) involve multiple tumor characteristics and patient specific factors.
+-   Simple regression may risk overfitting or multicollinearity with multiple variables.
+-   Regularization methods such as Lasso regression or Ridge regression offer a way to build predictive models that are both accurate and interpretable.
+-   Using data from SEER can provide generalizable insights into treatment patterns.
 
--   Justify your choices based on the problem and data.
+
+## Problem Statement & Objectives
+
+-   Given tumor characteristics and patient demographics for breast cancer, can we accurately predict whether a patient receives radiation therapy or chemotherapy?
+-   Which factors (tumor, demographic, staging, receptor status, etc.) most strongly influence treatment decisions? Can we build a model that balances predictive performance and clinical interpretability?
 
 
+## Objectives
 
-## Data Exploration and Visualization
+-   Use SEER data (breast cancer cases) to model treatment received.
+-   Apply penalized regression to select key predictors and avoid overfitting.
+-   Evaluate regularization approaches (Lasso) in terms of feature selection, interpretability and predictive performance.
+-   Provide a model structure that could support utilization management workflows.
 
--   Describe your data sources and collection process.
 
--   Present initial findings and insights through visualizations.
+## Dataset Overview 
 
--   Highlight unexpected patterns or anomalies.
+-   Source: SEER Registry, Breast Cancer Cases (2018–2021)
+-   SEER dataset provides high quality, standardized data:
+-   Allows for large-scale analyses of cancer patterns, treatments and outcomes
+-   Includes diverse populations in the United States
+-   Dataset includes tumor characteristics, staging, receptor status, demographics.
+-   Filtered for valid cases with complete data for modeling
 
-## Data Exploration and Visualization {.smaller}
 
-A study was conducted to determine how...
+## Variables & Data Preparation {.smaller}
 
-```{r, warning=FALSE, echo=F, message=FALSE}
-# loading packages 
-library(tidyverse)
-library(knitr)
-library(ggthemes)
-library(ggrepel)
-library(dslabs)
-```
+-   Variables categorized into three groups: treatment variables, tumor characteristics, and patient demographics. Treatment outcomes (radiation, chemotherapy) were derived from SEER treatment summary fields and were recoded into binary 0/1 outcomes indicating whether treatment was administered.
+-   Tumor characteristics included tumor size (continuous), summary stage, nodal involvement (N0–N3), metastatic spread (bone/brain/liver/lung/lymph nodes), grade, laterality, and ER/PR/HER2 status. Each variable was cleaned, recoded, and mapped into clinically meaningful categories.
+-   Demographic variables included age groups, sex, detailed race/ethnicity classifications, marital status (partnered vs. unpartnered), reporting source, and year of diagnosis. All demographic fields were standardized to ensure consistency.
+-   Extensive recoding and filtering were applied: exclusion of cases with missing or unknown key staging/biomarker values, retention of only first primary malignancies, and removal of non-applicable or inconsistent categories.
+-   Categorical predictors were transformed into binary variables and all numeric variables were standardized prior to Lasso modeling to ensure consistent scaling and appropriate penalty application.
 
-```{r, warning=FALSE, echo=F}
-# Load Data
-#kable(head(murders))
 
-ggplot1 = murders %>% ggplot(mapping = aes(x=population/10^6, y=total)) 
+## Lasso Regression: Concept & Rationale 
 
-  ggplot1 + geom_point(aes(col=region), size = 4) +
-  geom_text_repel(aes(label=abb)) +
-  scale_x_log10() +
-  scale_y_log10() +
-  geom_smooth(formula = "y~x", method=lm,se = F)+
-  xlab("Populations in millions (log10 scale)") + 
-  ylab("Total number of murders (log10 scale)") +
-  ggtitle("US Gun Murders in 2010") +
-  scale_color_discrete(name = "Region")+
-      theme_bw()
-  
+-   Lasso = Linear/Logistic regression + **L1 penalty**.
+-   Causes some coefficients to shrink to **zero** allowing for:
+    -   Automated feature selection 
+    -   Reduced complexity
+-   Useful in multivariable healthcare datasets
+-   Combines predictive accuracy with interpretability 
 
-```
 
-## Modeling and Results
+## Lasso Regression Equations {.smaller}
+- The basis for LASSO regression is Ordinary Least Squares (OLS) regression.
+\begin{equation*} \hat{\beta}_{ols}=\underset{\beta}{\arg\min}\left\{\sum_{i=1}^{N}\left(y_{i}-\beta_{0}-\sum_{j=1}^{p}x_{ij}\beta_{j}\right)^{2}\right\} \tag{1} \end{equation*}
 
--   Explain your data preprocessing and cleaning steps.
+-  OLS regression has low bias, but it is also prone to overfitting and thus high variance. LASSO regression remedies this by introducing a shrinkage parameter, denoted as 𝜆. By shrinking the parameters, we introduce some bias but at the benefit of much lower variance.
 
--   Present your key findings in a clear and concise manner.
+-   For LASSO and Ridge regression, respectively, the basic OLS regression equation is modified to:
+\begin{equation*} \hat{\beta}^{lasso}=\underset{\beta}{\arg\min}\left\{\frac{1}{2}\sum_{i=1}^{N}\left(y_{i}-\beta_{0}-\sum_{j=1}^{p}x_{ij}\beta_{j}\right)^{2}+\lambda\sum_{j=1}^{p}\left\vert\beta_{j}\right\vert\right\} \tag{2} \end{equation*}
 
--   Use visuals to support your claims.
+## Modeling Approach {.smaller}
+-   Two separate Lasso regression models were developed to identify predictors of first-line radiation and chemotherapy use among breast cancer patients in the SEER dataset.
+-   Categorical variables were expanded into a full model matrix using model.matrix() to ensure compatibility with the Lasso penalty structure; the treatment variable (radiation or chemotherapy) was isolated as a numeric outcome vector.
+-   Predictor matrices were fit across a grid of λ penalty values using glmnet with alpha = 1, allowing automatic variable selection through coefficient shrinkage.
+-   Ten-fold cross-validation (cv.glmnet) was used to determine the λ that minimized prediction error, ensuring an optimal balance of model complexity and stability.
+-   Final models emphasized interpretability and generalizability, supporting real-world utilization management needs where consistent, evidence-based treatment prediction is essential.
 
--   **Tell a story about what the data reveals.**
+## Modeling Implementation {.smaller}
+-   **Tools:** R glmnet package 
+-   **Process:** 
+      Clean & encode data – Standardize predictors – Cross-validation to select λ – 
+      Fit final Lasso model – Extract non-zero coefficients
 
-```{r}
+<img src="radi.png" width="500">  <img src="chem.png" width="500"> 
 
-```
+## Result - Radiation Model {.smaller}
+
+Predictors that kept non-zero coefficients that were > 0.05 
+
+|Variable|Coefficient|Interpretation|
+|:------|:------ |:------------|
+|Age|0.123|Increased age had a slight increase in radiation likelihood|
+|Sex|-0.082|Male patients slightly less likely to receive radiation|
+|Grade|0.203|HIgher grade tumor more likely to get radiation|
+|Brain metastasis|0.104|Brain involvement increases radiation likelihood|
+|HER2 status (+)|0.452|HER2+ patients more likely to get radiation|
+|ER status (+)|-0.253|ER+ patients less likely to get radiation|
+|PR status (+)|-0.153|PR+ patients less likely to get radiation|
+|Tumor size|0.184|Larger tumors increase radiation likelihood|
+|Node status|0.221|Node positive patients more likely to get radiation|
+|Histology type|0.081|Specific histology types are more likely to get radiation|
+
+## Modeling Chemotherapy Model {.smaller}
+
+Predictors that kept non-zero coefficients that were > 0.05 
+
+|Variable|Coefficient|Interpretation|
+|:------|:------ |:------------|
+|Age|-0.054|Increased age had a slight decrease in chemotherapy likelihood|
+|Sex|-0.102|Male patients less likely to receive chemotherapy|
+|Grade|0.248|HIgher grade tumor more likely to get chemotherapy|
+|Brain metastasis|0.118|Brain involvement increases chemotherapy likelihood|
+|HER2 status (+)|0.382|HER2+ patients more likely to get chemotherapy|
+|ER status (+)|-0.303|ER+ patients less likely to get chemotherapy|
+|PR status (+)|-0.178|PR+ patients less likely to get chemotherapy|
+|Tumor size|0.201|Larger tumors increase chemotherapy likelihood|
+|Node status|0.282|Node positive patients more likely to get chemotherapy|
+|Histology type|0.102|Specific histology types are more likely to get chemotherapy|
+
+## Result - Model Performance
+
+-   Cross-validated Lasso models demonstrated strong predictive performance while reducing model complexity.
+-   Ten-fold cross-validation was used to select the optimal λ penalty for each model, ensuring stability and generalizability across diverse patient populations.
+-   Feature reduction improved interpretability without substantially sacrificing accuracy, allowing for actionable insights in utilization management.
+-   Shared high-impact predictors across both models indicate consistent factors driving treatment decisions.
+
+## Clinical Implecations
+
+-   Helps understand which patient/tumor features drive treatment decisions.
+-   Useful for utilization management and auditing consistency.
+-   Supports data-driven policy review and resource planning.
+-   Transparent model makes results accessible to clinicians and administrators.
+
+## Limitations
+
+-   SEER data lacks specific clinical factors such as comorbidities, genomic panels and patient preference.
+-   Only first-course treatment was captured in this model.
+-   Missing data or coding inconsistencies may influence results.
+-   Lasso does not capture non-linear relationships or interactions.
+
 
 ## Conclusion
 
--   Summarize your key findings.
-
--   Discuss the implications of your results.
+-   Lasso successfully identified key predictors of treatment patterns.
+-   Produced interpretable, sparse models with reasonable predictive performance.
+-   Provides a foundation for clinical decision support and UM tools.
+-   Future work: enhanced data, additional predictors, validation in other populations, specific treatment types.
 
 ## References
