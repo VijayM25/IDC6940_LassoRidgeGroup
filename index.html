@@ -6,8 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Vijay Mohanam, Jennifer Nesbit and Sassou Khabou (Advisor: Dr. Cohen)">
-<meta name="dcterms.date" content="2025-11-30">
+<meta name="author" content="Vijayavel Mohanam, Jennifer Nesbit and Sassou Khabou (Advisor: Dr. Cohen)">
+<meta name="dcterms.date" content="2025-12-03">
 
 <title>Lasso Regression for Oncology Utilization Management Applications</title>
 <style>
@@ -2350,14 +2350,14 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Vijay Mohanam, Jennifer Nesbit and Sassou Khabou (Advisor: Dr. Cohen) </p>
+             <p>Vijayavel Mohanam, Jennifer Nesbit and Sassou Khabou (Advisor: Dr. Cohen) </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 30, 2025</p>
+      <p class="date">December 3, 2025</p>
     </div>
   </div>
   
@@ -2369,29 +2369,7 @@ window.Quarto = {
 </header>
 
 
-<p>Slides: <a href="slides.html" target="_blank">slides.html</a> ( Go to <code>slides.qmd</code> to edit)</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Week 01:</strong> This is our first week as group, we are trying to compile a summary of introductions!</p>
-<p><strong>Week 02:</strong> We tried to add more articles from our research and narrowing on a particular dataset!</p>
-<p><strong>Week 03:</strong> Downloaded USA cancer dataset, exploring attributes and records for our study!</p>
-<p><strong>Week 04:</strong> Analysed the variables, selected and recoded for our model!</p>
-<p><strong>Week 05:</strong> Refined the variables, as metadata and data were not matching!</p>
-<p><strong>Week 06:</strong> Started coding in R studio!</p>
-<p><strong>Week 07:</strong> Applied Lasso regression on two outcome - radiation and chemotherapy!</p>
-<p><strong>Week 08:</strong> Accessed the results and was able to interpret back to the clinical value!</p>
-<p><strong>Week 09:</strong> Added conclusion and getting ready for our presentation!</p>
-<p>Nice effort!</p>
-</div>
-</div>
+<p><a href="slides.html" target="_blank">Slides:</a></p>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Least Absolute Shrinkage and Selection Operator (Lasso) and Ridge regression are both regularization techniques used to prevent overfitting and multicollinearity in linear regression models by adding a penalty term to the loss function. The Lasso regression method was first introduced by Tibshirani in 1996 and has become a widely used method in both statistical modeling and machine learning. Lasso regression uses L1 regularization, which adds a penalty proportional to the sum of the absolute values of the coefficients, whereas Ridge uses L2 regularization, which adds a penalty proportional to the sum of the squared coefficients. An additional regularization technique called Elastic Net regression, combines both Lasso and Ridge. This technique is useful when there are many correlated features. The L1 penalty used with Lasso shrinks some coefficients to zero which allows for automated selection while also reducing model complexity. Overall Lasso is able to combine both predictive accuracy with interpretability.</p>
@@ -2400,11 +2378,10 @@ Note
 <p>Research has been done to compare the use of Lasso as a methodology to multiple related techniques such as Ridge and Elastic Net. Studies have shown that Ridge regression sometimes outperforms Lasso when predictor variables are highly correlated. However, Lasso tends to be more valuable when only a few predictors are significant and applicable to the problem at hand Vidaurre et al., 2013<span class="citation" data-cites="vidaurre">(<a href="#ref-vidaurre" role="doc-biblioref">Vidaurre and Larrañaga 2013</a>)</span>. Overall, Lasso shows a consistent advantage with its ability to produce sparse, interpretable and efficient models making it an excellent tool for both modeling and research.</p>
 <p>A principal advantage of Lasso (Least Absolute Shrinkage and Selection Operator) regression is its capacity for feature shrinkage and selection. As established in the seminal works by “Introduction to the Lasso” (Gauraha, N, 2018)<span class="citation" data-cites="gauraha">(<a href="#ref-gauraha" role="doc-biblioref">Gauraha 2018</a>)</span>, selection of most relevant variables from a large set of clinical and pathological data while shrinking less important ones to zero(Li, Y., Bai. 2023)<span class="citation" data-cites="li">(<a href="#ref-li" role="doc-biblioref">Li 2023</a>)</span> and “Regression Shrinkage and Selection Via the Lasso” (Robert Tibshirani. 1996)<span class="citation" data-cites="robert">(<a href="#ref-robert" role="doc-biblioref">Tibshirani 1996</a>)</span>. They also compare lasso regression to both ridge regression and subset selection. Unlike in ridge regression, where all parameters can only asymptotically approach zero, lasso regression allows some parameters to reach zero. These techniques are applied in Machine Learning for feature selection techniques in predictive modeling (R. Muthukrishnan and R. Rohini. 2016)<span class="citation" data-cites="muthu">(<a href="#ref-muthu" role="doc-biblioref">Muthukrishnan and Rohini 2016</a>)</span> .On the same lines, we can see how to handle zero inflated predictors(Mariella Gregorich et al., 2025)<span class="citation" data-cites="mari">(<a href="#ref-mari" role="doc-biblioref">Mariella Gregorich 2025</a>)</span> handled by Lasso.</p>
 <p>After considering the multiple impactful applications of Lasso regression, this study will apply Lasso to a real-world healthcare problem using the Surveillance, Epidemiology and End Results (SEER) database. Specifically, we aim to develop predictive models that will estimate the likelihood of various cancer treatments such as chemotherapy, radiation therapy or surgery based on patient demographics and clinical characteristics. We will leverage the ability of Lasso to select the most influential factors driving treatment decisions while automatically excluding less informative predictors. The ultimate goal of this application is to support utilization management processes by streamlining treatment approval pathways and expediting patient access to appropriate care. Through this study, we aim to demonstrate how Lasso regressive can serve as an effective tool for improving operational efficiency and decision making in oncology care.</p>
-<p><em>The final introduction paragraph on the problem that we will apply Lasso to will be added to draft next week after finalizing the problem and choosing a dataset.</em></p>
 </section>
 <section id="data-exploration-and-visualization" class="level2">
 <h2 class="anchored" data-anchor-id="data-exploration-and-visualization">Data Exploration and Visualization</h2>
-<p>The data for this study was obtained from the SEER program of the <a href="https://seer.cancer.gov/archive/manuals/2018/SPCSM_2018_maindoc.pdf">National Cancer Institute (NCI)</a>. SEER is a comprehensive population-based cancer registry within the United States that consists of a collection of detailed information on cancer incidence, patient demographics, tumor characteristics, treatment modalities and survival outcomes. The SEER dataset provides high quality, standardized data that allows for large-scale analyses of cancer patterns, treatments and outcomes across diverse populations in the United States. For this study we focused on female breast cancer cases (ICD O-3 site codes C50.0 - C50.9) from 2018 - 2021 and specific variables to indicate whether a patient received specific treatment such as surgery, radiation, chemotherapy, immunotherapy or hormone therapy based on the SEER treatment summary fields. This time period aligns with the period following SEER’s transition to the Extent of Disease (EOD) 2018 and Summary Stage 2018 systems. This time was chosen because these years provide the most consistent and comprehensive recording of tumor stage, biological markers and treatment variables. Using 2018 - 2021 ensures compatibility across staging and treatment codes while avoiding inconsistencies in earlier datasets.</p>
+<p>The data for this study was obtained from the SEER program of the <a href="https://seer.cancer.gov/archive/manuals/2018/SPCSM_2018_maindoc.pdf">National Cancer Institute (NCI)</a>. SEER<span class="citation" data-cites="seer">(<a href="#ref-seer" role="doc-biblioref">Adamo M. 2018</a>)</span> is a comprehensive population-based cancer registry within the United States that consists of a collection of detailed information on cancer incidence, patient demographics, tumor characteristics, treatment modalities and survival outcomes. The SEER dataset provides high quality, standardized data that allows for large-scale analyses of cancer patterns, treatments and outcomes across diverse populations in the United States. For this study we focused on female breast cancer cases (ICD O-3 site codes C50.0 - C50.9) from 2018 - 2022 and specific variables to indicate whether a patient received specific treatment such as surgery, radiation, chemotherapy, immunotherapy or hormone therapy based on the SEER treatment summary fields. This time period aligns with the period following SEER’s transition to the Extent of Disease (EOD) 2018 and Summary Stage 2018 systems. This time was chosen because these years provide the most consistent and comprehensive recording of tumor stage, biological markers and treatment variables. Using 2018 - 2022 ensures compatibility across staging and treatment codes while avoiding inconsistencies in earlier datasets.</p>
 <p>We focused on variables that are clinically relevant and have been shown to influence treatment decisions in breast cancer. These variables have been categorized into three groups: treatment variables, tumor characteristics and patient demographics. Radiation therapy was identified using the variable Radiation recode and chemotherapy from Chemotherapy recode. These variables capture first-course treatments administered after diagnosis. Only first primary malignancies were included to avoid confounding from prior cancer diagnoses and treatments. Patients with missing or unknown key staging information were excluded. Each treatment variable was recoded into a binary outcome with 1 indicating that treatment was received and 0 indicating that treatment was not received or unknown.</p>
 <p>The tumor characteristic variables capture the biological and clinical features of each breast cancer case and are significant determinants of prognosis and treatment selection. Tumor size was included as a continuous numeric variable representing the largest tumor dimension in millimeters prior to treatment. Summary stage, based on the Combined Summary Stage with Expanded Regional Codes, categorized disease extent from in situ to distant spread, providing an overall measure of progression. Nodal involvement, recoded from the EOD Regional Nodes variable, was grouped into N0-N3 categories reflecting increasing lymphatic spread. Metastatic indicators for bone, brain, liver, lung and distant lymph nodes were each recoded as binary variables to identify the presence or absence of distant disease. Laterality identified the side of origin (left or right breast), while Clinical Grade summarized tumor differentiation as low, intermediate or high. Hormone receptor and HER2 status (ER, PR, HER2) were each treated as binary variables (positive or negative) and used to characterize molecular subtypes relevant to therapy decisions. Collectively, these variables provide a detailed picture of tumor biology and stage at diagnosis.</p>
 <p>Patient demographic variables describe the population characteristics of the sample and help identify disparities in presentation or treatment. Age at diagnosis was grouped into 5-year intervals and treated as an ordinal categorical variable. Sex was coded as a binary variable (male/female). Race, Hispanic origin and the combined race/ethnicity recode were included as categorical variables to capture sociodemographic diversity and potential disparities. Marital status as diagnosis was collapsed into partnered versus unpartnered categories to assess social support influences. The type of reporting source identified the institution or data source contributing to each case and the year of diagnosis (2018-2022) was treated as a categorical variable. Overall, these demographic factors contextualize differences in clinical presentation and treatment patterns across the study population.</p>
@@ -3039,6 +3016,9 @@ pd_year_of_diagnosis -0.0026783369</code></pre>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-seer" class="csl-entry" role="listitem">
+Adamo M., &amp; Ruhl, Dickie L. 2018. <span>“SEER Program Coding and Staging Manual 2018.”</span> <em>National Cancer Institute.</em>
+</div>
 <div id="ref-aheto" class="csl-entry" role="listitem">
 Aheto JMK, Duah HO, Agbadi P. 2021. <span>“A Predictive Model, and Predictors of Under-Five Child Malaria Prevalence in Ghana.”</span> <em>Prev Med Rep. 10.1016/j.pmedr.2021.101475</em>.
 </div>

@@ -1,7 +1,7 @@
 ---
 title: "Lasso Regression for Oncology Utilization Management"
 subtitle: "A report on Lasso Regression for data science projects - Fall 2025"
-author: "Vijay Mohanam, Jennifer Nesbit and Sassou Khabou (Advisor: Dr. Cohen)"
+author: "Vijayavel Mohanam, Jennifer Nesbit and Sassou Khabou (Advisor: Dr. Cohen)"
 date: '`r Sys.Date()`'
 format:
   revealjs
@@ -59,11 +59,7 @@ library(glmnet)
 
 -   Conclusion
 
-In kernel estimator, weight function is known as kernel function
-[@efr2008]. Cite this paper [@bro2014principal]. The GEE [@wang2014].
-The PCA [@daffertshofer2004pca]\*
-
-## Background  {.smaller}
+## Background  
 
 -   The rising complexity of cancer care and treatment decision-making requires robust tools to support utilization management.
 -   Clinical decisions (radiation, chemotherapy) involve multiple tumor characteristics and patient specific factors.
@@ -72,7 +68,7 @@ The PCA [@daffertshofer2004pca]\*
 -   Using data from SEER can provide generalizable insights into treatment patterns.
 
 
-## Problem Statement & Objectives
+## Problem Statement
 
 -   Given tumor characteristics and patient demographics for breast cancer, can we accurately predict whether a patient receives radiation therapy or chemotherapy?
 -   Which factors (tumor, demographic, staging, receptor status, etc.) most strongly influence treatment decisions? Can we build a model that balances predictive performance and clinical interpretability?
@@ -88,7 +84,7 @@ The PCA [@daffertshofer2004pca]\*
 
 ## Dataset Overview 
 
--   Source: SEER Registry, Breast Cancer Cases (2018–2021)
+-   Source: SEER Registry, Breast Cancer Cases (2018–2022)
 -   SEER dataset provides high quality, standardized data:
 -   Allows for large-scale analyses of cancer patterns, treatments and outcomes
 -   Includes diverse populations in the United States
@@ -97,8 +93,12 @@ The PCA [@daffertshofer2004pca]\*
 
 
 ## Variables & Data Preparation {.smaller}
-
--   Variables categorized into three groups: treatment variables, tumor characteristics, and patient demographics. Treatment outcomes (radiation, chemotherapy) were derived from SEER treatment summary fields and were recoded into binary 0/1 outcomes indicating whether treatment was administered.
+<style>
+    .reveal section li{
+    font-size: 0.9em;
+  }
+</style>
+-   Ctegorized into three groups: treatment variables, tumor characteristics, and patient demographics. Treatment outcomes (radiation, chemotherapy) were derived from SEER treatment summary fields and were recoded into binary 0/1 outcomes indicating whether treatment was administered.
 -   Tumor characteristics included tumor size (continuous), summary stage, nodal involvement (N0–N3), metastatic spread (bone/brain/liver/lung/lymph nodes), grade, laterality, and ER/PR/HER2 status. Each variable was cleaned, recoded, and mapped into clinically meaningful categories.
 -   Demographic variables included age groups, sex, detailed race/ethnicity classifications, marital status (partnered vs. unpartnered), reporting source, and year of diagnosis. All demographic fields were standardized to ensure consistency.
 -   Extensive recoding and filtering were applied: exclusion of cases with missing or unknown key staging/biomarker values, retention of only first primary malignancies, and removal of non-applicable or inconsistent categories.
@@ -139,8 +139,12 @@ The PCA [@daffertshofer2004pca]\*
 
 <img src="radi.png" width="500">  <img src="chem.png" width="500"> 
 
-## Result - Radiation Model {.smaller}
-
+## Results - Radiation Model {.smaller}
+<style>
+    .reveal section table {
+    font-size: 0.8em;
+  }
+</style>
 Predictors that kept non-zero coefficients that were > 0.05 
 
 |Variable|Coefficient|Interpretation|
@@ -156,7 +160,7 @@ Predictors that kept non-zero coefficients that were > 0.05
 |Node status|0.221|Node positive patients more likely to get radiation|
 |Histology type|0.081|Specific histology types are more likely to get radiation|
 
-## Modeling Chemotherapy Model {.smaller}
+## Results - Chemotherapy Model {.smaller}
 
 Predictors that kept non-zero coefficients that were > 0.05 
 
@@ -173,14 +177,14 @@ Predictors that kept non-zero coefficients that were > 0.05
 |Node status|0.282|Node positive patients more likely to get chemotherapy|
 |Histology type|0.102|Specific histology types are more likely to get chemotherapy|
 
-## Result - Model Performance
+## Results - Model Performance
 
 -   Cross-validated Lasso models demonstrated strong predictive performance while reducing model complexity.
 -   Ten-fold cross-validation was used to select the optimal λ penalty for each model, ensuring stability and generalizability across diverse patient populations.
 -   Feature reduction improved interpretability without substantially sacrificing accuracy, allowing for actionable insights in utilization management.
 -   Shared high-impact predictors across both models indicate consistent factors driving treatment decisions.
 
-## Clinical Implecations
+## Clinical Implications
 
 -   Helps understand which patient/tumor features drive treatment decisions.
 -   Useful for utilization management and auditing consistency.
@@ -202,4 +206,17 @@ Predictors that kept non-zero coefficients that were > 0.05
 -   Provides a foundation for clinical decision support and UM tools.
 -   Future work: enhanced data, additional predictors, validation in other populations, specific treatment types.
 
-## References
+## References 
+<style>
+    .myDiv {
+    font-size: 0.5em;
+  }
+</style>
+<div class="myDiv"><p>
+Adamo M., Dickie L., & Ruhl, J. (2018). SEER Program Coding and Staging Manual 2018. National Cancer Institute.<BR><BR>
+Ali, Shahzad, H. 2023. “Application and Impact of Lasso Regression in Gastroenterology.” A Systematic Review. Indian J Gastroenterol 42, 780–790 (2023).<BR><BR>
+Li, Bai, Y. 2023. “Prognostic Nomograms for Gastric Carcinoma After D2 + Total Gastrectomy to Assist Decision-Making for Postoperative Treatment: Based on Lasso Regression.” World Journal of Surgical Oncology, 21(1), Article 207.<BR><BR>
+Muthukrishnan, R., and R. Rohini. 2016. “LASSO: A Feature Selection Technique in Predictive Modeling for Machine Learning.” IEEE International Conference on Advances in Computer Applications (ICACA), Coimbatore, India, 2016, Pp. 18-20.<BR><BR>
+Tibshirani, Robert. 1996. “Regression Shrinkage and Selection Via the Lasso.” Journal of the Royal Statistical Society: Series B (Methodological), Volume 58, Issue 1, January 1996, Pages 267–288.<BR><BR>
+Vidaurre, Concha Bielza, Diego, and Pedro Larrañaga. 2013. “A Survey of L1 Regression.” International Statistical Review 81 (3): 361–87.
+</p></div>

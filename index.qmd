@@ -1,7 +1,7 @@
 ---
 title: "Lasso Regression for Oncology Utilization Management Applications"
 subtitle: "A report on Lasso Regression for data science projects - Fall 2025"
-author: "Vijay Mohanam, Jennifer Nesbit and Sassou Khabou (Advisor: Dr. Cohen)"
+author: "Vijayavel Mohanam, Jennifer Nesbit and Sassou Khabou (Advisor: Dr. Cohen)"
 date: '`r format(Sys.Date(), "%Y-%m-%d")`'
 format:
   html:
@@ -18,29 +18,29 @@ editor:
     wrap: 72
 ---
 
-Slides: [slides.html](slides.html){target="_blank"} ( Go to `slides.qmd` to edit)
+[Slides:](slides.html){target="_blank"}
 
-::: callout-note
-**Week 01:** This is our first week as group, we are trying to compile a summary of introductions!
+[//]: ::: callout-note
+[//]: **Week 01:** This is our first week as group, we are trying to compile a summary of introductions!
 
-**Week 02:** We tried to add more articles from our research and narrowing on a particular dataset!
+[//]: **Week 02:** We tried to add more articles from our research and narrowing on a particular dataset!
 
-**Week 03:** Downloaded USA cancer dataset, exploring attributes and records for our study!
+[//]:  **Week 03:** Downloaded USA cancer dataset, exploring attributes and records for our study!
 
-**Week 04:** Analysed the variables, selected and recoded for our model!
+[//]: **Week 04:** Analysed the variables, selected and recoded for our model!
 
-**Week 05:** Refined the variables, as metadata and data were not matching!
+[//]: **Week 05:** Refined the variables, as metadata and data were not matching!
 
-**Week 06:** Started coding in R studio!
+[//]: **Week 06:** Started coding in R studio!
 
-**Week 07:** Applied Lasso regression on two outcome - radiation and chemotherapy!
+[//]: **Week 07:** Applied Lasso regression on two outcome - radiation and chemotherapy!
 
-**Week 08:** Accessed the results and was able to interpret back to the clinical value!
+[//]: **Week 08:** Accessed the results and was able to interpret back to the clinical value!
 
-**Week 09:** Added conclusion and getting ready for our presentation!
+[//]: **Week 09:** Added conclusion and getting ready for our presentation!
 
-Nice effort!
-:::
+[//]: Nice effort!
+[//]: :::
 
 ## Introduction
 
@@ -56,14 +56,13 @@ A principal advantage of Lasso (Least Absolute Shrinkage and Selection Operator)
 
 After considering the multiple impactful applications of Lasso regression, this study will apply Lasso to a real-world healthcare problem using the Surveillance, Epidemiology and End Results (SEER) database. Specifically, we aim to develop predictive models that will estimate the likelihood of various cancer treatments such as chemotherapy, radiation therapy or surgery based on patient demographics and clinical characteristics. We will leverage the ability of Lasso to select the most influential factors driving treatment decisions while automatically excluding less informative predictors. The ultimate goal of this application is to support utilization management processes by streamlining treatment approval pathways and expediting patient access to appropriate care. Through this study, we aim to demonstrate how Lasso regressive can serve as an effective tool for improving operational efficiency and decision making in oncology care.
 
-*The final introduction paragraph on the problem that we will apply Lasso to will be added to draft next week after finalizing the problem and choosing a dataset.*
 
 ## Data Exploration and Visualization
 
 
 
 
-The data for this study was obtained from the SEER program of the [National Cancer Institute (NCI)](https://seer.cancer.gov/archive/manuals/2018/SPCSM_2018_maindoc.pdf). SEER is a comprehensive population-based cancer registry within the United States that consists of a collection of detailed information on cancer incidence, patient demographics, tumor characteristics, treatment modalities and survival outcomes. The SEER dataset provides high quality, standardized data that allows for large-scale analyses of cancer patterns, treatments and outcomes across diverse populations in the United States. For this study we focused on female breast cancer cases (ICD O-3 site codes C50.0 - C50.9) from 2018 - 2021 and specific variables to indicate whether a patient received specific treatment such as surgery, radiation, chemotherapy, immunotherapy or hormone therapy based on the SEER treatment summary fields. This time period aligns with the period following SEER’s transition to the Extent of Disease (EOD) 2018 and Summary Stage 2018 systems. This time was chosen because these years provide the most consistent and comprehensive recording of tumor stage, biological markers and treatment variables. Using 2018 - 2021 ensures compatibility across staging and treatment codes while avoiding inconsistencies in earlier datasets.
+The data for this study was obtained from the SEER program of the [National Cancer Institute (NCI)](https://seer.cancer.gov/archive/manuals/2018/SPCSM_2018_maindoc.pdf). SEER[@seer] is a comprehensive population-based cancer registry within the United States that consists of a collection of detailed information on cancer incidence, patient demographics, tumor characteristics, treatment modalities and survival outcomes. The SEER dataset provides high quality, standardized data that allows for large-scale analyses of cancer patterns, treatments and outcomes across diverse populations in the United States. For this study we focused on female breast cancer cases (ICD O-3 site codes C50.0 - C50.9) from 2018 - 2022 and specific variables to indicate whether a patient received specific treatment such as surgery, radiation, chemotherapy, immunotherapy or hormone therapy based on the SEER treatment summary fields. This time period aligns with the period following SEER’s transition to the Extent of Disease (EOD) 2018 and Summary Stage 2018 systems. This time was chosen because these years provide the most consistent and comprehensive recording of tumor stage, biological markers and treatment variables. Using 2018 - 2022 ensures compatibility across staging and treatment codes while avoiding inconsistencies in earlier datasets.
 
 We focused on variables that are clinically relevant and have been shown to influence treatment decisions in breast cancer. These variables have been categorized into three groups: treatment variables, tumor characteristics and patient demographics. Radiation therapy was identified using the variable Radiation recode and chemotherapy from Chemotherapy recode. These variables capture first-course treatments administered after diagnosis. Only first primary malignancies were included to avoid confounding from prior cancer diagnoses and treatments. Patients with missing or unknown key staging information were excluded. Each treatment variable was recoded into a binary outcome with 1 indicating that treatment was received and 0 indicating that treatment was not received or unknown. 
 
