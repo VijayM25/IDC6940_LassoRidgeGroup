@@ -20,12 +20,9 @@ editor:
 
 ## Introduction
 
-Modern enterprises store vast amounts of information like SOPs, manuals, FAQs, research reports, safety guides, and human resource document repositories across various systems. Context retrieval is challenging at scale and consequently lowers generative output quality. Conventional or keyword search solutions involves complex indexing, crawling, links and internal scoring method to evaluate relevancy. sometime the result would be irrelevant, if it find the keyword in a document, it will show small 100 character extract and link to the info - webpage, link to document or option to download.
+The operational knowledge of modern enterprises is fragmented across heterogeneous systems, encompassing documents such as technical manuals, compliance guidelines, research reports, and HR repositories. This dispersion creates a fundamental bottleneck for context retrieval at scale, directly impairing the precision and utility of generative AI outputs. Traditional search solutions, based on keyword matching and intricate indexing architectures, are poorly suited to this task. Their reliance on statistical relevancy metrics often yields superficial results—typically brief, decontextualized text extracts accompanied by document links—rather than synthesizing the coherent, topic-specific knowledge necessary for advanced analytical or generative tasks.
 
-In Environmental Health & Safety, there are many divisions providing safety guidelines and one of them is Occupational Safety and Health Administration
-which governs physical, chemical, biological and radiological hazards. lets consider physical hazard and one of the topic is "Fall Prevention", Employer must provide correct equipment for people working at height and then workers has to know what is the guidlines to follow. the challange here is the workers are not that computer savey and its very unlikely to have computer with internet/intranet at a new construction site, sometimes electricity itself scare.
-
-Want to explore simple local LLM and RAG to get a comprehensive question answering or summarization of those guideline documents, so that they can interact with simple English (NLP) and get to the info what they are looking for quickly rather than downloading, or visiting multiple docs/websites.
+The field of Environmental Health and Safety (EHS) comprises numerous divisions, including the Occupational Safety and Health Administration (OSHA), which sets standards for physical, chemical, biological, and radiological hazards. Ensuring compliance with these standards, such as those for "Fall Prevention," presents a twofold challenge: employers must supply appropriate equipment, and workers must accurately understand and apply the corresponding guidelines. This knowledge dissemination is severely hindered in many field settings—particularly in industries like construction—where workers may have low digital literacy and lack access to networked computers or stable power. To bridge this gap, this study investigates the feasibility of a localized LLM-RAG (Retrieval-Augmented Generation) system. Such a tool would enable workers to interact with dense regulatory documents using natural language queries, facilitating rapid, on-demand access to summarized guidelines or specific answers, thereby circumventing traditional barriers of document retrieval and navigation.
 <!-- -->
 
 
@@ -34,7 +31,7 @@ Want to explore simple local LLM and RAG to get a comprehensive question answeri
 
 LLM : Large Language Models (LLMs) are machine learning models trained on large volumes of text data to perform natural language understanding and generation tasks. These models are built on architectures like transformers, which utilize attention mechanisms to focus on different parts of the input text for context-aware processing and help in translation, summarization, question answering etc. There are 10's of models either open source or with subscription.
 
-Despite their capabilities, LLMs face challenges when dealing with up-to-date/dynamic or niche information that wasn't included during training.
+LLMs inherit a critical limitation: their knowledge is frozen at the point of training. Consequently, they struggle with temporal dynamism (e.g., recent events) and often lack proficiency in highly specialized or niche domains not well-represented in their pre-training data.
 
 RAG : Retrieval-Augmented Generation (RAG) is a method designed to enhance the capabilities of traditional large language models (LLMs) by integrating them with external information retrieval systems. a RAG with local vector database of new/updated documents from a vast corpus of organization data.
 
