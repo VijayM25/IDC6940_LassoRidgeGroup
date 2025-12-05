@@ -1,0 +1,100 @@
+---
+title: "Enhance Enterprise Document Using RAG with LLM"
+subtitle: "Bertter search with Gen AI"
+author: "Vijay Mohanam (Advisor: Jeremy Straub)"
+date: '`r Sys.Date()`'
+format:
+  html:
+    code-fold: true
+course: Emerging Trends in Artificial Intellegence
+bibliography: genairag.bib # file contains bibtex for references
+#always_allow_html: true # this allows to get PDF with HTML features
+self-contained: true
+execute: 
+  warning: false
+  message: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+## Introduction
+
+Modern enterprises store vast amounts of information like SOPs, manuals, FAQs, research reports, safety guides, and human resource document repositories across various systems. Context retrieval is challenging at scale and consequently lowers generative output quality. Conventional or keyword search solutions involves complex indexing, crawling, links and internal scoring method to evaluate relevancy. sometime the result would be irrelevant, if it find the keyword in a document, it will show small 100 character extract and link to the info - webpage, link to document or option to download.
+
+In Environmental Health & Safety, there are many divisions providing safety guidelines and one of them is Occupational Safety and Health Administration
+which governs physical, chemical, biological and radiological hazards. lets consider physical hazard and one of the topic is "Fall Prevention", Employer must provide correct equipment for people working at height and then workers has to know what is the guidlines to follow. the challange here is the workers are not that computer savey and its very unlikely to have computer with internet/intranet at a new construction site, sometimes electricity itself scare.
+
+Want to explore simple local LLM and RAG to get a comprehensive question answering or summarization of those guideline documents, so that they can interact with simple English (NLP) and get to the info what they are looking for quickly rather than downloading, or visiting multiple docs/websites.
+<!-- -->
+
+
+
+## Background
+
+LLM : Large Language Models (LLMs) are machine learning models trained on large volumes of text data to perform natural language understanding and generation tasks. These models are built on architectures like transformers, which utilize attention mechanisms to focus on different parts of the input text for context-aware processing and help in translation, summarization, question answering etc. There are 10's of models either open source or with subscription.
+
+Despite their capabilities, LLMs face challenges when dealing with up-to-date/dynamic or niche information that wasn't included during training.
+
+RAG : Retrieval-Augmented Generation (RAG) is a method designed to enhance the capabilities of traditional large language models (LLMs) by integrating them with external information retrieval systems. a RAG with local vector database of new/updated documents from a vast corpus of organization data.
+
+There are few initiatives/studies/implementations from agricultural[@cottonbot] to common household controls[@monitor] using LLM, RAG and agentic. 
+
+In 2023, the use of LLMs saw significant growth in organisation applications, particularly in the domain of RAG & information retrieval. an impressive 36.2% of organisation LLM use cases now employ RAG technology. RAG brings the power of LLMs to structured and unstructured data, making organisation information retrieval more effective and efficient than ever.
+
+## System Summary
+
+A RAG pipeline consists of three key components: retrieval, augmentation, and generation, each playing an essential role in generating accurate, context-aware outputs.
+
+- **Retrieval:** The retrieval step is where the system searches an external knowledge base to gather relevant information, can include documents, articles, or web resources. 
+
+- **Augmentation:** Once the relevant data is retrieved, the augmentation step kicks in. Here, the retrieved information is used as additional context for the LLM, helping it generate a more accurate and relevant response.
+
+- **Generation:** The final stage is generation, where the language model processes the augmented data and creates a coherent, context-aware response.
+
+![RAG components](RAG.png) Figure 1: RAG system components[@ragsource]
+
+As this design is to run in a local computer, among so many LLM Llama3.1:8b was selected, which has 8 billion parameters with size of ~5GB and can comfortably run in 24GB RAM, used "nomic-embed-text" embedding model, which is simple with no multi-lingual support. our programing language is Python 3.10 with terminal iterations for this study, it can be enhanced with FastAPI for serving with other applications, or use StreamLit for web interface to interact with model, finally the vector database will be Chroma, which can store our local documents.
+
+![Llama components](llama.png){width=500px}<BR>Figure 2: Llama components
+
+## Data and Analysis
+
+- **Data Collection**
+Among 100's of guidlines in "Fall preventions" category, which includes agriculture, crane, construction lift, electric towers, radio signal antenna, windmill etc, one primary tool is the ladder, collected about 7 documents from [osha.gov](https://www.osha.gov/publications/bytopic/fall-prevention-protection), though a program routine can download relavent documents, as this will be off-line system, downloaded and stored in docs directory.
+
+![docs](docs.png){width=600px}<BR>Figure 3: Docs
+
+- **Data Preparation**
+LangChain's PyPDFLoader method is used to load pdf docs, content of document are split into chunks using TextSplitter method to make is suitable to be stored in vector database as high-dimensional vectors or embeddings.
+
+
+## Results
+
+Among the docs, we have details of many types of ladders, so, for question 'what is a stepladder', we get precise answer with citation to know whaere it was extracted.
+
+![docs](res01.png){width=700px}<BR>Figure 4: Q='What is a stepladder?'
+
+Now, with many types/capacity of ladder, user is interested to know the capacity of a heavy duty ladder, the answer was right to the expectation.
+
+![docs](res02.png){width=700px}<BR>Figure 5: Q='what is the load capacity of heavy duty ladder?'
+
+May be user was working in a metric locally, so what to know the capacity in kilograms, observe LLM was able to understand the context, and did conversion to KG, not found in the document.
+
+![docs](res04.png){width=700px}<BR>Figure 6: Q='what is the load capacity of heavy duty ladder, report in kg'
+
+For any more details or to report to OSHA, user want to know option to contact OSHA office
+
+![docs](res03.png){width=700px}<BR>Figure 7: Q='how to contact OSHA?'
+
+
+
+```{r}
+
+```
+
+## Conclusion
+
+This study covered key steps in building a RAG to be used without internet/intranet service at the worksite using small and powerful LLM, from loading and chunking pdf docs from osha.gov site to using embeddings and vector databases like Chroma. Retrieve relevant documents and generate meaningful responses.
+
+## References
